@@ -129,3 +129,28 @@ This section details the specific scenes and the navigation paths between them.
     4.  Clicking the correct pot adds the key to the player's inventory.
     5.  The player must return to the `Escada`.
     6.  With the key in the inventory, clicking on the `Corredor` door will now unlock and open it.
+
+### Puzzle 03: The Note from the Owl
+
+*   **Location:** `Cenário 4: Corredor`
+*   **Type:** Narrative/Objective Reveal
+*   **Interaction:** A note is visible, tacked to the hallway wall. Clicking on it brings up a close-up view.
+*   **Content:** The note is from the demonic Duolingo Owl and reads:
+    > "You thought you could escape? Your curse is bound to this house. To break it, you must find the **five offerings** before the witching hour. Your time is running out."
+*   **Objective Reveal:** Below the text are five crude, child-like drawings of the five birthday gifts: a cell phone, a piece of clothing, a wine bottle, a chocolate bar, and a piece of cheese.
+*   **Gameplay Impact:** This interaction formally assigns the main quest to the player. It should trigger the appearance of the main UI/inventory, showing five empty slots corresponding to the drawings on the note.
+
+### Puzzle 04: The Cat's Treasure
+
+*   **Objective:** Obtain the key to the Living Room (`Cenário 6: Sala`).
+*   **Cross-location Items Required:**
+    *   **Lighter:** Player starts with this item.
+    *   **Miniature Rake:** Must be acquired from the `Cenário 3.1: Sacada`.
+    *   **Broom:** Must be acquired from the `Cenário 4: Corredor`.
+*   **Puzzle Sequence in `Cenário 5: Quintal`:**
+    1.  **Light the Area:** The player must first collect the **hand sanitizer (álcool gel)** from above the washing machine. They then use the sanitizer on the barbecue grill, followed by the **lighter** to create light.
+    2.  **Identify the Obstacle:** The light reveals a **cat house** on a high shelf. A message indicates something is inside but it's out of reach. A cat is also blocking physical access.
+    3.  **Lure the Cat:** The player finds a **can of cat food** in the cabinets. They must use the **miniature rake** (from the balcony) to pry it open.
+    4.  Placing the opened can on the central table will lure the cat away from the shelf.
+    5.  **Retrieve the Key:** With the cat gone, the player can now use the **broom** (from the hallway) to knock the **Living Room Key** out of the cat house.
+    6.  The player can now pick up the key from the floor.
