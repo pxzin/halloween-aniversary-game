@@ -14,13 +14,13 @@ export class IntroScene extends Phaser.Scene {
   }
 
   preload(): void {
-    // TODO: Load background and smartphone assets here
-    // For now, we'll use placeholder graphics
+    // Load smartphone sprite
+    this.load.image('phone_intro', '/assets/images/ui/phone_intro.png');
   }
 
   create(): void {
-    // Set dark dreamlike background
-    this.cameras.main.setBackgroundColor('#0a0a1a');
+    // Set dark background to match phone sprite
+    this.cameras.main.setBackgroundColor('#02060f');
 
     // Create nightmare background atmosphere
     this.createDarkAtmosphere();
@@ -47,7 +47,7 @@ export class IntroScene extends Phaser.Scene {
     const graphics = this.add.graphics();
 
     // Create a vignette effect
-    graphics.fillGradientStyle(0x0a0a1a, 0x0a0a1a, 0x1a0a2a, 0x1a0a2a, 0.8, 0.8, 0, 0);
+
     graphics.fillRect(0, 0, width, height);
 
     // Add some floating "nightmare" particles
@@ -66,7 +66,7 @@ export class IntroScene extends Phaser.Scene {
         duration: Math.random() * 3000 + 2000,
         yoyo: true,
         repeat: -1,
-        ease: 'Sine.easeInOut'
+        ease: 'Sine.easeInOut',
       });
     }
   }
@@ -79,30 +79,26 @@ export class IntroScene extends Phaser.Scene {
     const centerX = width / 2;
     const centerY = height / 2;
 
-    // Smartphone body (placeholder rectangle)
-    const phoneWidth = 200;
-    const phoneHeight = 360;
+    // Add phone sprite
+    const phone = this.add.image(centerX, centerY, 'phone_intro');
 
-    const phone = this.add.rectangle(
-      centerX,
-      centerY,
-      phoneWidth,
-      phoneHeight,
-      0x1a1a1a
-    );
-    phone.setStrokeStyle(4, 0x3a3a3a);
+    // Scale phone to appropriate size (adjust as needed)
+    phone.setScale(0.35);
 
-    // Screen area
-    const screen = this.add.rectangle(
-      centerX,
-      centerY,
-      phoneWidth - 20,
-      phoneHeight - 60,
-      0x0a0a0a
-    );
+    // Add pulsing animation to the entire phone for notification effect
+    // This creates a subtle breathing effect
+    this.tweens.add({
+      targets: phone,
+      scale: 0.37,
+      duration: 1500,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+    });
 
-    // Add Duolingo-style green glow effect
-    const glow = this.add.circle(centerX, centerY, 120, 0x58cc02, 0.1);
+    // Add Duolingo-style green glow effect behind the phone
+    const glow = this.add.circle(centerX, centerY, 150, 0x58cc02, 0.15);
+    glow.setDepth(-1); // Place glow behind phone
 
     this.tweens.add({
       targets: glow,
@@ -111,7 +107,7 @@ export class IntroScene extends Phaser.Scene {
       duration: 2000,
       yoyo: true,
       repeat: -1,
-      ease: 'Sine.easeInOut'
+      ease: 'Sine.easeInOut',
     });
   }
 
@@ -210,7 +206,7 @@ export class IntroScene extends Phaser.Scene {
    * Utility function to wait for a specified duration
    */
   private wait(ms: number): Promise<void> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       this.time.delayedCall(ms, resolve);
     });
   }

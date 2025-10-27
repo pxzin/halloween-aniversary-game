@@ -2,12 +2,12 @@
   "opening_narrative": {
     "id": "opening_narrative",
     "lines": [
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jessica está em casa na noite de 31 de outubro, Halloween." },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Ela deveria estar se preparando para ir à festa da sua melhor amiga, Sofia..." },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Mas como sempre, ela está procrastinando." },
-      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Só mais alguns minutos navegando no celular..." },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "De repente, uma notificação do Duolingo aparece na tela." },
-      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Ah não... De novo esse maldito aplicativo!" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "É noite de 31 de outubro, Halloween, e também aniversário de Jéssica." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Ela está em casa, esperando seu namorado para o jantar de aniversário dos dois..." },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Ele está demorando... Vou só checar o celular mais uma vez."
+      },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "De repente, uma notificação furiosa do Duolingo aparece na tela." },
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Ah, não... De novo esse aplicativo!" },
       { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Já tem meses que eu não faço uma lição..." },
       { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Ela tenta ignorar, mas as notificações ficam cada vez mais insistentes." },
       { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Ok, ok! Vou fazer UMA lição e depois ele me deixa em paz!" }
@@ -16,7 +16,7 @@
   "owl_appears": {
     "id": "owl_appears",
     "lines": [
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jessica abre o aplicativo e, estranhamente, há apenas um quiz disponível..." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jéssica abre o aplicativo e, estranhamente, há apenas um quiz disponível..." },
       { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "O título está escrito em caracteres estranhos que ela não consegue ler." },
       { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Que estranho... Mas enfim, vamos logo terminar isso." }
     ]
@@ -24,7 +24,7 @@
   "curse_dialogue": {
     "id": "curse_dialogue",
     "lines": [
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Assim que Jessica finaliza a última questão..." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Assim que Jéssica finaliza a última questão..." },
       { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A tela do celular começa a emitir uma luz verde intensa!" },
       { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "O-o que está acontecendo?!" },
       { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Da luz surge uma forma... É o Duo, a coruja do Duolingo!" },
@@ -35,22 +35,22 @@
       { "speaker": { "character": "owl", "emotion": "impatient" }, "text": "Você fez sua escolha. Agora viverá as consequências!" },
       { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Espera! Eu estava ocupada! Faculdade, trabalho..." },
       { "speaker": { "character": "owl", "emotion": "furious" }, "text": "DESCULPAS! Sempre desculpas! Sua alma agora me pertence!" },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A coruja ergue suas asas e um círculo de runas verdes aparece ao redor de Jessica." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A coruja ergue suas asas e um círculo de runas verdes aparece ao redor de Jéssica." },
       { "speaker": { "character": "owl", "emotion": "furious" }, "text": "Você tem até a meia-noite para completar TODAS as tarefas que ignorou!" },
       { "speaker": { "character": "owl", "emotion": "impatient" }, "text": "Caso contrário... Sua alma será MINHA para sempre!" },
       { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "NÃO! Isso é loucura!" },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A luz verde se intensifica ainda mais, cegando Jessica..." }
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A luz verde se intensifica ainda mais, cegando Jéssica..." }
     ]
   },
   "fainting_sequence": {
     "id": "fainting_sequence",
     "lines": [
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jessica sente suas pernas fraquejarem..." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jéssica sente suas pernas fraquejarem..." },
       { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Eu... preciso... sair daqui..." },
       { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Tudo escurece ao seu redor." },
       { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Quando ela finalmente abre os olhos..." },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Ela está na entrada de uma casa estranha." },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Uma casa que ela nunca viu antes, mas que de alguma forma... parece familiar." }
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Ela está na entrada da casa de seu namorado." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Uma casa que ela conhece bem, mas que agora... parece terrivelmente errada." }
     ]
   }
 }
