@@ -5,3 +5,4 @@
 - [x] Task 003: Implement Core GUI and Inventory Systems
 - [x] Task 004: Enhance Dialogue System UI and Scripting
 - [ ] Task 005: Implement Intro Nightmare Quiz Scene
+- [ ] Task 006: Implement Portrait Emotion System
