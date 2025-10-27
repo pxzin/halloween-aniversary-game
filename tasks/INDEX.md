@@ -7,4 +7,6 @@
 - [x] Task 005: Implement Intro Nightmare Quiz Scene
 - [x] Task 006: Implement Portrait Emotion System
 - [x] Task 007: Replace Intro Scene Phone Placeholder
-- [ ] Task 008: Refactor UI with Persona-5-Inspired Halloween Theme
+- [x] Task 008: Refactor UI with Persona-5-Inspired Halloween Theme
+- [ ] Task 009: Implement Main Menu and Apply Theme
+- [ ] Task 010: UI Layout and Decorative Element Adjustments

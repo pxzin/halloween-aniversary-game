@@ -172,3 +172,34 @@ This section details the specific scenes and the navigation paths between them.
         3.  Clap hands.
 *   **Solution:** Choosing "Clap hands" scares Sombra away, who runs out of the cabinet.
 *   **Reward:** The player can now collect the **Cell Phone**.
+
+### Puzzle 06: The Frozen Key
+
+*   **Location:** `Cenário 8: Cozinha` (with two separate views).
+*   **Objective:** Retrieve the second gift: the **Wine**.
+*   **Riddle:** The clue for this puzzle comes from the cell phone: "...o caminho está fechado para quem não aguenta o calor."
+*   **Sequence:**
+    1.  The player enters the kitchen, arriving in **View 1 (Entrance View)**. From here, they can interact with the main refrigerator.
+    2.  Inside the refrigerator's freezer compartment, the player finds a **"key of ice"**.
+    3.  The player navigates to **View 2 (Island View)**. Here they can see the induction stove and a modern wine cooler.
+    4.  The wine cooler is sealed with a visible **"icy lock"**. Trying the `key of ice` on the lock fails, with a message: "The key is the right shape, but it's too big and doesn't fit."
+    5.  The solution is to use the induction stove. The player must turn it on to the **lowest possible heat setting**.
+    6.  The player then uses the `key of ice` on the gently heated stove, which transforms it into a **"slightly melted ice key"**.
+    7.  This `slightly melted ice key` now fits the `icy lock` on the wine cooler, opening it.
+    8.  **Reward:** The player can now collect the **Wine**.
+
+### Puzzle 07: The Stinky Key
+
+*   **Location:** `Cenário 9: Banheiro` (with two separate views).
+*   **Objective:** Find and clean the key to the Bedroom (`Cenário 10: Quarto`).
+*   **Cross-location Item Required:**
+    *   **Miniature Rake:** Must be acquired from the `Cenário 3.1: Sacada`.
+*   **Sequence:**
+    1.  The player enters the bathroom, arriving in **View 1 (Main View)**. They can see a dirty cat litter box in the shower stall.
+    2.  Using the `miniature rake` on the `litter box` unearths a **"dirty key"**.
+    3.  If the player tries to use the `dirty key` on the Bedroom door, they will refuse due to it being too gross.
+    4.  If the player tries to use the sink to clean the key, they discover there is no running water.
+    5.  The player must navigate to **View 2 (Under the Sink)**. Among various old items, they find a pack of **"wet wipes"**.
+    6.  In the inventory, the player must **combine** the `dirty key` with the `wet wipes`.
+    7.  This combination produces the clean **"Bedroom Key"**.
+    8.  **Reward:** The player can now unlock the door to the Bedroom.
