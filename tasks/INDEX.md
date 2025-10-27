@@ -1,4 +1,4 @@
 # Task Index
 
 - [x] Task 001: Initial Project Setup
-- [ ] Task 002: Scene Management and UI Integration
+- [x] Task 002: Scene Management and UI Integration

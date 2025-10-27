@@ -1,17 +1,16 @@
 import Phaser from 'phaser';
+import { BootScene } from './scenes/BootScene';
+import { MainMenuScene } from './scenes/MainMenuScene';
+import { WorldScene } from './scenes/WorldScene';
 
-// Placeholder Phaser game configuration
+// Phaser game configuration with registered scenes
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
   parent: 'game-container',
   backgroundColor: '#2d2d2d',
-  scene: {
-    create() {
-      // Placeholder scene - game logic will be implemented here
-    }
-  }
+  scene: [BootScene, MainMenuScene, WorldScene]
 };
 
 // Export a function to initialize the game when needed
