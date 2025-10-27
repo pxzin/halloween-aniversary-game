@@ -154,3 +154,21 @@ This section details the specific scenes and the navigation paths between them.
     4.  Placing the opened can on the central table will lure the cat away from the shelf.
     5.  **Retrieve the Key:** With the cat gone, the player can now use the **broom** (from the hallway) to knock the **Living Room Key** out of the cat house.
     6.  The player can now pick up the key from the floor.
+
+### Puzzle 05: The Scaredy Cat
+
+*   **Location:** `Cenário 6: Sala`
+*   **Objective:** Retrieve the first gift: the **Cell Phone**.
+*   **Part 1: Tidying Up**
+    *   The room is initially messy, with chairs blocking access to a cabinet and the office door.
+    *   The first interaction is to click on the chairs to "Tidy up the room".
+    *   **Time Penalty:** This action costs the player **5 minutes** on the game clock.
+*   **Part 2: The Sleeping Guardian**
+    *   After tidying, the player can open the cabinet.
+    *   Inside, the cat "Sombra" is sleeping on top of the cell phone.
+    *   Clicking on the cat triggers a dialogue with three choices:
+        1.  Yell at the cat.
+        2.  Make a "pspsps" sound.
+        3.  Clap hands.
+*   **Solution:** Choosing "Clap hands" scares Sombra away, who runs out of the cabinet.
+*   **Reward:** The player can now collect the **Cell Phone**.
