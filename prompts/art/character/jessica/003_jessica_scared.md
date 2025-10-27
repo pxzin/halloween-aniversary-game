@@ -1,4 +1,4 @@
-# Prompt: Jessica - Scared
+# Prompt: Jéssica - Scared
 
 ## Description
 For moments of fear or surprise. **Use the neutral portrait as the base image reference.**

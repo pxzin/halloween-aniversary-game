@@ -1,6 +1,6 @@
-# Prompt: Jessica's Neutral Portrait
+# Prompt: Jéssica's Neutral Portrait
 
-This prompt is designed to generate the primary character portrait for Jessica. This will serve as the style bible for all subsequent character art.
+This prompt is designed to generate the primary character portrait for Jéssica. This will serve as the style bible for all subsequent character art.
 
 ## AI Tool
 

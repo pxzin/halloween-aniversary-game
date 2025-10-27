@@ -1,7 +1,7 @@
-# Prompt: Jessica - Thinking
+# Prompt: Jéssica - Thinking
 
 ## Description
-For when Jessica is focused on solving a puzzle. **Use the neutral portrait as the base image reference.**
+For when Jéssica is focused on solving a puzzle. **Use the neutral portrait as the base image reference.**
 
 ## Prompt
 

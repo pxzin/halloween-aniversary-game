@@ -165,7 +165,7 @@
     const { character } = parseSpeaker(speaker);
 
     if (character === 'jessica') {
-      return 'Jessica';
+      return 'Jéssica';
     } else if (character === 'narrator') {
       return 'Narrator';
     } else if (character === 'owl') {

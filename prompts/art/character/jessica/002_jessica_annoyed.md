@@ -1,7 +1,7 @@
-# Prompt: Jessica - Annoyed
+# Prompt: Jéssica - Annoyed
 
 ## Description
-For moments when Jessica is annoyed or skeptical. **Use the neutral portrait as the base image reference.**
+For moments when Jéssica is annoyed or skeptical. **Use the neutral portrait as the base image reference.**
 
 ## Prompt
 

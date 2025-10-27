@@ -15,7 +15,7 @@ To develop the game's opening sequence as described in the GDD. This includes th
       "opening_narrative": {
         "id": "opening_narrative",
         "lines": [
-          { "speaker": "narrator", "text": "Jessica is at home on October 31st..." },
+          { "speaker": "narrator", "text": "Jéssica is at home on October 31st..." },
           { "speaker": "jessica_annoyed", "text": "Ugh, Duolingo again?" }
         ]
       },

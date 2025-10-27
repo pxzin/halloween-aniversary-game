@@ -1,4 +1,4 @@
-# Prompt: Jessica - Happy
+# Prompt: Jéssica - Happy
 
 ## Description
 For moments of relief or happiness. **Use the neutral portrait as the base image reference.**
