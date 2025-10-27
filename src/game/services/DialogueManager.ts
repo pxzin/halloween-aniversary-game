@@ -94,6 +94,24 @@ class DialogueManagerClass {
   }
 
   /**
+   * Go back to the previous line in the dialogue
+   */
+  goBackDialogue(): void {
+    if (!this.currentScript) {
+      return;
+    }
+
+    // Don't go back if we're at the first line
+    if (this.currentLineIndex <= 0) {
+      console.log('Already at the first dialogue line');
+      return;
+    }
+
+    this.currentLineIndex--;
+    this.showCurrentLine();
+  }
+
+  /**
    * Show the current line
    */
   private showCurrentLine(): void {

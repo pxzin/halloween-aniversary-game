@@ -3,6 +3,9 @@
   import { EventBus } from '../../game/EventBus';
   import { quizData } from '../../game/data/quizQuestions';
 
+  // Development mode check
+  const isDevMode = import.meta.env.VITE_DEV_MODE === 'true' || import.meta.env.DEV;
+
   // Quiz state
   let isActive = $state(false);
   let currentPhase = $state(1);
@@ -183,6 +186,13 @@
           ></div>
         </div>
       </div>
+
+      <!-- Dev Skip Button -->
+      {#if isDevMode}
+        <button class="dev-skip-button" onclick={endQuiz}>
+          [DEV] Skip Quiz
+        </button>
+      {/if}
 
       <!-- Question Card -->
       <div class="question-card">
@@ -377,6 +387,35 @@
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-8px); }
     75% { transform: translateX(8px); }
+  }
+
+  /* Dev Skip Button */
+  .dev-skip-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: 2px solid rgba(255, 0, 0, 1);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .dev-skip-button:hover {
+    background: rgba(255, 0, 0, 1);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+  }
+
+  .dev-skip-button:active {
+    transform: scale(0.98);
   }
 
   @media (max-width: 600px) {

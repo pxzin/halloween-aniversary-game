@@ -4,110 +4,237 @@
   import DialogueBox from './DialogueBox.svelte';
 </script>
 
+<!-- Background com abóboras flutuantes -->
+<div class="pumpkin-bg">
+  <div class="floating-pumpkin" style="left: 10%; top: 20%; animation-delay: 0s;">🎃</div>
+  <div class="floating-pumpkin" style="left: 80%; top: 30%; animation-delay: 2s;">🎃</div>
+  <div class="floating-pumpkin" style="left: 50%; top: 60%; animation-delay: 4s;">🎃</div>
+</div>
+
 <div class="game-container">
-  <!-- Top bar: Clock -->
-  <div class="clock-bar">
+  <!-- Morcegos voadores -->
+  <div class="bat" style="animation-delay: 0s;">🦇</div>
+  <div class="bat" style="animation-delay: 4s; animation-duration: 10s;">🦇</div>
+
+  <!-- Fantasmas flutuantes -->
+  <div class="ghost" style="left: 15%; top: 15%;">👻</div>
+  <div class="ghost" style="left: 75%; top: 25%; animation-delay: 3s;">👻</div>
+
+  <!-- Timer no topo -->
+  <div class="timer-bar">
     <Clock />
   </div>
 
-  <!-- Center: Phaser game canvas -->
-  <div class="game-area">
-    <div id="game-container"></div>
-  </div>
-
-  <!-- Right sidebar: Inventory -->
-  <div class="inventory-sidebar">
+  <!-- Inventário lateral direito -->
+  <div class="inventory-panel">
     <Inventory />
   </div>
 
-  <!-- Bottom bar: Dialogue -->
-  <div class="dialogue-bar">
+  <!-- Área do jogo (Phaser canvas) -->
+  <div class="game-view">
+    <div id="game-container"></div>
+  </div>
+
+  <!-- Container de diálogo -->
+  <div class="dialogue-container">
     <DialogueBox />
   </div>
 </div>
 
 <style>
-  .game-container {
+  /* Fundo animado */
+  .pumpkin-bg {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 250px;
-    grid-template-rows: 60px 1fr minmax(180px, auto);
-    grid-template-areas:
-      "clock clock"
-      "game inventory"
-      "dialogue dialogue";
-    background-color: #1a1a1a;
-  }
-
-  @media (max-width: 1200px) {
-    .game-container {
-      grid-template-columns: 1fr 200px;
-    }
-  }
-
-  @media (max-width: 900px) {
-    .game-container {
-      grid-template-columns: 1fr;
-      grid-template-rows: 50px 1fr 200px minmax(180px, auto);
-      grid-template-areas:
-        "clock"
-        "game"
-        "inventory"
-        "dialogue";
-    }
-  }
-
-  .clock-bar {
-    grid-area: clock;
-    background-color: #2d2d2d;
-    border-bottom: 2px solid #ff6b35;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .game-area {
-    grid-area: game;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
     overflow: hidden;
-    background-color: #000000;
-    position: relative;
+    opacity: 0.15;
+    z-index: 1;
   }
 
-  .game-area :global(#game-container) {
-    width: min(800px, 100%);
-    height: min(600px, 100%);
+  .floating-pumpkin {
+    position: absolute;
+    font-size: 40px;
+    animation: float 15s infinite ease-in-out;
   }
 
-  @media (max-width: 900px) {
-    .game-area :global(#game-container) {
-      width: 100%;
-      height: 100%;
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+  }
+
+  /* Container principal */
+  .game-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(1200px, 100vw);
+    height: min(675px, 100vh);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0f2e 100%);
+    box-shadow:
+      0 10px 50px rgba(255, 94, 0, 0.4),
+      0 0 100px rgba(138, 43, 226, 0.3);
+    border: 2px solid #ff5e00;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  /* Morcegos */
+  .bat {
+    position: absolute;
+    font-size: 25px;
+    animation: flyBat 8s infinite linear;
+    z-index: 5;
+    opacity: 0.7;
+  }
+
+  @keyframes flyBat {
+    0% {
+      left: -50px;
+      top: 20%;
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      left: 100%;
+      top: 60%;
+      transform: scale(1);
     }
   }
 
-  .game-area :global(canvas) {
-    display: block !important;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+  /* Fantasmas */
+  .ghost {
+    position: absolute;
+    font-size: 30px;
+    animation: floatGhost 10s infinite ease-in-out;
+    opacity: 0.6;
+    z-index: 5;
   }
 
-  .inventory-sidebar {
-    grid-area: inventory;
-    background-color: #2d2d2d;
-    border-left: 2px solid #ff6b35;
+  @keyframes floatGhost {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translateY(-40px) translateX(30px);
+      opacity: 0.7;
+    }
+  }
+
+  /* Timer no topo */
+  .timer-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(26, 15, 46, 0.8) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 3px solid #ff5e00;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(255, 94, 0, 0.4);
+  }
+
+  /* Inventário */
+  .inventory-panel {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 280px;
+    height: calc(100% - 280px);
+    background: linear-gradient(135deg, rgba(10, 5, 20, 0.95) 0%, rgba(26, 10, 35, 0.95) 100%);
+    border-left: 3px solid #ff5e00;
+    padding: 20px;
+    z-index: 50;
+    box-shadow: inset 0 0 30px rgba(138, 43, 226, 0.2);
     overflow-y: auto;
   }
 
-  .dialogue-bar {
-    grid-area: dialogue;
-    background-color: #2d2d2d;
-    border-top: 2px solid #ff6b35;
+  /* Área do jogo */
+  .game-view {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 280px;
+    bottom: 220px;
+    background: linear-gradient(135deg, #0a0015 0%, #1a0f2e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 50px rgba(138, 43, 226, 0.2);
+    overflow: hidden;
+  }
+
+  .game-view :global(#game-container) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .game-view :global(canvas) {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+  }
+
+  /* Container de diálogo */
+  .dialogue-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10, 5, 20, 0.8) 30%, rgba(0,0,0,0.98) 100%);
+    z-index: 200;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .inventory-panel {
+      width: 220px;
+    }
+
+    .game-view {
+      right: 220px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .game-container {
+      width: 100vw;
+      height: 100vh;
+      border: none;
+    }
+
+    .inventory-panel {
+      width: 100%;
+      height: 180px;
+      top: auto;
+      bottom: 220px;
+      right: 0;
+      left: 0;
+      border-left: none;
+      border-top: 3px solid #ff5e00;
+      padding: 15px;
+    }
+
+    .game-view {
+      top: 60px;
+      bottom: 400px;
+      right: 0;
+    }
+
+    .dialogue-container {
+      height: 200px;
+    }
   }
 </style>

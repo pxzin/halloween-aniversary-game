@@ -109,92 +109,171 @@
 
 <style>
   .inventory {
-    padding: 16px;
+    padding: 0;
     color: #ffffff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inventory-title {
+    font-size: 24px;
+    font-weight: 900;
+    font-family: 'Arial Black', 'Arial Bold', 'Gadget', sans-serif;
+    color: #ff5e00;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow:
+      0 0 15px rgba(255, 94, 0, 0.8),
+      0 0 30px rgba(255, 94, 0, 0.5),
+      0 0 45px rgba(138, 43, 226, 0.3);
   }
 
   @media (max-width: 1200px) {
-    .inventory {
-      padding: 12px;
+    .inventory-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
     }
   }
 
   @media (max-width: 900px) {
-    .inventory {
-      padding: 10px;
+    .inventory-title {
+      font-size: 18px;
+      margin-bottom: 12px;
     }
   }
 
-  .inventory-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #ff6b35;
-    margin-bottom: 16px;
-    text-align: center;
-  }
-
   .empty-message {
-    color: #888;
+    color: #b388ff;
     text-align: center;
     font-style: italic;
     margin-top: 32px;
+    font-size: 14px;
+    opacity: 0.7;
   }
 
   .items-grid {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
+  .items-grid::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .items-grid::-webkit-scrollbar-track {
+    background: rgba(10, 0, 21, 0.5);
+    border-radius: 4px;
+  }
+
+  .items-grid::-webkit-scrollbar-thumb {
+    background: #ff5e00;
+    border-radius: 4px;
+  }
+
+  .items-grid::-webkit-scrollbar-thumb:hover {
+    background: #ff8c5a;
   }
 
   .item {
-    background-color: #3d3d3d;
-    border: 2px solid #555;
+    background: linear-gradient(135deg, rgba(26, 10, 35, 0.9) 0%, rgba(10, 5, 20, 0.9) 100%);
+    border: 2px solid #8a2be2;
     border-radius: 8px;
     padding: 12px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     text-align: left;
     display: flex;
     align-items: center;
     gap: 12px;
+    box-shadow: 0 2px 8px rgba(138, 43, 226, 0.2);
   }
 
   .item:hover {
-    background-color: #4d4d4d;
-    border-color: #ff6b35;
+    background: linear-gradient(135deg, rgba(26, 10, 35, 1) 0%, rgba(10, 5, 20, 1) 100%);
+    border-color: #ff5e00;
+    box-shadow:
+      0 4px 12px rgba(255, 94, 0, 0.4),
+      0 0 20px rgba(138, 43, 226, 0.3);
+    transform: translateX(-4px);
   }
 
   .item.selected {
-    background-color: #ff6b35;
-    border-color: #ff8c5a;
+    background: linear-gradient(135deg, rgba(255, 94, 0, 0.3) 0%, rgba(255, 94, 0, 0.2) 100%);
+    border-color: #ff5e00;
+    box-shadow:
+      0 4px 16px rgba(255, 94, 0, 0.6),
+      0 0 30px rgba(255, 94, 0, 0.4);
+    transform: scale(1.02);
   }
 
   .item.combination {
-    background-color: #35a7ff;
-    border-color: #5ab8ff;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.3) 0%, rgba(138, 43, 226, 0.2) 100%);
+    border-color: #b388ff;
+    box-shadow:
+      0 4px 16px rgba(138, 43, 226, 0.6),
+      0 0 30px rgba(138, 43, 226, 0.4);
+    transform: scale(1.02);
   }
 
   .item-icon {
-    font-size: 28px;
+    font-size: 32px;
     line-height: 1;
+    filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.5));
+  }
+
+  @media (max-width: 1200px) {
+    .item-icon {
+      font-size: 28px;
+    }
   }
 
   .item-name {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
     color: #ffffff;
     flex: 1;
+    text-shadow: 0 0 10px rgba(255, 94, 0, 0.3);
+  }
+
+  @media (max-width: 1200px) {
+    .item-name {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .item-name {
+      font-size: 12px;
+    }
   }
 
   .instructions {
-    margin-top: 24px;
+    margin-top: 16px;
     padding-top: 16px;
-    border-top: 1px solid #555;
-    font-size: 12px;
-    color: #888;
+    border-top: 2px solid rgba(138, 43, 226, 0.3);
+    font-size: 11px;
+    color: #b388ff;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .instructions {
+      font-size: 10px;
+      margin-top: 12px;
+      padding-top: 12px;
+    }
   }
 
   .instructions p {
     margin: 4px 0;
+    opacity: 0.8;
   }
 </style>

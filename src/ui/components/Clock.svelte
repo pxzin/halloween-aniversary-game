@@ -24,47 +24,94 @@
   }
 </script>
 
-<div class="clock">
-  <div class="clock-icon">🕐</div>
-  <div class="clock-time" class:warning={isWarning($gameTime)} class:danger={isDanger($gameTime)}>
-    {formatTime($gameTime)}
+<div class="timer-container">
+  <div class="timer" class:warning={isWarning($gameTime)} class:danger={isDanger($gameTime)}>
+    🎃 {formatTime($gameTime)} 🎃
   </div>
 </div>
 
 <style>
-  .clock {
+  .timer-container {
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 12px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #ff6b35;
   }
 
-  .clock-icon {
-    font-size: 32px;
+  .timer {
+    color: #ff5e00;
+    font-size: 42px;
+    font-weight: 900;
+    font-family: 'Arial Black', 'Arial Bold', 'Gadget', sans-serif;
+    text-shadow:
+      0 0 20px rgba(255, 94, 0, 0.8),
+      0 0 40px rgba(255, 94, 0, 0.5),
+      0 0 60px rgba(138, 43, 226, 0.3);
+    letter-spacing: 4px;
+    animation: pulse 2s infinite ease-in-out;
+    transition: color 0.3s, text-shadow 0.3s;
   }
 
-  .clock-time {
-    font-family: 'Courier New', monospace;
-    transition: color 0.3s;
-  }
-
-  .clock-time.warning {
+  /* Warning state - yellow glow */
+  .timer.warning {
     color: #ffaa00;
+    text-shadow:
+      0 0 20px rgba(255, 170, 0, 0.9),
+      0 0 40px rgba(255, 170, 0, 0.6),
+      0 0 60px rgba(255, 94, 0, 0.4);
   }
 
-  .clock-time.danger {
+  /* Danger state - red glow with faster pulse */
+  .timer.danger {
     color: #ff0000;
-    animation: pulse 1s infinite;
+    text-shadow:
+      0 0 20px rgba(255, 0, 0, 1),
+      0 0 40px rgba(255, 0, 0, 0.7),
+      0 0 60px rgba(255, 94, 0, 0.5);
+    animation: pulseDanger 0.8s infinite ease-in-out;
   }
 
   @keyframes pulse {
     0%, 100% {
+      transform: scale(1);
       opacity: 1;
     }
     50% {
-      opacity: 0.5;
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes pulseDanger {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.08);
+      opacity: 0.85;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1200px) {
+    .timer {
+      font-size: 36px;
+      letter-spacing: 3px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .timer {
+      font-size: 32px;
+      letter-spacing: 2px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .timer {
+      font-size: 28px;
+      letter-spacing: 1px;
     }
   }
 </style>
