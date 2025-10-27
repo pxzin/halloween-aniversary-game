@@ -4,6 +4,9 @@
   import { EventBus } from '../../game/EventBus';
   import { DialogueManager } from '../../game/services/DialogueManager';
 
+  // Speaker can be either a string (legacy) or an object (new format)
+  type SpeakerData = string | { character: string; emotion: string };
+
   let displayedText = $state('');
   let fullText = $state('');
   let isTyping = $state(false);
@@ -11,6 +14,23 @@
   let currentCharIndex = $state(0);
   let portraitError = $state(false);
   let missingEmotion = $state('');
+
+  /**
+   * Parse speaker data - supports both legacy string format and new object format
+   */
+  function parseSpeaker(speaker: SpeakerData): { character: string; emotion: string } {
+    if (typeof speaker === 'string') {
+      // Legacy format: "jessica_neutral" or "narrator"
+      const parts = speaker.split('_');
+      if (parts.length === 1) {
+        return { character: parts[0], emotion: 'neutral' };
+      }
+      return { character: parts[0], emotion: parts[1] };
+    } else {
+      // New format: { character: "jessica", emotion: "neutral" }
+      return speaker;
+    }
+  }
 
   // Placeholder sound effect (will be replaced with actual audio)
   const playBlipSound = () => {
@@ -96,19 +116,20 @@
   /**
    * Get portrait image path based on speaker
    */
-  function getPortraitPath(speaker: string, useFallback: boolean = false): string {
-    if (speaker === 'narrator') {
+  function getPortraitPath(speaker: SpeakerData, useFallback: boolean = false): string {
+    const { character, emotion } = parseSpeaker(speaker);
+
+    if (character === 'narrator') {
       return '';
     }
 
     // If fallback needed, use neutral emotion
     if (useFallback) {
-      const characterName = speaker.split('_')[0];
-      return `/assets/images/portraits/${characterName}_neutral.png`;
+      return `/assets/images/portraits/${character}_neutral.png`;
     }
 
     // Path to portrait images in public folder
-    return `/assets/images/portraits/${speaker}.png`;
+    return `/assets/images/portraits/${character}_${emotion}.png`;
   }
 
   /**
@@ -116,12 +137,13 @@
    */
   function handlePortraitError(event: Event) {
     const speaker = $dialogue?.character || '';
-    const emotion = speaker.split('_')[1] || 'unknown';
+    const { character, emotion } = parseSpeaker(speaker);
 
     portraitError = true;
     missingEmotion = emotion;
 
-    console.error(`⚠️ Portrait missing: ${speaker}.png - Using neutral fallback`);
+    const missingPath = `/assets/images/portraits/${character}_${emotion}.png`;
+    console.warn(`Portrait not found, falling back to neutral. Missing: ${missingPath}`);
 
     // Set image src to fallback
     const img = event.target as HTMLImageElement;
@@ -139,17 +161,27 @@
   /**
    * Get speaker display name
    */
-  function getSpeakerName(speaker: string): string {
-    if (speaker.startsWith('jessica')) {
+  function getSpeakerName(speaker: SpeakerData): string {
+    const { character } = parseSpeaker(speaker);
+
+    if (character === 'jessica') {
       return 'Jessica';
-    } else if (speaker === 'narrator') {
+    } else if (character === 'narrator') {
       return 'Narrator';
-    } else if (speaker.startsWith('owl')) {
+    } else if (character === 'owl') {
       return 'Duo';
-    } else if (speaker === 'duolingo') {
+    } else if (character === 'duolingo') {
       return 'Duolingo';
     }
-    return speaker;
+    return character;
+  }
+
+  /**
+   * Check if speaker is narrator (no portrait needed)
+   */
+  function isNarrator(speaker: SpeakerData): boolean {
+    const { character } = parseSpeaker(speaker);
+    return character === 'narrator';
   }
 
 
@@ -180,7 +212,7 @@
 {#if $dialogue}
   <div class="dialogue-box" onclick={handleClick}>
     <div class="dialogue-content">
-      {#if $dialogue.character !== 'narrator'}
+      {#if !isNarrator($dialogue.character)}
         <div class="character-portrait">
           <div class="portrait-container">
             <img
@@ -201,7 +233,7 @@
         </div>
       {/if}
 
-      <div class="dialogue-text" class:narrator={$dialogue.character === 'narrator'}>
+      <div class="dialogue-text" class:narrator={isNarrator($dialogue.character)}>
         <p>{displayedText}{#if isTyping}<span class="cursor">▋</span>{/if}</p>
       </div>
 

@@ -1,9 +1,9 @@
 {
   "id": "sample_dialogue",
   "lines": [
-    { "speaker": "jessica_neutral", "text": "This is the first line of dialogue." },
-    { "speaker": "narrator", "text": "This is a narration line, without a portrait." },
-    { "speaker": "jessica_surprised", "text": "And this is a second line, with a different emotion!" },
-    { "speaker": "jessica_neutral", "text": "This dialogue system is working perfectly!" }
+    { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "This is the first line of dialogue." },
+    { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "This is a narration line, without a portrait." },
+    { "speaker": { "character": "jessica", "emotion": "surprised" }, "text": "And this is a second line, with a different emotion!" },
+    { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "This dialogue system is working perfectly!" }
   ]
 }
