@@ -1,7 +1,6 @@
 import 'uno.css';
 import { mount } from 'svelte';
 import App from './ui/App.svelte';
-import { initializeGame } from './game/Game';
 import { gameTime, isGameOver } from './ui/stores';
 import { EventBus } from './game/EventBus';
 import type { GameTime } from './ui/stores';
@@ -11,9 +10,6 @@ import { get } from 'svelte/store';
 const app = mount(App, {
   target: document.getElementById('app')!
 });
-
-// Initialize Phaser game
-const game = initializeGame();
 
 // Game clock timer reference
 let clockTimer: number | null = null;

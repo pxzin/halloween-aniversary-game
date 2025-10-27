@@ -4,6 +4,7 @@
   import { isGameOver } from './stores';
   import GUI from './components/GUI.svelte';
   import GameOver from './components/GameOver.svelte';
+  import { initializeGame } from '../game/Game';
 
   let showMainMenu = $state(false);
 
@@ -20,17 +21,23 @@
   }
 
   onMount(() => {
+    // Initialize Phaser game after DOM is ready
+    const game = initializeGame();
+
     // Listen for events from Phaser
     EventBus.on('show-main-menu', handleShowMainMenu);
     EventBus.on('hide-main-menu', handleHideMainMenu);
-  });
 
-  onDestroy(() => {
-    // Cleanup event listeners
-    EventBus.off('show-main-menu', handleShowMainMenu);
-    EventBus.off('hide-main-menu', handleHideMainMenu);
+    return () => {
+      EventBus.off('show-main-menu', handleShowMainMenu);
+      EventBus.off('hide-main-menu', handleHideMainMenu);
+      game?.destroy(true);
+    };
   });
 </script>
+
+<!-- Game GUI - Always rendered -->
+<GUI />
 
 {#if $isGameOver}
   <!-- Game Over Screen -->
@@ -48,9 +55,6 @@
       </button>
     </div>
   </div>
-{:else}
-  <!-- Game GUI -->
-  <GUI />
 {/if}
 
 <style>

@@ -6,6 +6,7 @@ import { writable } from 'svelte/store';
 export interface Item {
   id: string;
   name: string;
+  icon: string; // Emoji or image path for the item
 }
 
 /**
@@ -28,11 +29,11 @@ export interface GameTime {
 /**
  * Initial game time - easy to modify for testing
  * Game over happens at midnight (00:00:00)
- * Starting at 23:59:00 = 1 minute until game over
+ * Starting at 23:00:00 = 1 hour until game over
  */
 export const INITIAL_TIME: GameTime = {
   hour: 23,
-  minute: 59,
+  minute: 0,
   second: 0
 };
 

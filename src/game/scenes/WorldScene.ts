@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { EventBus } from '../EventBus';
 import { inventory, selectedItem } from '../../ui/stores';
 import { InteractionService } from '../services/InteractionService';
+import { DialogueManager } from '../services/DialogueManager';
 import { get } from 'svelte/store';
 
 /**
@@ -28,27 +29,56 @@ export class WorldScene extends Phaser.Scene {
 
     // Add test items to inventory
     inventory.set([
-      { id: 'lighter', name: 'Isqueiro' },
-      { id: 'cat_food_can', name: 'Lata de Ração' },
-      { id: 'mini_rake', name: 'Mini Rastelo' }
+      { id: 'lighter', name: 'Isqueiro', icon: '🔥' },
+      { id: 'cat_food_can', name: 'Lata de Ração', icon: '🥫' },
+      { id: 'mini_rake', name: 'Mini Rastelo', icon: '🧹' }
     ]);
 
     // Create clickable test objects
     this.createTestObject(200, 300, 'Churrasqueira', 'grill_with_sanitizer');
     this.createTestObject(600, 300, 'Mesa', 'table');
 
-    // Show welcome dialogue
-    EventBus.emit('show-dialogue', {
-      character: 'jessica',
-      text: 'Onde eu estou? O que aconteceu? Preciso encontrar uma forma de sair daqui...'
-    });
+    // Create test button for DialogueManager
+    this.createDialogueTestButton(400, 400);
 
     // Instructions text
-    this.add.text(400, 550, 'Clique nos objetos para interagir\nUse itens do inventário nos objetos', {
+    this.add.text(400, 550, 'Clique nos objetos para interagir\nClique no botão "Test Dialogue" para testar o novo sistema', {
       fontSize: '14px',
       color: '#888888',
       align: 'center'
     }).setOrigin(0.5);
+  }
+
+  /**
+   * Create a test button to trigger the sample dialogue
+   */
+  private createDialogueTestButton(x: number, y: number): void {
+    const button = this.add.rectangle(x, y, 250, 60, 0x58cc02);
+    button.setStrokeStyle(3, 0xffffff);
+    button.setInteractive();
+    button.setDepth(10); // Ensure it's on top
+
+    const buttonText = this.add.text(x, y, 'Test Dialogue System', {
+      fontSize: '20px',
+      color: '#ffffff',
+      fontStyle: 'bold'
+    }).setOrigin(0.5);
+    buttonText.setDepth(11); // Text on top of button
+
+    // Handle click
+    button.on('pointerdown', async () => {
+      await DialogueManager.loadScript('sample');
+      DialogueManager.startDialogue();
+    });
+
+    // Hover effect
+    button.on('pointerover', () => {
+      button.setFillStyle(0x7aef34);
+    });
+
+    button.on('pointerout', () => {
+      button.setFillStyle(0x58cc02);
+    });
   }
 
   /**
@@ -58,7 +88,7 @@ export class WorldScene extends Phaser.Scene {
     // Create a rectangle as placeholder
     const rect = this.add.rectangle(x, y, 120, 120, 0x3d3d3d);
     rect.setStrokeStyle(2, 0xff6b35);
-    rect.setInteractive({ useHandCursor: true });
+    rect.setInteractive();
 
     // Add label
     this.add.text(x, y, label, {
@@ -80,6 +110,9 @@ export class WorldScene extends Phaser.Scene {
             text: `Usei ${selected.name} na ${label}!`
           });
         }
+
+        // Deselect item after interaction
+        selectedItem.set(null);
       } else {
         // Just examining the object
         EventBus.emit('show-dialogue', {

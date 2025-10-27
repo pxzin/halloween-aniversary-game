@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { inventory, selectedItem, combinationStore } from '../stores';
   import { CombinationService } from '../../game/services/CombinationService';
   import type { Item } from '../stores';
@@ -56,6 +57,26 @@
   function isSelectedItem(item: Item): boolean {
     return $selectedItem?.id === item.id;
   }
+
+  /**
+   * Update cursor based on selected item
+   */
+  onMount(() => {
+    const unsubscribe = selectedItem.subscribe((item) => {
+      if (item) {
+        // Set custom cursor with item icon
+        document.body.style.cursor = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="24" font-size="24">${item.icon}</text></svg>') 16 16, auto`;
+      } else {
+        // Reset to default cursor
+        document.body.style.cursor = 'default';
+      }
+    });
+
+    return () => {
+      unsubscribe();
+      document.body.style.cursor = 'default';
+    };
+  });
 </script>
 
 <div class="inventory">
@@ -73,6 +94,7 @@
           onclick={(e) => handleItemClick(item, e)}
           title={item.name}
         >
+          <div class="item-icon">{item.icon}</div>
           <div class="item-name">{item.name}</div>
         </button>
       {/each}
@@ -120,6 +142,9 @@
     cursor: pointer;
     transition: all 0.2s;
     text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .item:hover {
@@ -137,10 +162,16 @@
     border-color: #5ab8ff;
   }
 
+  .item-icon {
+    font-size: 28px;
+    line-height: 1;
+  }
+
   .item-name {
     font-size: 14px;
     font-weight: 500;
     color: #ffffff;
+    flex: 1;
   }
 
   .instructions {

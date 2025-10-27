@@ -58,6 +58,19 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-color: #000000;
+    position: relative;
+  }
+
+  .game-area :global(#game-container) {
+    width: 800px;
+    height: 600px;
+  }
+
+  .game-area :global(canvas) {
+    display: block !important;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
   }
 
   .inventory-sidebar {
