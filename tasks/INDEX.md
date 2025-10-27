@@ -8,5 +8,5 @@
 - [x] Task 006: Implement Portrait Emotion System
 - [x] Task 007: Replace Intro Scene Phone Placeholder
 - [x] Task 008: Refactor UI with Persona-5-Inspired Halloween Theme
-- [ ] Task 009: Implement Main Menu and Apply Theme
+- [x] Task 009: Implement Main Menu and Apply Theme
 - [ ] Task 010: UI Layout and Decorative Element Adjustments

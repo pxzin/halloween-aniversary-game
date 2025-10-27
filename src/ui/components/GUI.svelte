@@ -150,7 +150,7 @@
     top: 60px;
     right: 0;
     width: 280px;
-    height: calc(100% - 280px);
+    height: calc(100% - 240px);
     background: linear-gradient(135deg, rgba(10, 5, 20, 0.95) 0%, rgba(26, 10, 35, 0.95) 100%);
     border-left: 3px solid #ff5e00;
     padding: 20px;
@@ -165,7 +165,7 @@
     top: 60px;
     left: 0;
     right: 280px;
-    bottom: 220px;
+    bottom: 180px;
     background: linear-gradient(135deg, #0a0015 0%, #1a0f2e 100%);
     display: flex;
     align-items: center;
@@ -192,7 +192,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 220px;
+    height: 180px;
     background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10, 5, 20, 0.8) 30%, rgba(0,0,0,0.98) 100%);
     z-index: 200;
   }
@@ -217,9 +217,9 @@
 
     .inventory-panel {
       width: 100%;
-      height: 180px;
+      height: 160px;
       top: auto;
-      bottom: 220px;
+      bottom: 180px;
       right: 0;
       left: 0;
       border-left: none;
@@ -229,12 +229,12 @@
 
     .game-view {
       top: 60px;
-      bottom: 400px;
+      bottom: 340px;
       right: 0;
     }
 
     .dialogue-container {
-      height: 200px;
+      height: 180px;
     }
   }
 </style>

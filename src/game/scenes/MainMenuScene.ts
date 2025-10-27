@@ -22,8 +22,8 @@ export class MainMenuScene extends Phaser.Scene {
     // Remove listener to prevent memory leaks
     EventBus.off('start-game', this.startGame.bind(this));
 
-    // Transition to WorldScene
-    this.scene.start('WorldScene');
+    // Transition to IntroScene
+    this.scene.start('IntroScene');
   }
 
   destroy(): void {

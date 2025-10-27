@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 /**
  * Boot Scene - responsible for loading essential assets
- * Currently transitions directly to MainMenuScene
+ * Transitions to IntroScene after loading
  */
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -14,7 +14,7 @@ export class BootScene extends Phaser.Scene {
   }
 
   create(): void {
-    // Transition to IntroScene
+    // Transition to IntroScene (game always starts with intro/quiz)
     this.scene.start('IntroScene');
   }
 }
