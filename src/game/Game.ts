@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { BootScene } from './scenes/BootScene';
+import { IntroScene } from './scenes/IntroScene';
 import { MainMenuScene } from './scenes/MainMenuScene';
 import { WorldScene } from './scenes/WorldScene';
 
@@ -10,7 +11,7 @@ const config: Phaser.Types.Core.GameConfig = {
   height: 600,
   parent: 'game-container',
   backgroundColor: '#1a1a1a',
-  scene: [BootScene, MainMenuScene, WorldScene]
+  scene: [BootScene, IntroScene, MainMenuScene, WorldScene]
 };
 
 // Export a function to initialize the game when needed

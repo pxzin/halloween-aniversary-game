@@ -144,6 +144,8 @@
       return 'Jessica';
     } else if (speaker === 'narrator') {
       return 'Narrator';
+    } else if (speaker.startsWith('owl')) {
+      return 'Duo';
     } else if (speaker === 'duolingo') {
       return 'Duolingo';
     }

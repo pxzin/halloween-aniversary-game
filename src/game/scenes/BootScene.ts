@@ -14,7 +14,7 @@ export class BootScene extends Phaser.Scene {
   }
 
   create(): void {
-    // Transition to MainMenuScene
-    this.scene.start('MainMenuScene');
+    // Transition to IntroScene
+    this.scene.start('IntroScene');
   }
 }

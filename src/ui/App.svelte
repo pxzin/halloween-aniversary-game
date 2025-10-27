@@ -4,6 +4,7 @@
   import { isGameOver } from './stores';
   import GUI from './components/GUI.svelte';
   import GameOver from './components/GameOver.svelte';
+  import Quiz from './components/Quiz.svelte';
   import { initializeGame } from '../game/Game';
 
   let showMainMenu = $state(false);
@@ -38,6 +39,9 @@
 
 <!-- Game GUI - Always rendered -->
 <GUI />
+
+<!-- Quiz Component - Shows when triggered by EventBus -->
+<Quiz />
 
 {#if $isGameOver}
   <!-- Game Over Screen -->

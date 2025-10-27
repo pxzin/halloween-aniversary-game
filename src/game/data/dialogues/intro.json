@@ -1,0 +1,56 @@
+{
+  "opening_narrative": {
+    "id": "opening_narrative",
+    "lines": [
+      { "speaker": "narrator", "text": "Jessica está em casa na noite de 31 de outubro, Halloween." },
+      { "speaker": "narrator", "text": "Ela deveria estar se preparando para ir à festa da sua melhor amiga, Sofia..." },
+      { "speaker": "narrator", "text": "Mas como sempre, ela está procrastinando." },
+      { "speaker": "jessica_neutral", "text": "Só mais alguns minutos navegando no celular..." },
+      { "speaker": "narrator", "text": "De repente, uma notificação do Duolingo aparece na tela." },
+      { "speaker": "jessica_annoyed", "text": "Ah não... De novo esse maldito aplicativo!" },
+      { "speaker": "jessica_annoyed", "text": "Já tem meses que eu não faço uma lição..." },
+      { "speaker": "narrator", "text": "Ela tenta ignorar, mas as notificações ficam cada vez mais insistentes." },
+      { "speaker": "jessica_scared", "text": "Ok, ok! Vou fazer UMA lição e depois ele me deixa em paz!" }
+    ]
+  },
+  "owl_appears": {
+    "id": "owl_appears",
+    "lines": [
+      { "speaker": "narrator", "text": "Jessica abre o aplicativo e, estranhamente, há apenas um quiz disponível..." },
+      { "speaker": "narrator", "text": "O título está escrito em caracteres estranhos que ela não consegue ler." },
+      { "speaker": "jessica_neutral", "text": "Que estranho... Mas enfim, vamos logo terminar isso." }
+    ]
+  },
+  "curse_dialogue": {
+    "id": "curse_dialogue",
+    "lines": [
+      { "speaker": "narrator", "text": "Assim que Jessica finaliza a última questão..." },
+      { "speaker": "narrator", "text": "A tela do celular começa a emitir uma luz verde intensa!" },
+      { "speaker": "jessica_scared", "text": "O-o que está acontecendo?!" },
+      { "speaker": "narrator", "text": "Da luz surge uma forma... É o Duo, a coruja do Duolingo!" },
+      { "speaker": "narrator", "text": "Mas algo está diferente... Seus olhos brilham com raiva sobrenatural." },
+      { "speaker": "owl_furious", "text": "VOCÊ PENSOU QUE PODIA ME IGNORAR?!" },
+      { "speaker": "jessica_scared", "text": "I-isso não pode estar acontecendo! É só um aplicativo!" },
+      { "speaker": "owl_agitated", "text": "MESES sem fazer uma lição... MESES de lembretes ignorados!" },
+      { "speaker": "owl_impatient", "text": "Você fez sua escolha. Agora viverá as consequências!" },
+      { "speaker": "jessica_scared", "text": "Espera! Eu estava ocupada! Faculdade, trabalho..." },
+      { "speaker": "owl_furious", "text": "DESCULPAS! Sempre desculpas! Sua alma agora me pertence!" },
+      { "speaker": "narrator", "text": "A coruja ergue suas asas e um círculo de runas verdes aparece ao redor de Jessica." },
+      { "speaker": "owl_furious", "text": "Você tem até a meia-noite para completar TODAS as tarefas que ignorou!" },
+      { "speaker": "owl_impatient", "text": "Caso contrário... Sua alma será MINHA para sempre!" },
+      { "speaker": "jessica_scared", "text": "NÃO! Isso é loucura!" },
+      { "speaker": "narrator", "text": "A luz verde se intensifica ainda mais, cegando Jessica..." }
+    ]
+  },
+  "fainting_sequence": {
+    "id": "fainting_sequence",
+    "lines": [
+      { "speaker": "narrator", "text": "Jessica sente suas pernas fraquejarem..." },
+      { "speaker": "jessica_neutral", "text": "Eu... preciso... sair daqui..." },
+      { "speaker": "narrator", "text": "Tudo escurece ao seu redor." },
+      { "speaker": "narrator", "text": "Quando ela finalmente abre os olhos..." },
+      { "speaker": "narrator", "text": "Ela está na entrada de uma casa estranha." },
+      { "speaker": "narrator", "text": "Uma casa que ela nunca viu antes, mas que de alguma forma... parece familiar." }
+    ]
+  }
+}

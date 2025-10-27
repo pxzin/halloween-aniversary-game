@@ -25,9 +25,11 @@ class DialogueManagerClass {
   private currentLineIndex: number = 0;
 
   /**
-   * Load a dialogue script by ID
+   * Load a dialogue script by ID, optionally specifying a section
+   * @param scriptId - The name of the JSON file (without .json extension)
+   * @param section - Optional section name within the JSON file (for multi-section files)
    */
-  async loadScript(scriptId: string): Promise<void> {
+  async loadScript(scriptId: string, section?: string): Promise<void> {
     try {
       // Fetch the JSON file from the dialogues directory
       const response = await fetch(`/src/game/data/dialogues/${scriptId}.json`);
@@ -36,10 +38,23 @@ class DialogueManagerClass {
         throw new Error(`Failed to load dialogue script: ${scriptId}`);
       }
 
-      this.currentScript = await response.json();
+      const data = await response.json();
+
+      // If a section is specified, extract that section
+      if (section) {
+        if (data[section]) {
+          this.currentScript = data[section];
+        } else {
+          throw new Error(`Section '${section}' not found in script '${scriptId}'`);
+        }
+      } else {
+        // Otherwise, use the entire JSON as the script
+        this.currentScript = data;
+      }
+
       this.currentLineIndex = 0;
 
-      console.log(`Dialogue script loaded: ${scriptId}`);
+      console.log(`Dialogue script loaded: ${scriptId}${section ? ` (section: ${section})` : ''}`);
     } catch (error) {
       console.error('Error loading dialogue script:', error);
       this.currentScript = null;
@@ -108,7 +123,7 @@ class DialogueManagerClass {
     dialogue.set(null);
 
     // Emit event for dialogue end
-    EventBus.emit('dialogue-end');
+    EventBus.emit('dialogue-ended');
 
     // Reset state
     this.currentScript = null;
