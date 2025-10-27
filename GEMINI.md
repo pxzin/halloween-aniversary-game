@@ -13,4 +13,4 @@ As the lead assistant, my primary responsibilities are to assist in designing th
 - **Prompt Engineering:** I will help create detailed and optimized text prompts for external AI tools (like Midjourney, DALL-E, Suno) to generate art and audio assets.
 - **Prompt Storage:** All generated prompts will be stored in the `/prompts` directory, organized into `art/` and `audio/` subdirectories.
 - **Style Consistency:** We will define a style "Bible-Image" to be used as a style reference in all art prompts to ensure visual consistency.
-- **Modular Characters:** Character sprites will be generated using a "Paper Doll" system, with separate prompts for the base body, clothing, and equipment.
+- **Character Portraits:** Characters will be represented by JRPG-style dialogue portraits (bust-up images). I will create prompts for these portraits, focusing on generating a set of expressions for the main character (neutral, scared, happy, etc.).

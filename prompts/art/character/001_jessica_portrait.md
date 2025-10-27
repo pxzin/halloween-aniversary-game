@@ -9,14 +9,14 @@ This prompt is designed to generate the primary character portrait for Jessica. 
 
 ## Image Reference
 
-- **URL:** `[URL_DA_FOTO_DE_REFERENCIA_AQUI]`
+- **URL:** `https://photos.fife.usercontent.google.com/pw/AP1GczNGwcC6gi8Wun88yjBB6YuGvbvU0q0WnZgm5RWDtuDg4lnFFPUpUyHK9Q=w726-h968-s-no-gm?authuser=0`
 
 ## Prompt Breakdown
 
 ### Main Prompt
 
 ```
-[URL_DA_FOTO_DE_REFERENCIA_AQUI] high-resolution pixel art portrait of a woman, JRPG dialogue portrait, bust-up, detailed expressive eyes, neutral expression, facing forward, clean lines, vibrant but moody color palette, halloween-themed subtle background, style of modern indie games like Stardew Valley and Celeste --ar 4:3
+https://photos.fife.usercontent.google.com/pw/AP1GczNGwcC6gi8Wun88yjBB6YuGvbvU0q0WnZgm5RWDtuDg4lnFFPUpUyHK9Q=w726-h968-s-no-gm?authuser=0 pixel art portrait of a woman, JRPG dialogue portrait, bust-up, detailed expressive eyes, neutral expression, facing forward, clean lines, vibrant but moody color palette, halloween-themed subtle background, style of modern indie games like Stardew Valley and Celeste --ar 4:3
 ```
 
 ### Negative Prompt
