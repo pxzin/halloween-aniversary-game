@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { EventBus } from '../game/EventBus';
+  import { isGameOver } from './stores';
+  import GUI from './components/GUI.svelte';
+  import GameOver from './components/GameOver.svelte';
 
   let showMainMenu = $state(false);
 
@@ -29,21 +32,73 @@
   });
 </script>
 
-<main class="p-4">
-  <h1 class="text-2xl font-bold text-orange-500">Halloween Anniversary</h1>
-
-  {#if showMainMenu}
-    <div class="mt-4">
+{#if $isGameOver}
+  <!-- Game Over Screen -->
+  <GameOver />
+{:else if showMainMenu}
+  <!-- Main Menu Overlay -->
+  <div class="main-menu-overlay">
+    <div class="menu-content">
+      <h1 class="game-title">Halloween Anniversary</h1>
       <button
         onclick={startGame}
-        class="px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg transition-colors"
+        class="start-button"
       >
         Start Game
       </button>
     </div>
-  {/if}
-</main>
+  </div>
+{:else}
+  <!-- Game GUI -->
+  <GUI />
+{/if}
 
 <style>
-  /* Component-specific styles can go here */
+  .main-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .menu-content {
+    text-align: center;
+  }
+
+  .game-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff6b35;
+    margin-bottom: 32px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .start-button {
+    padding: 16px 48px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ff6b35;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .start-button:hover {
+    background-color: #ff8c5a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .start-button:active {
+    transform: translateY(0);
+  }
 </style>
