@@ -113,6 +113,18 @@
     color: #ffffff;
   }
 
+  @media (max-width: 1200px) {
+    .inventory {
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .inventory {
+      padding: 10px;
+    }
+  }
+
   .inventory-title {
     font-size: 20px;
     font-weight: bold;

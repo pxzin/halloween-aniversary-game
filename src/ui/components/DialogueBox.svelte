@@ -9,6 +9,8 @@
   let isTyping = $state(false);
   let typewriterInterval: number | null = null;
   let currentCharIndex = $state(0);
+  let portraitError = $state(false);
+  let missingEmotion = $state('');
 
   // Placeholder sound effect (will be replaced with actual audio)
   const playBlipSound = () => {
@@ -92,17 +94,46 @@
   }
 
   /**
-   * Get portrait icon based on speaker
+   * Get portrait image path based on speaker
    */
-  function getPortraitIcon(speaker: string): string {
-    if (speaker.startsWith('jessica')) {
-      return '👧';
-    } else if (speaker === 'narrator') {
+  function getPortraitPath(speaker: string, useFallback: boolean = false): string {
+    if (speaker === 'narrator') {
       return '';
-    } else if (speaker === 'duolingo') {
-      return '🦉';
     }
-    return '❓';
+
+    // If fallback needed, use neutral emotion
+    if (useFallback) {
+      const characterName = speaker.split('_')[0];
+      return `/assets/images/portraits/${characterName}_neutral.png`;
+    }
+
+    // Path to portrait images in public folder
+    return `/assets/images/portraits/${speaker}.png`;
+  }
+
+  /**
+   * Handle portrait image load error - fallback to neutral emotion
+   */
+  function handlePortraitError(event: Event) {
+    const speaker = $dialogue?.character || '';
+    const emotion = speaker.split('_')[1] || 'unknown';
+
+    portraitError = true;
+    missingEmotion = emotion;
+
+    console.error(`⚠️ Portrait missing: ${speaker}.png - Using neutral fallback`);
+
+    // Set image src to fallback
+    const img = event.target as HTMLImageElement;
+    img.src = getPortraitPath(speaker, true);
+  }
+
+  /**
+   * Reset portrait error state when dialogue changes
+   */
+  function resetPortraitState() {
+    portraitError = false;
+    missingEmotion = '';
   }
 
   /**
@@ -119,21 +150,11 @@
     return speaker;
   }
 
-  /**
-   * Get portrait color based on emotion
-   */
-  function getPortraitColor(speaker: string): string {
-    if (speaker === 'jessica_neutral') return '#4a90e2';
-    if (speaker === 'jessica_surprised') return '#f5a623';
-    if (speaker === 'jessica_happy') return '#7ed321';
-    if (speaker === 'jessica_sad') return '#8b7e8a';
-    if (speaker === 'duolingo') return '#58cc02';
-    return '#888';
-  }
 
   // Watch for dialogue changes
   $effect(() => {
     if ($dialogue && $dialogue.text) {
+      resetPortraitState();
       startTypewriter($dialogue.text);
     }
   });
@@ -159,11 +180,18 @@
     <div class="dialogue-content">
       {#if $dialogue.character !== 'narrator'}
         <div class="character-portrait">
-          <div
-            class="portrait-placeholder"
-            style="background-color: {getPortraitColor($dialogue.character)}"
-          >
-            {getPortraitIcon($dialogue.character)}
+          <div class="portrait-container">
+            <img
+              src={getPortraitPath($dialogue.character)}
+              alt={getSpeakerName($dialogue.character)}
+              class="portrait-image"
+              onerror={handlePortraitError}
+            />
+            {#if portraitError}
+              <div class="missing-emotion-label">
+                Missing: {missingEmotion}
+              </div>
+            {/if}
           </div>
           <div class="character-name">
             {getSpeakerName($dialogue.character)}
@@ -188,7 +216,7 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 16px 24px;
+    padding: 12px 16px;
     cursor: pointer;
   }
 
@@ -200,9 +228,27 @@
     background-color: #3d3d3d;
     border: 2px solid #ff6b35;
     border-radius: 12px;
-    padding: 16px;
+    padding: 12px;
     position: relative;
     transition: background-color 0.2s;
+  }
+
+  @media (max-width: 1200px) {
+    .dialogue-content {
+      gap: 12px;
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .dialogue-box {
+      padding: 8px 12px;
+    }
+
+    .dialogue-content {
+      gap: 10px;
+      padding: 8px;
+    }
   }
 
   .dialogue-content:hover {
@@ -214,19 +260,58 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    min-width: 80px;
   }
 
-  .portrait-placeholder {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+  .portrait-container {
+    position: relative;
+  }
+
+  .portrait-image {
+    height: min(300px, 35vh);
+    width: auto;
+    max-width: 200px;
+    border-radius: 8px;
     border: 3px solid #ff6b35;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
+  }
+
+  @media (max-width: 1200px) {
+    .portrait-image {
+      height: min(250px, 30vh);
+      max-width: 170px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .portrait-image {
+      height: min(200px, 25vh);
+      max-width: 140px;
+      border: 2px solid #ff6b35;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .portrait-image {
+      height: min(150px, 20vh);
+      max-width: 100px;
+    }
+  }
+
+  .missing-emotion-label {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 107, 53, 0.9);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
   }
 
   .character-name {
@@ -244,6 +329,27 @@
     min-height: 60px;
     display: flex;
     align-items: center;
+  }
+
+  @media (max-width: 1200px) {
+    .dialogue-text {
+      font-size: 16px;
+      min-height: 50px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .dialogue-text {
+      font-size: 15px;
+      min-height: 45px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .dialogue-text {
+      font-size: 14px;
+      min-height: 40px;
+    }
   }
 
   .dialogue-text.narrator {
