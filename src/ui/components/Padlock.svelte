@@ -54,9 +54,9 @@
     console.log('═══════════════════════════════════════════════════════');
     console.log(`Entered code: "${enteredCode}"`);
     console.log(`Valid codes:`, validCodes);
-    console.log(`Is valid? ${validCodes.includes(enteredCode)}`);
+    console.log(`Is valid? ${validCodes.includes(enteredCode as any)}`);
 
-    if (validCodes.includes(enteredCode)) {
+    if (validCodes.includes(enteredCode as any)) {
       // Success!
       console.log('✅ CODE CORRECT! Unlocking gate...');
       console.log('Setting isVisible = false');
@@ -210,71 +210,6 @@
     text-align: center;
   }
 
-  .action-buttons {
-    display: flex;
-    gap: 20px;
-    margin-top: 10px;
-  }
-
-  .unlock-button,
-  .close-button {
-    padding: 15px 40px;
-    font-family: 'Arial Black', 'Arial Bold', 'Gadget', sans-serif;
-    font-size: 20px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 3px solid;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 5px;
-  }
-
-  .unlock-button {
-    background: linear-gradient(135deg, #ff5e00 0%, #ff8533 100%);
-    border-color: #ff5e00;
-    color: white;
-    box-shadow:
-      0 4px 15px rgba(255, 94, 0, 0.5),
-      0 0 30px rgba(255, 94, 0, 0.3),
-      inset 0 -3px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .unlock-button:hover {
-    background: linear-gradient(135deg, #ff7a33 0%, #ffa366 100%);
-    border-color: #ffa366;
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 25px rgba(255, 94, 0, 0.7),
-      0 0 50px rgba(255, 94, 0, 0.5),
-      inset 0 -3px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .close-button {
-    background: linear-gradient(135deg, #4a0a5a 0%, #6a1a7a 100%);
-    border-color: #8a2aba;
-    color: white;
-    box-shadow:
-      0 4px 15px rgba(138, 42, 186, 0.5),
-      0 0 30px rgba(138, 42, 186, 0.3),
-      inset 0 -3px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .close-button:hover {
-    background: linear-gradient(135deg, #6a1a7a 0%, #8a2aba 100%);
-    border-color: #aa4ada;
-    transform: translateY(-2px);
-    box-shadow:
-      0 6px 25px rgba(138, 42, 186, 0.7),
-      0 0 50px rgba(138, 42, 186, 0.5),
-      inset 0 -3px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .unlock-button:active,
-  .close-button:active {
-    transform: translateY(0);
-  }
-
   /* Responsive */
   @media (max-width: 700px) {
     .padlock-container {
@@ -297,12 +232,6 @@
       font-size: 36px;
       padding: 8px 15px;
       min-width: 60px;
-    }
-
-    .unlock-button,
-    .close-button {
-      padding: 12px 30px;
-      font-size: 16px;
     }
   }
 </style>
