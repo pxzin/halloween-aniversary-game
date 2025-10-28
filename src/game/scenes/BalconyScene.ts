@@ -1,8 +1,6 @@
 import Phaser from 'phaser';
 import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
-import { inventory } from '../../ui/stores';
-import type { Item } from '../../ui/stores';
 import { createClickableRect, DEBUG_COLORS } from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
@@ -355,13 +353,7 @@ export class BalconyScene extends Phaser.Scene {
       return;
     }
 
-    console.log('Adding rake to inventory');
-    // Add rake to inventory
-    inventory.update(items => [...items, {
-      id: 'miniature_rake',
-      name: 'Mini-Rastelo de Jardim',
-      icon: '🍴', // Placeholder icon
-    }]);
+    console.log('Acquiring rake');
 
     this.rakeFound = true;
     this.saveState();
@@ -378,6 +370,15 @@ export class BalconyScene extends Phaser.Scene {
     console.log('Loading found_rake dialogue');
     await DialogueManager.loadScript('balcony', 'found_rake');
     DialogueManager.startDialogue();
+
+    // After dialogue ends, trigger item acquisition animation
+    EventBus.once('dialogue-ended', () => {
+      EventBus.emit('item-acquired', {
+        id: 'miniature_rake',
+        name: 'Mini-Rastelo de Jardim',
+        icon: '/assets/images/ui/miniature_rake.png',
+      });
+    });
   }
 
   /**
@@ -436,13 +437,6 @@ export class BalconyScene extends Phaser.Scene {
     await DialogueManager.loadScript('balcony', 'cat_interaction_success');
     DialogueManager.startDialogue();
 
-    // Add key to inventory
-    inventory.update(items => [...items, {
-      id: 'hallway_key',
-      name: 'Chave do Corredor',
-      icon: '🔑', // Key icon
-    }]);
-
     // Show key visual appearing
     if (this.keyVisual) {
       this.keyVisual.setVisible(true);
@@ -461,6 +455,15 @@ export class BalconyScene extends Phaser.Scene {
     if (this.catZone) {
       this.catZone.disableInteractive();
     }
+
+    // After dialogue ends, trigger item acquisition animation
+    EventBus.once('dialogue-ended', () => {
+      EventBus.emit('item-acquired', {
+        id: 'hallway_key',
+        name: 'Chave do Corredor',
+        icon: '🔑', // Key icon
+      });
+    });
   }
 
   /**

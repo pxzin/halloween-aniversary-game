@@ -1,0 +1,27 @@
+{
+  "hallway_intro": {
+    "id": "hallway_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Este corredor... dá arrepios. Tantas portas..." }
+    ]
+  },
+  "note_pickup": {
+    "id": "note_pickup",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "O que é isso na parede? Um bilhete?" }
+    ]
+  },
+  "note_reading": {
+    "id": "note_reading",
+    "lines": [
+      { "speaker": { "character": "owl", "emotion": "furious" }, "text": "Achou que podia escapar? Sua maldição está presa a esta casa. Para quebrá-la, encontre as cinco oferendas antes da meia-noite. Seu tempo está acabando." },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Cinco oferendas... então é isso. Preciso encontrar esses itens para sair daqui!" }
+    ]
+  },
+  "found_broom": {
+    "id": "found_broom",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Uma vassoura. Pode ser útil para alcançar lugares altos." }
+    ]
+  }
+}

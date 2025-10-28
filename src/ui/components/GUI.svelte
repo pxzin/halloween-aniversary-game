@@ -3,6 +3,7 @@
   import Inventory from './Inventory.svelte';
   import DialogueBox from './DialogueBox.svelte';
   import ChoiceBox from './ChoiceBox.svelte';
+  import ItemAcquisition from './ItemAcquisition.svelte';
 </script>
 
 <!-- Background com abóboras flutuantes -->
@@ -50,6 +51,9 @@
 
 <!-- Choice Box (overlay) -->
 <ChoiceBox />
+
+<!-- Item Acquisition Animation (overlay) -->
+<ItemAcquisition />
 
 <style>
   /* Fundo animado */

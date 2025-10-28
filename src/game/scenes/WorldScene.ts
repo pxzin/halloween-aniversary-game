@@ -31,7 +31,7 @@ export class WorldScene extends Phaser.Scene {
     inventory.set([
       { id: 'lighter', name: 'Isqueiro', icon: '🔥' },
       { id: 'cat_food_can', name: 'Lata de Ração', icon: '🥫' },
-      { id: 'miniature_rake', name: 'Mini-Rastelo de Jardim', icon: '🍴' }
+      { id: 'miniature_rake', name: 'Mini-Rastelo de Jardim', icon: '/assets/images/ui/miniature_rake.png' }
     ]);
 
     // Create clickable test objects

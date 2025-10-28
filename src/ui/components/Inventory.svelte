@@ -59,13 +59,25 @@
   }
 
   /**
+   * Check if icon is an image path (vs emoji)
+   */
+  function isImageIcon(icon: string): boolean {
+    return icon.startsWith('/') || icon.includes('.png') || icon.includes('.jpg') || icon.includes('.jpeg');
+  }
+
+  /**
    * Update cursor based on selected item
    */
   onMount(() => {
     const unsubscribe = selectedItem.subscribe((item) => {
       if (item) {
-        // Set custom cursor with item icon
-        document.body.style.cursor = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="24" font-size="24">${item.icon}</text></svg>') 16 16, auto`;
+        if (isImageIcon(item.icon)) {
+          // For image icons, use the image as cursor
+          document.body.style.cursor = `url('${item.icon}') 16 16, auto`;
+        } else {
+          // For emoji icons, use SVG with text
+          document.body.style.cursor = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="24" font-size="24">${item.icon}</text></svg>') 16 16, auto`;
+        }
       } else {
         // Reset to default cursor
         document.body.style.cursor = 'default';
@@ -94,7 +106,13 @@
           onclick={(e) => handleItemClick(item, e)}
           title={item.name}
         >
-          <div class="item-icon">{item.icon}</div>
+          <div class="item-icon">
+            {#if isImageIcon(item.icon)}
+              <img src={item.icon} alt={item.name} class="item-icon-image" />
+            {:else}
+              {item.icon}
+            {/if}
+          </div>
           <div class="item-name">{item.name}</div>
         </button>
       {/each}
@@ -227,11 +245,24 @@
     font-size: 32px;
     line-height: 1;
     filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.5));
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .item-icon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   @media (max-width: 1200px) {
     .item-icon {
       font-size: 28px;
+      width: 36px;
+      height: 36px;
     }
   }
 
