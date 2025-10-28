@@ -20,6 +20,15 @@
     console.log('Home - Setting startScene:', sceneName);
     push('/game');
   }
+
+  /**
+   * Clear session storage (dev only)
+   */
+  function clearSessionStorage() {
+    sessionStorage.clear();
+    console.log('Session storage cleared');
+    alert('Session storage cleared! ✅');
+  }
 </script>
 
 <div class="home-page">
@@ -53,10 +62,18 @@
           <button class="skip-button" onclick={() => skipToScene('StairsScene')}>
             Escadas
           </button>
+          <button class="skip-button" onclick={() => skipToScene('BalconyScene')}>
+            Sacada
+          </button>
           <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
             World
           </button>
         </div>
+
+        <!-- Clear Storage Button -->
+        <button class="clear-button" onclick={clearSessionStorage}>
+          🗑️ Limpar Session Storage
+        </button>
       </div>
     {/if}
   </div>
@@ -208,7 +225,7 @@
 
   .skip-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
@@ -237,6 +254,35 @@
   }
 
   .skip-button:active {
+    transform: translateY(0);
+  }
+
+  .clear-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #8a0a0a 0%, #aa1a1a 100%);
+    border: 2px solid #cc3333;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow:
+      0 2px 10px rgba(204, 51, 51, 0.3),
+      inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .clear-button:hover {
+    background: linear-gradient(135deg, #aa1a1a 0%, #cc3333 100%);
+    border-color: #ee5555;
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 15px rgba(204, 51, 51, 0.5),
+      inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .clear-button:active {
     transform: translateY(0);
   }
 

@@ -13,10 +13,6 @@ To implement the `StairsScene` and `BalconyScene`, including their backgrounds, 
     *   Load and display `public/assets/images/backgrounds/stairs_door_closed.png` as the initial background.
     *   When the `Hallway Key` is used on the door, the background should switch to `public/assets/images/backgrounds/stairs_door_open.png`.
 -   **Interactive Elements:**
-    *   **Millipedes:** Create multiple interactive zones over the millipedes on the stairs. Clicking them should:
-        *   Play a squishing sound effect (use a placeholder for now).
-        *   Make the millipede disappear.
-        *   Trigger the `millipede_squish` dialogue from `src/game/data/dialogues/stairs.json`.
     *   **Balcony Door:** Create an interactive zone over the balcony door. Clicking it should transition the game to the `BalconyScene`.
     *   **Hallway Door:** Create an interactive zone over the hallway door.
         *   If the `Hallway Key` is NOT in the player's inventory, clicking it should trigger the `hallway_door_locked` dialogue from `src/game/data/dialogues/stairs.json`.
@@ -30,13 +26,16 @@ To implement the `StairsScene` and `BalconyScene`, including their backgrounds, 
 -   Create a new Phaser scene file at `src/game/scenes/BalconyScene.ts`.
 -   **Background:** Load and display `public/assets/images/backgrounds/balcony.png` as the background.
 -   **Interactive Elements:**
-    *   **Plant Pots:** Create multiple interactive zones over the plant pots.
-        *   One specific pot should contain the `miniature_rake` item. Clicking this pot should:
-            *   Add the `miniature_rake` to the player's inventory.
-            *   Trigger the `found_rake` dialogue from `src/game/data/dialogues/balcony.json`.
-            *   Make the rake visually disappear from the pot.
-        *   Other pots should trigger the `empty_pot` dialogue from `src/game/data/dialogues/balcony.json`.
-    *   **Return to Stairs:** Create an interactive zone (e.g., over the door leading back inside) that transitions the game back to the `StairsScene`.
+    *   **Rake:** One of the plant pots contains the `miniature_rake`. Clicking it adds the item to the inventory and triggers the `found_rake` dialogue.
+    *   **Val Kilmer (The Cat Puzzle):**
+        *   Another, larger plant pot has the cat, Val Kilmer, sleeping on it. This is an interactive zone.
+        *   Clicking the cat should present the player with a dialogue choice UI with three options: "Fazer carinho na cabeça", "Fazer carinho na barriga", "Fazer carinho na bunda".
+        *   **Failure Cases (Head/Belly):** Choosing the first two options should trigger the `cat_interaction_fail` dialogue from `src/game/data/dialogues/balcony.json`.
+        *   **Success Case (Butt):** Choosing "Fazer carinho na bunda" should:
+            *   Trigger the `cat_interaction_success` dialogue sequence.
+            *   After the dialogue, add the `hallway_key` to the player's inventory.
+            *   Make the key visually appear from under the cat.
+    *   **Return to Stairs:** Create an interactive zone that transitions the game back to the `StairsScene`.
 
 ### 3. Dialogue Integration
 

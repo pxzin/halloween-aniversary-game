@@ -2,6 +2,7 @@
   import Clock from './Clock.svelte';
   import Inventory from './Inventory.svelte';
   import DialogueBox from './DialogueBox.svelte';
+  import ChoiceBox from './ChoiceBox.svelte';
 </script>
 
 <!-- Background com abóboras flutuantes -->
@@ -46,6 +47,9 @@
     <DialogueBox />
   </div>
 </div>
+
+<!-- Choice Box (overlay) -->
+<ChoiceBox />
 
 <style>
   /* Fundo animado */

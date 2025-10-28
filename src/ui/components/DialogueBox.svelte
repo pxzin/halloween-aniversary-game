@@ -139,8 +139,17 @@
       return `/assets/images/portraits/${character}_neutral.png`;
     }
 
+    // Map emotion aliases to actual portrait files
+    const emotionMap: Record<string, string> = {
+      'surprised': 'scared', // We don't have surprised, use scared instead
+      'disgusted': 'annoyed', // We don't have disgusted, use annoyed instead
+    };
+
+    // Use mapped emotion if available, otherwise use original
+    const mappedEmotion = emotionMap[emotion] || emotion;
+
     // Path to portrait images in public folder
-    return `/assets/images/portraits/${character}_${emotion}.png`;
+    return `/assets/images/portraits/${character}_${mappedEmotion}.png`;
   }
 
   /**

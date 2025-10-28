@@ -3,19 +3,45 @@
     "id": "balcony_intro",
     "lines": [
       { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A sacada... parece que o tempo parou aqui." },
-      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Será que tem algo útil por aqui?" }
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Será que tem jaboticabas? Eu adoro jaboticaba!" }
     ]
   },
   "found_rake": {
     "id": "found_rake",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Um rastelo em miniatura! Isso pode ser útil." }
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Ah não, não é jaboticaba... é só um Mini-Rastelo de Jardim." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Mas isso pode ser útil pra alguma coisa..." }
     ]
   },
-  "empty_pot": {
-    "id": "empty_pot",
+  "empty_pot_1": {
+    "id": "empty_pot_1",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Nada aqui, só terra velha." }
+      { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "Credo, tá cheiro de aranha." }
+    ]
+  },
+  "empty_pot_2": {
+    "id": "empty_pot_2",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "MEU DEUS, Um mandruvá enorme!!" }
+    ]
+  },
+  "empty_pot_3": {
+    "id": "empty_pot_3",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "URRHGGGH, alguém cagou aí !!" }
+    ]
+  },
+  "cat_interaction_fail": {
+    "id": "cat_interaction_fail",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Val Kilmer ronrona, satisfeito, mas não se move." }
+    ]
+  },
+  "cat_interaction_success": {
+    "id": "cat_interaction_success",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Ele parece gostar tanto do carinho nesse lugar que até levantou a bunda aos ares." },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Olha, a chave está ali. O Val safado estava dormindo em cima!" }
     ]
   }
 }

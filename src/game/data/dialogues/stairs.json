@@ -9,13 +9,9 @@
   "hallway_door_locked": {
     "id": "hallway_door_locked",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "A porta do corredor está trancada. Preciso de uma chave." }
-    ]
-  },
-  "millipede_squish": {
-    "id": "millipede_squish",
-    "lines": [
-      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Eca! Que nojo!" }
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A porta está trancada, parece ser necessário uma chave para abri-la." },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Ahh nãoo!! O que faço agora?!" },
+      { "speaker": { "character": "jessica", "emotion": "surprised" }, "text": "Espera, é o Val ali na sacada?" }
     ]
   }
 }
