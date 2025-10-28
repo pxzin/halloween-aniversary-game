@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { push } from 'svelte-spa-router';
   import { EventBus } from '../game/EventBus';
   import { gameTime, isGameOver } from '../ui/stores';
   import { get } from 'svelte/store';
@@ -7,6 +8,10 @@
   import GameOver from '../ui/components/GameOver.svelte';
   import Quiz from '../ui/components/Quiz.svelte';
   import { initializeGame } from '../game/Game';
+
+  function goToHome() {
+    push('/');
+  }
 
   // Game clock timer reference
   let clockTimer: number | null = null;
@@ -78,6 +83,7 @@
   src="/assets/images/ui/logo_transparent.png"
   alt="Logo"
   class="game-logo"
+  onclick={goToHome}
 />
 
 <!-- Game GUI - Always rendered -->
@@ -101,5 +107,6 @@
     width: auto;
     object-fit: contain;
     z-index: 9999;
+    cursor: pointer;
   }
 </style>
