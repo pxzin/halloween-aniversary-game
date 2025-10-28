@@ -251,7 +251,45 @@ This section details the specific scenes and the navigation paths between them.
     6.  Jéssica returns to the safe in the `Banheiro` and inputs the sequence of geometric symbols.
     7.  **Reward:** The safe opens, revealing the **Cheese**.
 
-## 9. Final Puzzle: The Pentagram of the Curse
+## 9. Easter Eggs
+
+### Easter Egg 01: The Magic Weed Joint
+
+*   **Location:** Available anywhere in the game (except during the Introduction scene).
+*   **Type:** Hidden comedic interaction.
+*   **Items Required:**
+    *   **Isqueiro (Lighter):** Jessica starts with this item in her inventory from the beginning.
+    *   **Ponta de Erva Boa (Weed Joint):** Jessica also starts with this item in her inventory.
+*   **Trigger:** The player must use the game's item combination mechanic (Shift+Click):
+    1.  Shift+Click on the **Isqueiro** to select it as the first item for combination.
+    2.  Shift+Click on the **Ponta de Erva Boa** to combine it with the lighter.
+*   **Sequence:**
+    1.  Upon combining the lighter with the joint, Jessica decides to smoke it.
+    2.  A comedic dialogue sequence plays out, showing:
+        *   Jessica lighting up and taking several drags.
+        *   Her getting relaxed and making funny, lighthearted comments about the haunted house.
+        *   Her losing track of what she was supposed to be doing.
+    3.  Suddenly, the **Duolingo Owl** appears, furious.
+    4.  The Owl reveals that the joint had **MAGICAL PROPERTIES**.
+    5.  The Owl explains that if Jessica had **shared** the joint with him, he would have become so chill that he'd lift the curse entirely.
+    6.  However, since Jessica smoked it all by herself, she will **remain cursed** and must continue solving puzzles.
+    7.  Jessica's response is nonchalant and humorous, embracing the Halloween vibe despite missing her chance at an easy exit.
+*   **Gameplay Impact:**
+    *   **The Lighter is NOT consumed** - it remains in the inventory after the combination.
+    *   **The Weed Joint IS consumed** - it is removed from the inventory after use.
+    *   **No Game Progress** - This is purely a comedic Easter Egg with no impact on puzzle progression.
+    *   **One-Time Trigger** - The dialogue can only be triggered once per playthrough.
+*   **Dialogue Highlights:** (See `src/game/data/dialogues/easter_egg_weed.json` for the full script)
+    *   Jessica's funny observations while high: "As paredes estão meio dançantes... mas tipo, de um jeito legal, sabe?"
+    *   The Owl's furious revelation: "Essa 'pontinha' que você fumou sozinha... ela tem propriedades MÁGICAS!"
+    *   Jessica's casual reaction: "Mas tipo... ainda valeu a pena. Tava uma erva boa mesmo. Valeu FANTASMA!! 👻"
+*   **Implementation Details:**
+    *   The combination is handled by the `CombinationService` in `src/game/services/CombinationService.ts`.
+    *   The recipe uses the `keepItems` property to preserve the lighter.
+    *   The dialogue is triggered via the `onCombine` callback using the `DialogueManager`.
+    *   The inventory panel is intentionally **hidden during the Introduction scene** to prevent players from triggering this Easter Egg before the game properly begins.
+
+## 10. Final Puzzle: The Pentagram of the Curse
 
 *   **Location:** `Cenário 7: Escritório`.
 *   **Objective:** Break the Duolingo Owl's curse.
