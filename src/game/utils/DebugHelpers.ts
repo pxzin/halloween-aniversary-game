@@ -206,15 +206,99 @@ export const DEBUG_COLORS = {
 } as const;
 
 /**
- * Create an interactive rectangular zone with optional debug visualization
+ * Create a clickable rectangle that draws itself when showDebug is true
+ * This ensures the clickable area and visual representation are EXACTLY the same
+ *
  * @param scene - The Phaser scene
- * @param x - X position (center)
- * @param y - Y position (center)
- * @param width - Width of the zone
- * @param height - Height of the zone
- * @param color - Debug color (default: red)
+ * @param centerX - X position of center
+ * @param centerY - Y position of center
+ * @param width - Width of the rectangle
+ * @param height - Height of the rectangle
+ * @param showDebug - Whether to show visual representation (default: true in dev, false in prod)
+ * @param color - Color when debug is shown (default: red)
  * @param label - Optional label to display
- * @returns The interactive zone
+ * @returns The clickable rectangle
+ */
+export function createClickableRect(
+  scene: Phaser.Scene,
+  centerX: number,
+  centerY: number,
+  width: number,
+  height: number,
+  showDebug: boolean = isDev(),
+  color: number = DEBUG_COLORS.CLICKABLE,
+  label?: string
+): Phaser.GameObjects.Rectangle {
+  // Create a rectangle at the center position
+  // When showDebug is false, it's invisible (alpha 0)
+  // When showDebug is true, it's semi-transparent with the specified color
+  const rect = scene.add.rectangle(
+    centerX,
+    centerY,
+    width,
+    height,
+    color,
+    showDebug ? 0.3 : 0  // 30% opacity when debug, invisible otherwise
+  );
+
+  // Rectangle has origin (0.5, 0.5) by default - center point
+  rect.setInteractive({ useHandCursor: true });
+
+  // If debug is enabled, add visual indicators
+  if (showDebug) {
+    // Create graphics for border and crosshair
+    const graphics = scene.add.graphics();
+
+    // Draw border
+    graphics.lineStyle(2, color, 1);
+    graphics.strokeRect(
+      centerX - width / 2,
+      centerY - height / 2,
+      width,
+      height
+    );
+
+    // Draw crosshair at center
+    const crosshairSize = 10;
+    graphics.lineStyle(2, color, 1);
+    graphics.beginPath();
+    graphics.moveTo(centerX - crosshairSize, centerY);
+    graphics.lineTo(centerX + crosshairSize, centerY);
+    graphics.moveTo(centerX, centerY - crosshairSize);
+    graphics.lineTo(centerX, centerY + crosshairSize);
+    graphics.strokePath();
+
+    // Add label if provided
+    if (label) {
+      const text = scene.add.text(centerX, centerY - height / 2 - 20, label, {
+        fontSize: '16px',
+        color: '#ffffff',
+        backgroundColor: `#${color.toString(16).padStart(6, '0')}`,
+        padding: { x: 8, y: 4 },
+      });
+      text.setOrigin(0.5, 1);
+    }
+
+    // Log creation
+    console.log(`[DebugHelpers] Created clickable rect:`, {
+      label,
+      center: { x: centerX, y: centerY },
+      dimensions: { width, height },
+      bounds: {
+        left: centerX - width / 2,
+        right: centerX + width / 2,
+        top: centerY - height / 2,
+        bottom: centerY + height / 2,
+      }
+    });
+  }
+
+  return rect;
+}
+
+/**
+ * DEPRECATED: Use createClickableRect instead
+ * This function is kept for backwards compatibility but should not be used
  */
 export function createInteractiveRect(
   scene: Phaser.Scene,
@@ -225,62 +309,8 @@ export function createInteractiveRect(
   color: number = 0xff0000,
   label?: string
 ): Phaser.GameObjects.Rectangle {
-  // Create an INVISIBLE rectangle at the center position
-  // Using Rectangle instead of Zone for more predictable behavior
-  const rect = scene.add.rectangle(x, y, width, height, 0x000000, 0);
-
-  // Rectangle has origin (0.5, 0.5) by default, which is what we want
-  // This means x,y is the center, and bounds are calculated correctly
-
-  // IMPORTANT: Explicitly define the hitArea to ensure exact bounds
-  // The hitArea is in LOCAL coordinates relative to the object's origin
-  const hitArea = new Phaser.Geom.Rectangle(
-    -width / 2,  // x offset from origin (left edge)
-    -height / 2, // y offset from origin (top edge)
-    width,
-    height
-  );
-
-  rect.setInteractive({
-    hitArea,
-    hitAreaCallback: Phaser.Geom.Rectangle.Contains,
-    useHandCursor: true
-  });
-
-  // Draw debug visualization in dev mode
-  if (isDev()) {
-    drawDebugRect(scene, x, y, width, height, color, label);
-
-    // Log the actual bounds of the Rectangle for comparison
-    console.log(`[DebugHelpers] Created Rectangle:`, {
-      label,
-      x: rect.x,
-      y: rect.y,
-      width: rect.width,
-      height: rect.height,
-      originX: rect.originX,
-      originY: rect.originY,
-      worldBounds: {
-        left: rect.x - rect.width * rect.originX,
-        right: rect.x + rect.width * (1 - rect.originX),
-        top: rect.y - rect.height * rect.originY,
-        bottom: rect.y + rect.height * (1 - rect.originY),
-      },
-      hitArea: {
-        x: hitArea.x,
-        y: hitArea.y,
-        width: hitArea.width,
-        height: hitArea.height,
-        // Calculate world bounds of hitArea
-        worldLeft: rect.x + hitArea.x,
-        worldRight: rect.x + hitArea.x + hitArea.width,
-        worldTop: rect.y + hitArea.y,
-        worldBottom: rect.y + hitArea.y + hitArea.height,
-      }
-    });
-  }
-
-  return rect;
+  console.warn('[DebugHelpers] createInteractiveRect is deprecated, use createClickableRect instead');
+  return createClickableRect(scene, x, y, width, height, isDev(), color, label);
 }
 
 /**

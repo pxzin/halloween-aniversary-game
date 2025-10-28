@@ -213,14 +213,13 @@
   .game-view :global(#game-container) {
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .game-view :global(canvas) {
     display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain;
-    aspect-ratio: 16 / 9;
   }
 
   /* Container de diálogo */

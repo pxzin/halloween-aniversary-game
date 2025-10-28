@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
-import { createInteractiveRect, DEBUG_COLORS } from '../utils/DebugHelpers';
+import { createClickableRect, DEBUG_COLORS } from '../utils/DebugHelpers';
+import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
 /**
  * Fachada Scene - First interactive scene showing the house facade
@@ -45,19 +46,19 @@ export class FachadaScene extends Phaser.Scene {
 
     const { width, height } = this.cameras.main;
 
-    // DEV: Log all pointer events in the scene
-    if (import.meta.env.DEV) {
-      this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
-        console.log(`[FachadaScene] Click at: x=${pointer.x}, y=${pointer.y}`);
-      });
+    // DEV: Log all pointer events in the scene (DISABLED - too verbose)
+    // if (import.meta.env.DEV) {
+    //   this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+    //     console.log(`[FachadaScene] Click at: x=${pointer.x}, y=${pointer.y}`);
+    //   });
 
-      this.input.on('pointermove', (pointer: Phaser.Input.Pointer) => {
-        // Log cursor changes
-        if (this.input.manager.canvas.style.cursor !== this.input.manager.defaultCursor) {
-          console.log(`[FachadaScene] Cursor changed to pointer at: x=${pointer.x}, y=${pointer.y}`);
-        }
-      });
-    }
+    //   this.input.on('pointermove', (pointer: Phaser.Input.Pointer) => {
+    //     // Log cursor changes
+    //     if (this.input.manager.canvas.style.cursor !== this.input.manager.defaultCursor) {
+    //       console.log(`[FachadaScene] Cursor changed to pointer at: x=${pointer.x}, y=${pointer.y}`);
+    //     }
+    //   });
+    // }
 
     // Display facade background - centered and scaled to fit
     const facade = this.add.image(width / 2, height / 2, 'facade');
@@ -70,6 +71,9 @@ export class FachadaScene extends Phaser.Scene {
 
     // Create clickable gate zone
     this.createGateZone();
+
+    // Enable rectangle draw tool (dev mode only)
+    enableRectangleDrawTool(this);
 
     // Start intro dialogue
     this.startIntroDialogue();
@@ -102,26 +106,107 @@ export class FachadaScene extends Phaser.Scene {
   }
 
   /**
+   * DEBUG: Create alignment test points to debug mouse position
+   */
+  private createAlignmentDebugPoints(): void {
+    const { width, height } = this.cameras.main;
+
+    // Define 9 test points in a grid pattern
+    const points = [
+      { x: width * 0.2, y: height * 0.2, num: 1 },   // Top-left
+      { x: width * 0.5, y: height * 0.2, num: 2 },   // Top-center
+      { x: width * 0.8, y: height * 0.2, num: 3 },   // Top-right
+      { x: width * 0.2, y: height * 0.5, num: 4 },   // Middle-left
+      { x: width * 0.5, y: height * 0.5, num: 5 },   // Center
+      { x: width * 0.8, y: height * 0.5, num: 6 },   // Middle-right
+      { x: width * 0.2, y: height * 0.8, num: 7 },   // Bottom-left
+      { x: width * 0.5, y: height * 0.8, num: 8 },   // Bottom-center
+      { x: width * 0.8, y: height * 0.8, num: 9 },   // Bottom-right
+    ];
+
+    console.log('');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('🎯 ALIGNMENT DEBUG POINTS');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('Try clicking on each numbered red point.');
+    console.log('The console will show the difference between:');
+    console.log('- Where you clicked (pointer position)');
+    console.log('- Where the point is drawn');
+    console.log('');
+    console.log('Point positions:');
+
+    points.forEach(point => {
+      // Draw red circle
+      const graphics = this.add.graphics();
+      graphics.fillStyle(0xff0000, 1);
+      graphics.fillCircle(point.x, point.y, 10);
+      graphics.lineStyle(2, 0xffffff, 1);
+      graphics.strokeCircle(point.x, point.y, 10);
+
+      // Draw number
+      const text = this.add.text(point.x, point.y, point.num.toString(), {
+        fontSize: '16px',
+        color: '#ffffff',
+        fontStyle: 'bold',
+      });
+      text.setOrigin(0.5, 0.5);
+
+      console.log(`  Point ${point.num}: x=${point.x.toFixed(2)}, y=${point.y.toFixed(2)}`);
+    });
+
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('');
+
+    // Listen for clicks and calculate distance to nearest point
+    this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+      console.log('');
+      console.log('🖱️  CLICK DETECTED:');
+      console.log(`   Pointer position: x=${pointer.x.toFixed(2)}, y=${pointer.y.toFixed(2)}`);
+      console.log(`   World position: x=${pointer.worldX.toFixed(2)}, y=${pointer.worldY.toFixed(2)}`);
+      console.log('');
+      console.log('   Distance to each point:');
+
+      points.forEach(point => {
+        const dx = pointer.x - point.x;
+        const dy = pointer.y - point.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const offsetX = pointer.x - point.x;
+        const offsetY = pointer.y - point.y;
+
+        console.log(`   Point ${point.num}: distance=${distance.toFixed(2)}px, offset=(${offsetX.toFixed(2)}, ${offsetY.toFixed(2)})`);
+      });
+
+      // Find closest point
+      const closest = points.reduce((prev, curr) => {
+        const prevDist = Math.sqrt((pointer.x - prev.x) ** 2 + (pointer.y - prev.y) ** 2);
+        const currDist = Math.sqrt((pointer.x - curr.x) ** 2 + (pointer.y - curr.y) ** 2);
+        return currDist < prevDist ? curr : prev;
+      });
+
+      console.log('');
+      console.log(`   ⭐ Closest point: ${closest.num} (${closest.x.toFixed(2)}, ${closest.y.toFixed(2)})`);
+      console.log('');
+    });
+  }
+
+  /**
    * Create an interactive zone over the gate area
    */
   private createGateZone(): void {
-    const { width, height } = this.cameras.main;
+    // Coordinates obtained from RectangleDrawTool
+    const centerX = 416.11;
+    const centerY = 477.77;
+    const width = 102.79;
+    const height = 270.63;
 
-    // Create a zone covering the gate area (approximately center-bottom of the image)
-    // These values may need adjustment based on the actual facade image
-    const gateX = width / 2;
-    const gateY = height * 0.7; // Gate is roughly 70% down from the top
-    const gateWidth = width * 0.3; // Gate width is about 30% of screen width
-    const gateHeight = height * 0.4; // Gate height is about 40% of screen height
-
-    // Create interactive zone with debug visualization
-    // The debug rect will automatically show in dev mode and be hidden in production
-    const gateZone = createInteractiveRect(
+    // Create clickable gate zone with debug visualization (auto-enabled in dev mode)
+    const gateZone = createClickableRect(
       this,
-      gateX,
-      gateY,
-      gateWidth,
-      gateHeight,
+      centerX,
+      centerY,
+      width,
+      height,
+      true,  // showDebug
       DEBUG_COLORS.CLICKABLE,
       'Gate Zone'
     );
@@ -129,78 +214,8 @@ export class FachadaScene extends Phaser.Scene {
     // When clicked, show padlock focus dialogue then open padlock
     gateZone.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
       console.log(`[FachadaScene] Gate zone clicked at: x=${pointer.x}, y=${pointer.y}`);
-      console.log(`[FachadaScene] Gate zone bounds: x=${gateX}, y=${gateY}, width=${gateWidth}, height=${gateHeight}`);
       this.onGateClicked();
     });
-
-    // DEV: Log the gate zone configuration
-    if (import.meta.env.DEV) {
-      console.log('[FachadaScene] Gate zone created:', {
-        x: gateX,
-        y: gateY,
-        width: gateWidth,
-        height: gateHeight,
-        left: gateX - gateWidth / 2,
-        right: gateX + gateWidth / 2,
-        top: gateY - gateHeight / 2,
-        bottom: gateY + gateHeight / 2,
-      });
-
-      // List all interactive objects in the scene
-      this.time.delayedCall(100, () => {
-        console.log('[FachadaScene] === All Interactive Objects ===');
-
-        // Get all game objects in the scene
-        const allObjects = this.children.list;
-        const interactiveObjects = allObjects.filter((obj: any) => obj.input);
-
-        console.log(`[FachadaScene] Total interactive objects: ${interactiveObjects.length}`);
-        console.log(`[FachadaScene] Total objects in scene: ${allObjects.length}`);
-
-        interactiveObjects.forEach((gameObject: any, index: number) => {
-          if (gameObject instanceof Phaser.GameObjects.Zone) {
-            console.log(`[FachadaScene] Zone ${index}:`, {
-              x: gameObject.x,
-              y: gameObject.y,
-              width: gameObject.width,
-              height: gameObject.height,
-              displayWidth: gameObject.displayWidth,
-              displayHeight: gameObject.displayHeight,
-              scaleX: gameObject.scaleX,
-              scaleY: gameObject.scaleY,
-              active: gameObject.active,
-              visible: gameObject.visible,
-            });
-          } else {
-            console.log(`[FachadaScene] Object ${index}:`, gameObject.type, {
-              x: gameObject.x,
-              y: gameObject.y,
-              width: gameObject.width,
-              height: gameObject.height,
-            });
-          }
-        });
-        console.log('[FachadaScene] === End Interactive Objects ===');
-
-        // Log camera and canvas info
-        console.log('[FachadaScene] Camera info:', {
-          width: this.cameras.main.width,
-          height: this.cameras.main.height,
-          zoom: this.cameras.main.zoom,
-          scrollX: this.cameras.main.scrollX,
-          scrollY: this.cameras.main.scrollY,
-        });
-
-        console.log('[FachadaScene] Canvas info:', {
-          width: this.game.canvas.width,
-          height: this.game.canvas.height,
-          style: {
-            width: this.game.canvas.style.width,
-            height: this.game.canvas.style.height,
-          },
-        });
-      });
-    }
   }
 
   /**

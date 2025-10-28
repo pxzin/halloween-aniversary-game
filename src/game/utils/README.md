@@ -1,36 +1,91 @@
 # Debug Helpers - Guia de Uso
 
-Este arquivo contém utilitários para visualizar áreas interativas durante o desenvolvimento.
+Este arquivo contém utilitários para criar e visualizar áreas interativas durante o desenvolvimento.
 
 ## Características
 
-- ✅ **Automático**: Só aparecem em modo dev (`pnpm dev`)
-- ✅ **Invisível em produção**: Totalmente removidos no build final
-- ✅ **Componentizável**: Use em qualquer cena
-- ✅ **Informativo**: Mostra dimensões, vértices e labels
+- ✅ **Área clicável = Visualização**: O que você vê é EXATAMENTE o que é clicável
+- ✅ **Automático em Dev**: Debug visual aparece automaticamente em modo dev
+- ✅ **Invisível em produção**: Totalmente removido no build final
+- ✅ **Ferramenta de medição**: Desenhe retângulos com o mouse para obter coordenadas exatas
+
+## 🎯 Fluxo de Trabalho Recomendado
+
+### 1. Medir a Área com a Ferramenta de Desenho
+
+Use a ferramenta de desenho para obter coordenadas exatas:
+
+```typescript
+import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
+
+create() {
+  // Ativa a ferramenta (só funciona em dev mode)
+  enableRectangleDrawTool(this);
+}
+```
+
+**Como usar:**
+1. Pressione e SEGURE a tecla **R**
+2. Arraste o mouse para desenhar um retângulo
+3. Solte o mouse - as coordenadas aparecem no console
+4. **Ajustar o retângulo:**
+   - **Arrastar**: Clique no meio do retângulo e arraste para mover
+   - **Redimensionar**: Arraste os círculos brancos (cantos) ou quadrados brancos (bordas)
+   - **Re-logar**: Pressione **SPACE** para logar as coordenadas atualizadas
+   - **Limpar**: Pressione **ESC** para apagar e começar de novo
+5. Copie os valores do console
+
+**Recursos de debug:**
+- Ao clicar (pointer down/up), o console mostra:
+  - `pointer.x` e `pointer.y` (coordenadas usadas pelo Phaser)
+  - `pointer.worldX` e `pointer.worldY` (coordenadas no mundo)
+  - `canvas.offsetLeft` e `canvas.offsetTop` (offset do canvas)
+- Isso ajuda a identificar desalinhamentos entre mouse e coordenadas
+
+### 2. Criar Área Clicável com as Coordenadas
+
+Use as coordenadas obtidas para criar a área clicável:
+
+```typescript
+import { createClickableRect, DEBUG_COLORS } from '../utils/DebugHelpers';
+
+const gateZone = createClickableRect(
+  this,           // scene
+  640,            // centerX (do console)
+  504,            // centerY (do console)
+  384,            // width (do console)
+  288,            // height (do console)
+  true,           // showDebug (true = visível, false = invisível)
+  DEBUG_COLORS.CLICKABLE,
+  'Gate Zone'     // label
+);
+
+// Adicionar evento de click
+gateZone.on('pointerdown', () => {
+  console.log('Clicou no portão!');
+});
+```
 
 ## Funções Disponíveis
 
-### ⭐ RECOMENDADO: Criar Áreas Interativas com Debug
+### ⭐ createClickableRect()
 
-Use estas funções para criar zonas interativas que automaticamente mostram debug em dev:
-
-#### 1. `createInteractiveRect()` - Retângulos Interativos
-
-Cria uma zona interativa retangular com debug automático.
+Cria uma área clicável que **SE DESENHA** quando showDebug é true.
+Isto garante que a área clicável e a visualização são **EXATAMENTE** a mesma coisa.
 
 ```typescript
-import { createInteractiveRect, DEBUG_COLORS } from '../utils/DebugHelpers';
+import { createClickableRect, DEBUG_COLORS } from '../utils/DebugHelpers';
 
-// Cria zona interativa + debug em uma chamada
-const zone = createInteractiveRect(
-  this,           // A cena Phaser
-  x,              // Posição X (centro)
-  y,              // Posição Y (centro)
-  width,          // Largura
-  height,         // Altura
-  DEBUG_COLORS.CLICKABLE,  // Cor (opcional)
-  'Nome da Área'  // Label (opcional)
+// Criar área clicável com debug visível
+const zone = createClickableRect(
+  this,                      // scene
+  centerX,                   // X do centro
+  centerY,                   // Y do centro
+  width,                     // Largura
+  height,                    // Altura
+  true,                      // showDebug (true = visível)
+  DEBUG_COLORS.CLICKABLE,    // Cor
+  'Gate'                     // Label (opcional)
 );
 
 // Adicionar evento de click
@@ -38,6 +93,14 @@ zone.on('pointerdown', () => {
   console.log('Clicou!');
 });
 ```
+
+**Parâmetros:**
+- `scene`: A cena Phaser
+- `centerX`, `centerY`: Coordenadas do **centro** do retângulo
+- `width`, `height`: Dimensões
+- `showDebug`: Se true, mostra visualização (padrão: true em dev, false em prod)
+- `color`: Cor da visualização (padrão: vermelho)
+- `label`: Texto opcional para identificar a área
 
 #### 2. `createInteractivePolygon()` - Polígonos Interativos
 
