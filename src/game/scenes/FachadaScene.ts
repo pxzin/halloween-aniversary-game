@@ -215,7 +215,7 @@ export class FachadaScene extends Phaser.Scene {
       centerY,
       width,
       height,
-      true,  // showDebug
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.CLICKABLE,
       'Gate Zone'
     );

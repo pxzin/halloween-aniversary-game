@@ -2,9 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { EventBus } from '../../game/EventBus';
   import { quizData } from '../../game/data/quizQuestions';
-
-  // Development mode check
-  const isDevMode = import.meta.env.VITE_DEV_MODE === 'true' || import.meta.env.DEV;
+  import { DEV_MODE } from '../../config/devMode';
 
   // Quiz state
   let isActive = $state(false);
@@ -188,7 +186,7 @@
       </div>
 
       <!-- Dev Skip Button -->
-      {#if isDevMode}
+      {#if DEV_MODE}
         <button class="dev-skip-button" onclick={endQuiz}>
           [DEV] Skip Quiz
         </button>

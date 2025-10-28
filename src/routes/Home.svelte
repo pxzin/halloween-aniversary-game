@@ -1,8 +1,9 @@
 <script lang="ts">
   import { push } from 'svelte-spa-router';
+  import { DEV_MODE } from '../config/devMode';
 
-  // Check if in development mode
-  const isDev = import.meta.env.DEV;
+  // Check if in development mode (controlled by VITE_DEV_MODE in .env)
+  const isDev = DEV_MODE;
 
   /**
    * Start the game by navigating to /game route

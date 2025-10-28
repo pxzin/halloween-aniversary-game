@@ -203,7 +203,7 @@ export class BalconyScene extends Phaser.Scene {
       359.16,  // centerY
       140.33,  // width
       714.99,  // height
-      false,   // showDebug disabled temporarily
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.NAVIGATION,
       'Return to Stairs'
     );
@@ -235,7 +235,7 @@ export class BalconyScene extends Phaser.Scene {
       405.10, // centerY
       91.88,  // width
       81.86,  // height
-      false,  // showDebug disabled temporarily
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.ITEM,
       'Empty Pot 1'
     );
@@ -250,7 +250,7 @@ export class BalconyScene extends Phaser.Scene {
       431.00, // centerY
       98.56,  // width
       96.89,  // height
-      false,  // showDebug disabled temporarily
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.ITEM,
       'Empty Pot 3'
     );
@@ -265,7 +265,7 @@ export class BalconyScene extends Phaser.Scene {
       344.97,  // centerY
       111.93,  // width
       409.28,  // height
-      false,   // showDebug disabled temporarily
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.ITEM,
       'Rake Pot'
     );
@@ -283,7 +283,7 @@ export class BalconyScene extends Phaser.Scene {
       643.16,  // centerY
       145.34,  // width
       143.67,  // height
-      false,   // showDebug disabled temporarily
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.HOTSPOT,
       'Val Kilmer (Cat)'
     );

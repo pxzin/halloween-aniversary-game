@@ -1,15 +1,17 @@
 import Phaser from 'phaser';
+import { isDevMode } from '../../config/devMode';
 
 /**
  * Debug Helpers - Utilities for debugging and visualizing game elements
- * These helpers are only active in development mode
+ * These helpers are only active when VITE_DEV_MODE=true in .env
  */
 
 /**
  * Check if we're in development mode
+ * @deprecated Use isDevMode() from config/devMode instead
  */
 export function isDev(): boolean {
-  return import.meta.env.DEV;
+  return isDevMode();
 }
 
 /**

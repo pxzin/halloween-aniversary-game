@@ -186,7 +186,7 @@ export class StairsScene extends Phaser.Scene {
       77.68,   // centerY
       456.06,  // width
       148.68,  // height
-      true,
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.NAVIGATION,
       'Balcony Door'
     );
@@ -218,7 +218,7 @@ export class StairsScene extends Phaser.Scene {
       121.11, // centerY
       145.34, // width
       235.55, // height
-      true,
+      undefined, // Use default (controlled by DEV_MODE)
       DEBUG_COLORS.CLICKABLE,
       'Hallway Door'
     );

@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { DEV_MODE } from '../../config/devMode';
 
-  // Only show in dev mode
-  const isDev = import.meta.env.DEV;
+  // Only show in dev mode (controlled by VITE_DEV_MODE in .env)
+  const isDev = DEV_MODE;
 
   let mouseX = $state(0);
   let mouseY = $state(0);
