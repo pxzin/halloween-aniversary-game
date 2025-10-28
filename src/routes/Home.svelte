@@ -1,10 +1,23 @@
 <script lang="ts">
   import { push } from 'svelte-spa-router';
 
+  // Check if in development mode
+  const isDev = import.meta.env.DEV;
+
   /**
    * Start the game by navigating to /game route
    */
   function startGame() {
+    push('/game');
+  }
+
+  /**
+   * Skip to a specific scene (dev only)
+   */
+  function skipToScene(sceneName: string) {
+    // Set scene in sessionStorage before navigating
+    sessionStorage.setItem('startScene', sceneName);
+    console.log('Home - Setting startScene:', sceneName);
     push('/game');
   }
 </script>
@@ -25,6 +38,27 @@
       <span class="button-text">Novo Jogo</span>
       <div class="button-glow"></div>
     </button>
+
+    {#if isDev}
+      <!-- Dev Scene Skip Buttons -->
+      <div class="dev-skip-buttons">
+        <p class="dev-label">DEV: Pular para cena</p>
+        <div class="skip-grid">
+          <button class="skip-button" onclick={() => skipToScene('IntroScene')}>
+            Intro
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('FachadaScene')}>
+            Fachada
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('StairsScene')}>
+            Escadas
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
+            World
+          </button>
+        </div>
+      </div>
+    {/if}
   </div>
 
   <!-- Decorative Elements -->
@@ -151,6 +185,59 @@
 
   .menu-button:active {
     transform: skewX(-3deg) translateX(10px) scale(0.98);
+  }
+
+  /* Dev Skip Buttons */
+  .dev-skip-buttons {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .dev-label {
+    color: #ff5e00;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    opacity: 0.7;
+  }
+
+  .skip-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .skip-button {
+    padding: 10px 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #4a0a5a 0%, #6a1a7a 100%);
+    border: 2px solid #8a2aba;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow:
+      0 2px 10px rgba(138, 42, 186, 0.3),
+      inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .skip-button:hover {
+    background: linear-gradient(135deg, #6a1a7a 0%, #8a2aba 100%);
+    border-color: #aa4ada;
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 15px rgba(138, 42, 186, 0.5),
+      inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  .skip-button:active {
+    transform: translateY(0);
   }
 
   /* Decorative Elements */

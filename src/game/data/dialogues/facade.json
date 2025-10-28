@@ -1,0 +1,17 @@
+{
+  "facade_intro": {
+    "id": "facade_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Onde... onde eu estou? Essa é a casa do Ric, mas..." },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Está tudo tão escuro, tão... abandonado. E a cidade? Não tem ninguém!" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Preciso entrar. Talvez ele esteja lá dentro, ou talvez eu encontre alguma pista do que está acontecendo." },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "O portão... parece ser o único caminho." }
+    ]
+  },
+  "padlock_focus": {
+    "id": "padlock_focus",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Um cadeado? E com senha... Preciso lembrar qual é a senha." }
+    ]
+  }
+}

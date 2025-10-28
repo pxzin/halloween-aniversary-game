@@ -7,6 +7,8 @@
   import GUI from '../ui/components/GUI.svelte';
   import GameOver from '../ui/components/GameOver.svelte';
   import Quiz from '../ui/components/Quiz.svelte';
+  import Padlock from '../ui/components/Padlock.svelte';
+  import MousePositionDebug from '../ui/components/MousePositionDebug.svelte';
   import { initializeGame } from '../game/Game';
 
   function goToHome() {
@@ -62,6 +64,7 @@
 
   onMount(() => {
     // Initialize Phaser game after DOM is ready
+    // Note: Scene skip is handled via sessionStorage set in Home.svelte
     const game = initializeGame();
 
     // Start game clock when quiz is completed
@@ -91,6 +94,12 @@
 
 <!-- Quiz Component - Shows when triggered by EventBus -->
 <Quiz />
+
+<!-- Padlock Component - Shows when triggered by EventBus -->
+<Padlock />
+
+<!-- Mouse Position Debug - Dev only -->
+<MousePositionDebug />
 
 {#if $isGameOver}
   <!-- Game Over Screen -->

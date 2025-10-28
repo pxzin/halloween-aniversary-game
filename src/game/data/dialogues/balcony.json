@@ -1,0 +1,21 @@
+{
+  "balcony_intro": {
+    "id": "balcony_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A sacada... parece que o tempo parou aqui." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Será que tem algo útil por aqui?" }
+    ]
+  },
+  "found_rake": {
+    "id": "found_rake",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Um rastelo em miniatura! Isso pode ser útil." }
+    ]
+  },
+  "empty_pot": {
+    "id": "empty_pot",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Nada aqui, só terra velha." }
+    ]
+  }
+}

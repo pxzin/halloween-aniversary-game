@@ -1,0 +1,21 @@
+{
+  "stairs_intro": {
+    "id": "stairs_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Ugh, essa escada... parece que não é limpa há séculos." },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Mas preciso subir. O que será que tem lá em cima?" }
+    ]
+  },
+  "hallway_door_locked": {
+    "id": "hallway_door_locked",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "A porta do corredor está trancada. Preciso de uma chave." }
+    ]
+  },
+  "millipede_squish": {
+    "id": "millipede_squish",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Eca! Que nojo!" }
+    ]
+  }
+}

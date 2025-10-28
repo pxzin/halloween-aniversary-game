@@ -9,6 +9,11 @@ import { DialogueManager } from '../services/DialogueManager';
 export class IntroScene extends Phaser.Scene {
   private currentPhase: string = 'opening';
 
+  // Store bound function references for proper cleanup
+  private boundOnQuizStarted!: () => void;
+  private boundOnQuizCompleted!: () => void;
+  private boundOnDialogueEnded!: () => void;
+
   constructor() {
     super({ key: 'IntroScene' });
   }
@@ -19,6 +24,27 @@ export class IntroScene extends Phaser.Scene {
   }
 
   create(): void {
+    console.log('IntroScene.create() called');
+
+    // IMPORTANT: Reset state when scene is created (Phaser reuses scene instances)
+    this.currentPhase = 'opening';
+    console.log('IntroScene: Reset currentPhase to opening');
+
+    // Store bound functions for proper cleanup (do this BEFORE registering listeners)
+    this.boundOnQuizStarted = this.onQuizStarted.bind(this);
+    this.boundOnQuizCompleted = this.onQuizCompleted.bind(this);
+    this.boundOnDialogueEnded = this.onDialogueEnded.bind(this);
+
+    // Remove any existing listeners to prevent duplicates
+    EventBus.off('quiz-started', this.boundOnQuizStarted);
+    EventBus.off('quiz-completed', this.boundOnQuizCompleted);
+    EventBus.off('dialogue-ended', this.boundOnDialogueEnded);
+
+    // Listen for quiz events
+    EventBus.on('quiz-started', this.boundOnQuizStarted);
+    EventBus.on('quiz-completed', this.boundOnQuizCompleted);
+    EventBus.on('dialogue-ended', this.boundOnDialogueEnded);
+
     // Set dark background to match phone sprite
     this.cameras.main.setBackgroundColor('#02060f');
 
@@ -30,11 +56,6 @@ export class IntroScene extends Phaser.Scene {
 
     // Start the intro sequence
     this.startIntroSequence();
-
-    // Listen for quiz events
-    EventBus.on('quiz-started', this.onQuizStarted.bind(this));
-    EventBus.on('quiz-completed', this.onQuizCompleted.bind(this));
-    EventBus.on('dialogue-ended', this.onDialogueEnded.bind(this));
   }
 
   /**
@@ -124,28 +145,38 @@ export class IntroScene extends Phaser.Scene {
    * Handle dialogue end event
    */
   private onDialogueEnded(): void {
+    console.log('IntroScene.onDialogueEnded - currentPhase:', this.currentPhase);
+
     switch (this.currentPhase) {
       case 'opening':
         // Opening narrative finished, show owl appears dialogue
+        console.log('IntroScene: Opening narrative finished, showing owl appears');
         this.currentPhase = 'owl_appears';
         this.playOwlAppearsSequence();
         break;
 
       case 'owl_appears':
         // Owl appears dialogue finished, start quiz
+        console.log('IntroScene: Owl appears finished, starting quiz');
         this.currentPhase = 'quiz';
         EventBus.emit('start-quiz');
         break;
 
       case 'curse':
         // Curse dialogue finished, show fainting sequence
+        console.log('IntroScene: Curse finished, showing fainting sequence');
         this.currentPhase = 'fainting';
         this.playFaintingSequence();
         break;
 
       case 'fainting':
-        // Fainting sequence finished, transition to WorldScene
+        // Fainting sequence finished, transition to FachadaScene
+        console.log('IntroScene: Fainting finished, transitioning to FachadaScene');
         this.transitionToWorld();
+        break;
+
+      default:
+        console.warn('IntroScene.onDialogueEnded - Unexpected phase:', this.currentPhase);
         break;
     }
   }
@@ -192,13 +223,41 @@ export class IntroScene extends Phaser.Scene {
   }
 
   /**
-   * Transition to WorldScene with fade effect
+   * Transition to FachadaScene with fade effect
    */
   private transitionToWorld(): void {
+    console.log('IntroScene.transitionToWorld called - currentPhase:', this.currentPhase);
+
+    // Only transition if we're actually in the fainting phase
+    if (this.currentPhase !== 'fainting') {
+      console.warn('transitionToWorld called but not in fainting phase, skipping');
+      return;
+    }
+
+    // Check if scene manager exists and scene is still active
+    if (!this.scene || !this.scene.isActive || !this.scene.isActive('IntroScene')) {
+      console.warn('IntroScene is not active or scene manager unavailable, transitioning directly');
+      if (this.scene && this.scene.start) {
+        this.scene.start('FachadaScene');
+      }
+      return;
+    }
+
+    // Check if camera exists
+    if (!this.cameras || !this.cameras.main) {
+      console.warn('Camera not available, transitioning directly');
+      this.scene.start('FachadaScene');
+      return;
+    }
+
+    console.log('Starting fade out transition to FachadaScene');
     this.cameras.main.fadeOut(2000, 0, 0, 0);
 
     this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.start('WorldScene');
+      console.log('Fade complete, cleaning up and starting FachadaScene');
+      // Manually clean up event listeners before transitioning
+      this.cleanupEventListeners();
+      this.scene.start('FachadaScene');
     });
   }
 
@@ -212,12 +271,25 @@ export class IntroScene extends Phaser.Scene {
   }
 
   /**
-   * Cleanup when scene is destroyed
+   * Clean up event listeners
    */
-  destroy(): void {
-    EventBus.off('quiz-started', this.onQuizStarted.bind(this));
-    EventBus.off('quiz-completed', this.onQuizCompleted.bind(this));
-    EventBus.off('dialogue-ended', this.onDialogueEnded.bind(this));
-    super.destroy();
+  private cleanupEventListeners(): void {
+    console.log('IntroScene: Cleaning up event listeners');
+    if (this.boundOnQuizStarted) {
+      EventBus.off('quiz-started', this.boundOnQuizStarted);
+    }
+    if (this.boundOnQuizCompleted) {
+      EventBus.off('quiz-completed', this.boundOnQuizCompleted);
+    }
+    if (this.boundOnDialogueEnded) {
+      EventBus.off('dialogue-ended', this.boundOnDialogueEnded);
+    }
+  }
+
+  /**
+   * Cleanup when scene is shutdown (stopped)
+   */
+  shutdown(): void {
+    this.cleanupEventListeners();
   }
 }

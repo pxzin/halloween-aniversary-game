@@ -17,6 +17,17 @@ class EventBusClass {
   }
 
   /**
+   * Subscribe to an event for a single execution
+   */
+  once(event: string, callback: EventCallback): void {
+    const onceWrapper: EventCallback = (...args: any[]) => {
+      callback(...args);
+      this.off(event, onceWrapper);
+    };
+    this.on(event, onceWrapper);
+  }
+
+  /**
    * Unsubscribe from an event
    */
   off(event: string, callback: EventCallback): void {

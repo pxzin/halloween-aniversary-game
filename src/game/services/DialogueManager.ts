@@ -168,6 +168,17 @@ class DialogueManagerClass {
   isActive(): boolean {
     return this.currentScript !== null;
   }
+
+  /**
+   * Clear/reset the dialogue manager state
+   * Useful for dev scene skipping or forced cleanup
+   */
+  clear(): void {
+    console.log('DialogueManager: Clearing state');
+    this.currentScript = null;
+    this.currentLineIndex = 0;
+    dialogue.set(null);
+  }
 }
 
 // Export singleton instance
