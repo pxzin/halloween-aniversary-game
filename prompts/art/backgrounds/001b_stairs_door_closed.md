@@ -10,18 +10,19 @@ Upload the generated stairs image (the one with the open door) to the AI tool fi
 ## Prompt
 
 ```
-The exact same image, but the open doorway at the top of the stairs is now closed with a simple, dark black wooden door. The door is fully closed. Everything else in the image must remain identical. --ar 16:9 --iw 2
+Photo-edit of the reference image. The only change is to add a simple, dark black wooden door to close the open doorway at the top of the stairs. Do not change the style, colors, or pixelation of the original image. Match the existing art style perfectly. --ar 16:9 --iw 2 --s 50
 ```
 
 ### Negative Prompt
 
 ```
---no changes, different style, new elements, open door
+--no changes, different style, new elements, open door, re-pixelate, extra details
 ```
 
 ## Logic and Reasoning
 
-- **Using the generated image as a base:** Ensures that the style, lighting, and details are perfectly consistent between the two versions.
-- **`The exact same image, but...`**: A very direct instruction to the AI to perform a minimal change.
-- **`...the open doorway...is now closed with a simple, dark black wooden door.`**: A clear and specific description of the single change required.
-- **`--iw 2`**: The high image weight parameter is critical here. It tells the AI to adhere as strictly as possible to the reference image, which minimizes the chance of it making other unwanted changes to the scene.
+- **`Photo-edit of the reference image`**: This new wording strongly suggests a modification rather than a recreation, which should help prevent the "double pixelation" issue.
+- **`The only change is...`**: Very direct and specific instruction.
+- **`Do not change the style, colors, or pixelation...`**: Explicitly tells the AI what to preserve.
+- **`--s 50`**: This (optional, for Midjourney) lowers the "stylization" value from the default of 100, encouraging the AI to take fewer creative liberties and stick closer to the source image.
+- **`--iw 2`**: The high image weight remains critical to enforce adherence to the reference image.
