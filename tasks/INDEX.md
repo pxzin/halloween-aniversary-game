@@ -10,4 +10,5 @@
 - [x] Task 008: Refactor UI with Persona-5-Inspired Halloween Theme
 - [x] Task 009: Implement Main Menu and Apply Theme
 - [x] Task 010: UI Layout and Decorative Element Adjustments
-- [ ] Task 011: Implement Façade Scene and Padlock Puzzle
+- [x] Task 011: Implement Façade Scene and Padlock Puzzle
+- [ ] Task 012: Implement Stairs and Balcony Scenes
