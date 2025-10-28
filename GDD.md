@@ -27,7 +27,7 @@ Jéssica faints from the shock. She awakens hours later in front of Ric's house,
 ## 3. Gameplay
 
 *   **Core Mechanic:** Point-and-click. Players will navigate static scenes (modified photos of the user's house), find items, and solve puzzles.
-*   **Objective:** The main goal is to find the five hidden birthday gifts: a cell phone, clothes, wine, and a cheese & chocolate basket. Each gift is the reward for completing a stage/major puzzle.
+*   **Objective:** The main goal is to find the five hidden birthday gifts: a cell phone, clothes, wine, cheese, and chocolates. Collecting all five gifts will unlock the Office, where Jéssica can break the curse.
 *   **Puzzles:** Puzzles will involve finding and combining items, unlocking new areas, and solving logic-based challenges related to the Halloween theme and the couple's personal inside jokes.
 
 ## 4. Art Style
@@ -42,15 +42,13 @@ Jéssica faints from the shock. She awakens hours later in front of Ric's house,
 *   **Supporting Character:** Ric. Jéssica's boyfriend. The house where the game takes place belongs to him.
 *   **Antagonist:** The Duolingo Owl. A demonic, possessed version of the language app mascot who has cursed Jéssica.
 
-## 6. Game Flow (Initial Draft)
+## 6. Game Flow
 
 1.  **Introduction:** The opening narrative sequence (non-interactive).
-2.  **Stage 1: The Living Room:** Jéssica must solve the first puzzle to obtain the first gift.
-3.  **Stage 2: The Kitchen:** A new area unlocks, presenting a new set of challenges.
-4.  **Stage 3: The Bedroom:** Another area, another major puzzle.
-5.  **Stage 4: The Office:** The fourth gift is hidden here.
-6.  **Stage 5: The Balcony/Final Area:** The final puzzle and the last gift.
-7.  **Conclusion:** After collecting all the gifts, the curse is broken, and the game transitions to a final "Happy Birthday" message from the user, revealing the real-world gifts.
+2.  **Exploration & Puzzles:** Jéssica explores the house, solving puzzles to find the five hidden birthday gifts.
+3.  **Office Unlocked:** Once all five gifts are collected, the Office (`Cenário 7`) becomes accessible.
+4.  **Final Puzzle:** In the Office, Jéssica must use the collected gifts to perform a ritual and break the curse.
+5.  **Conclusion:** The curse is broken, and the game transitions to a final "Happy Birthday" message from the user, revealing the real-world gifts.
 
 ## 7. Game Scenes & Flow
 
@@ -204,3 +202,63 @@ This section details the specific scenes and the navigation paths between them.
     6.  In the inventory, the player must **combine** the `dirty key` with the `wet wipes`.
     7.  This combination produces the clean **"Bedroom Key"**.
     8.  **Reward:** The player can now unlock the door to the Bedroom.
+
+### Puzzle 08: The Hand Gesture Enigma
+
+*   **Location:** `Cenário 10: Quarto` (with two separate views).
+*   **Objective:** Retrieve the third gift: the **Clothes**.
+*   **Sequence:**
+    1.  Jéssica enters the Bedroom (`Cenário 10: Quarto`, View 1).
+    2.  She finds a large, old, locked wardrobe. There's an interactive panel on its door.
+    3.  In View 1 of the Bedroom (e.g., on a dresser or under a rug), she finds an **"old note"**.
+    4.  This `old note` contains three distinct drawings:
+        *   A **coxinha** (Brazilian snack).
+        *   A **mini heart**.
+        *   A **sketch of the user's photo**.
+    5.  The player must interpret these visual clues as the corresponding emojis: **🤌 (coxinha), 🫰 (mini heart), 😘 (kissing face - representing the user's photo)**.
+    6.  Jéssica navigates to **View 2 (Closets View)**.
+    7.  In View 2, there are three interactive points (e.g., stylized hand gestures or emoji representations) corresponding to the three emojis.
+    8.  The player must interact with these points in the correct sequence: **🤌, 🫰, 😘**.
+    9.  Upon successful input, the wardrobe in View 1 opens.
+    10. **Reward:** Jéssica finds the **Clothes** gift inside the wardrobe.
+
+### Puzzle 09: The Frozen Treasure (Chocolates)
+
+*   **Location:** `Cenário 8: Cozinha` (View 1 - Refrigerator/Freezer).
+*   **Objective:** Retrieve the fourth gift: the **Chocolates**.
+*   **Clue:** A note from Ric (the user) found elsewhere (e.g., Living Room or Office) explaining the chocolates were put in the freezer due to melting, and mentioning the strange ice keys.
+*   **Sequence:**
+    1.  In the freezer compartment of the refrigerator, Jéssica finds several **"ice keys"** (beyond the one used for the wine cooler).
+    2.  The player must interact with and remove all these `ice keys` from the freezer.
+    3.  Once all `ice keys` are removed, the **Chocolates** are revealed at the bottom of the freezer.
+    4.  **Reward:** Jéssica collects the **Chocolates**.
+
+### Puzzle 10: Ric's Cheese Safe
+
+*   **Location:** `Cenário 9: Banheiro` (View 1).
+*   **Objective:** Retrieve the fifth gift: the **Cheese**.
+*   **Clue:** Ric's Diary, found in the `Cenário 5: Quintal`.
+*   **Sequence:**
+    1.  In the `Banheiro` (View 1), Jéssica finds a **small safe** with a geometric symbol input panel.
+    2.  Interacting with the safe, Jéssica notices a strong cheese smell and a dialogue indicates she's sure cheese is inside, but doesn't know the password. She also notes the bathroom has *multiple sources of bad smells*.
+    3.  In the `Quintal` (View 1, e.g., on a shelf or behind a pot), Jéssica finds **Ric's Diary**.
+    4.  Reading Ric's Diary (close-up UI) reveals an entry:
+        > "Querida Jéssica,
+        > Tenho tido umas experiências muito estranhas ultimamente, como se estivesse viajando entre o nosso mundo e um mundo de Halloween. Agora, parece que fiquei preso aqui. Estou com tanta fome, e felizmente tenho meu queijo guardado no cofre. Mas, para minha infelicidade, esqueci a senha! Anotei-a na geladeira do nosso mundo real. Se ao menos eu pudesse encontrá-la...
+        > Sinto tanto a sua falta, meu amor. Mal posso esperar para te ver de novo.
+        > Com saudades, Ric."
+    5.  **Fourth Wall Break:** The clue "anotada na geladeira do nosso mundo real" directs the player (your girlfriend) to look at *your actual real-world refrigerator* for a note with geometric symbols.
+    6.  Jéssica returns to the safe in the `Banheiro` and inputs the sequence of geometric symbols.
+    7.  **Reward:** The safe opens, revealing the **Cheese**.
+
+## 9. Final Puzzle: The Pentagram of the Curse
+
+*   **Location:** `Cenário 7: Escritório`.
+*   **Objective:** Break the Duolingo Owl's curse.
+*   **Prerequisite:** All five gifts (Cell Phone, Wine, Clothes, Chocolates, Cheese) must be collected.
+*   **Sequence:**
+    1.  Once all five gifts are in Jéssica's inventory, the door to the `Escritório` becomes accessible.
+    2.  Inside the `Escritório`, there is a large, central area (e.g., a rug or a marked spot on the floor) where a pentagram can be formed.
+    3.  The player must use each of the five collected gifts on a specific point of the pentagram.
+    4.  Upon placing all five gifts correctly, a magical ritual is performed.
+
