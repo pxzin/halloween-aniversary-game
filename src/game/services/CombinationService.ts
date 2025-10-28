@@ -1,5 +1,7 @@
-import { inventory } from '../../ui/stores';
+import { inventory, selectedItem, combinationStore } from '../../ui/stores';
 import type { Item } from '../../ui/stores';
+import { EventBus } from '../EventBus';
+import { DialogueManager } from './DialogueManager';
 import { get } from 'svelte/store';
 
 /**
@@ -7,7 +9,9 @@ import { get } from 'svelte/store';
  */
 interface Recipe {
   ingredients: string[]; // IDs of the two items needed
-  result: Item; // The resulting item
+  result?: Item; // The resulting item (optional - some combinations trigger events instead)
+  keepItems?: string[]; // IDs of items to keep (not remove from inventory)
+  onCombine?: () => Promise<void>; // Optional callback for special combinations
 }
 
 /**
@@ -18,7 +22,17 @@ class CombinationServiceClass {
     // Example recipes - will be expanded in future tasks
     {
       ingredients: ['cat_food_can', 'mini_rake'],
-      result: { id: 'open_cat_food_can', name: 'Lata de Ração Aberta' }
+      result: { id: 'open_cat_food_can', name: 'Lata de Ração Aberta', icon: '🥫' }
+    },
+    // Easter Egg: Lighter + Weed Joint
+    {
+      ingredients: ['lighter', 'weed_joint'],
+      keepItems: ['lighter'], // Keep the lighter, remove only the joint
+      onCombine: async () => {
+        console.log('[CombinationService] Easter Egg: Smoking weed joint!');
+        await DialogueManager.loadScript('easter_egg_weed', 'smoking_sequence');
+        DialogueManager.startDialogue();
+      }
     }
   ];
 
@@ -26,7 +40,7 @@ class CombinationServiceClass {
    * Attempt to combine two items
    * Returns the resulting item if successful, null otherwise
    */
-  combine(item1: Item, item2: Item): Item | null {
+  async combine(item1: Item, item2: Item): Promise<Item | null> {
     // Try to find a matching recipe
     const recipe = this.recipes.find(r => {
       const ingredients = r.ingredients.sort();
@@ -38,17 +52,39 @@ class CombinationServiceClass {
       return null;
     }
 
-    // Remove the two items from inventory
-    inventory.update(items => {
-      return items.filter(item =>
-        item.id !== item1.id && item.id !== item2.id
-      );
-    });
+    // Determine which items to remove
+    const keepIds = recipe.keepItems || [];
+    const itemsToRemove = [item1.id, item2.id].filter(id => !keepIds.includes(id));
 
-    // Add the resulting item to inventory
-    inventory.update(items => [...items, recipe.result]);
+    // Remove items that shouldn't be kept
+    if (itemsToRemove.length > 0) {
+      inventory.update(items => {
+        const filtered = [...items];
+        itemsToRemove.forEach(idToRemove => {
+          const index = filtered.findIndex(item => item.id === idToRemove);
+          if (index !== -1) {
+            filtered.splice(index, 1);
+          }
+        });
+        return filtered;
+      });
+    }
 
-    return recipe.result;
+    // Execute special callback if present
+    if (recipe.onCombine) {
+      await recipe.onCombine();
+    }
+
+    // Add the resulting item to inventory (if there is one)
+    if (recipe.result) {
+      inventory.update(items => [...items, recipe.result!]);
+    }
+
+    // Reset selection stores to clear cursor and combination state
+    selectedItem.set(null);
+    combinationStore.set(null);
+
+    return recipe.result || null;
   }
 
   /**

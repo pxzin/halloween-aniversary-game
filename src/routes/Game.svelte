@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { push } from 'svelte-spa-router';
   import { EventBus } from '../game/EventBus';
-  import { gameTime, isGameOver } from '../ui/stores';
+  import { gameTime, isGameOver, inventoryVisible } from '../ui/stores';
   import { get } from 'svelte/store';
   import GUI from '../ui/components/GUI.svelte';
   import GameOver from '../ui/components/GameOver.svelte';
@@ -62,6 +62,20 @@
     }, 1000);
   }
 
+  /**
+   * Hide inventory panel
+   */
+  function hideInventory() {
+    inventoryVisible.set(false);
+  }
+
+  /**
+   * Show inventory panel
+   */
+  function showInventory() {
+    inventoryVisible.set(true);
+  }
+
   onMount(() => {
     // Initialize Phaser game after DOM is ready
     // Note: Scene skip is handled via sessionStorage set in Home.svelte
@@ -70,9 +84,15 @@
     // Start game clock when quiz is completed
     EventBus.on('quiz-completed', startGameClock);
 
+    // Inventory visibility control
+    EventBus.on('hide-inventory', hideInventory);
+    EventBus.on('show-inventory', showInventory);
+
     return () => {
       // Cleanup
       EventBus.off('quiz-completed', startGameClock);
+      EventBus.off('hide-inventory', hideInventory);
+      EventBus.off('show-inventory', showInventory);
       if (clockTimer !== null) {
         clearInterval(clockTimer);
       }

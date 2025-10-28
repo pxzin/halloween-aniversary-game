@@ -7,6 +7,70 @@ import { isDevMode } from '../../config/devMode';
  */
 
 /**
+ * Global state for debug visibility toggle
+ */
+let debugVisualsVisible = true;
+const debugElements: Array<{
+  rectangle?: Phaser.GameObjects.Rectangle;
+  graphics?: Phaser.GameObjects.Graphics;
+  text?: Phaser.GameObjects.Text;
+}> = [];
+
+/**
+ * Toggle visibility of all debug visuals
+ * Called when Alt key is pressed in dev mode
+ */
+export function toggleDebugVisibility(): void {
+  if (!isDev()) return;
+
+  debugVisualsVisible = !debugVisualsVisible;
+  console.log(`[DebugHelpers] Debug visuals ${debugVisualsVisible ? 'VISIBLE' : 'HIDDEN'}`);
+
+  // Update all registered debug elements
+  debugElements.forEach(element => {
+    if (element.rectangle) {
+      element.rectangle.setAlpha(debugVisualsVisible ? 0.3 : 0);
+    }
+    if (element.graphics) {
+      element.graphics.setVisible(debugVisualsVisible);
+    }
+    if (element.text) {
+      element.text.setVisible(debugVisualsVisible);
+    }
+  });
+}
+
+/**
+ * Get current debug visibility state
+ */
+export function isDebugVisible(): boolean {
+  return debugVisualsVisible;
+}
+
+/**
+ * Clear all registered debug elements (called when scene shuts down)
+ */
+export function clearDebugElements(): void {
+  debugElements.length = 0;
+}
+
+/**
+ * Enable debug visibility toggle with Alt key for a scene
+ * Call this in the create() method of your scene
+ * @param scene - The Phaser scene to enable toggle for
+ */
+export function enableDebugToggle(scene: Phaser.Scene): void {
+  if (!isDev()) return;
+
+  // Add keyboard listener for Alt key
+  scene.input.keyboard?.on('keydown-ALT', () => {
+    toggleDebugVisibility();
+  });
+
+  console.log('[DebugHelpers] Debug toggle enabled - Press ALT to toggle visibility');
+}
+
+/**
  * Check if we're in development mode
  * @deprecated Use isDevMode() from config/devMode instead
  */
@@ -240,16 +304,20 @@ export function createClickableRect(
     width,
     height,
     color,
-    showDebug ? 0.3 : 0  // 30% opacity when debug, invisible otherwise
+    showDebug ? (debugVisualsVisible ? 0.3 : 0) : 0  // Respect toggle state
   );
 
   // Rectangle has origin (0.5, 0.5) by default - center point
   rect.setInteractive({ useHandCursor: true });
 
+  let graphics: Phaser.GameObjects.Graphics | undefined;
+  let text: Phaser.GameObjects.Text | undefined;
+
   // If debug is enabled, add visual indicators
   if (showDebug) {
     // Create graphics for border and crosshair
-    const graphics = scene.add.graphics();
+    graphics = scene.add.graphics();
+    graphics.setVisible(debugVisualsVisible); // Respect toggle state
 
     // Draw border
     graphics.lineStyle(2, color, 1);
@@ -272,14 +340,22 @@ export function createClickableRect(
 
     // Add label if provided
     if (label) {
-      const text = scene.add.text(centerX, centerY - height / 2 - 20, label, {
+      text = scene.add.text(centerX, centerY - height / 2 - 20, label, {
         fontSize: '16px',
         color: '#ffffff',
         backgroundColor: `#${color.toString(16).padStart(6, '0')}`,
         padding: { x: 8, y: 4 },
       });
       text.setOrigin(0.5, 1);
+      text.setVisible(debugVisualsVisible); // Respect toggle state
     }
+
+    // Register elements for toggle functionality
+    debugElements.push({
+      rectangle: rect,
+      graphics: graphics,
+      text: text,
+    });
 
     // Log creation
     console.log(`[DebugHelpers] Created clickable rect:`, {

@@ -6,6 +6,8 @@ import { WorldScene } from './scenes/WorldScene';
 import { FachadaScene } from './scenes/FachadaScene';
 import { StairsScene } from './scenes/StairsScene';
 import { BalconyScene } from './scenes/BalconyScene';
+import { HallwayScene } from './scenes/HallwayScene';
+import { BackyardScene } from './scenes/BackyardScene';
 
 // Phaser game configuration with registered scenes
 // Using 16:9 aspect ratio (1280x720)
@@ -19,7 +21,7 @@ const config: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [BootScene, IntroScene, MainMenuScene, FachadaScene, StairsScene, BalconyScene, WorldScene]
+  scene: [BootScene, IntroScene, MainMenuScene, FachadaScene, StairsScene, BalconyScene, HallwayScene, BackyardScene, WorldScene]
 };
 
 // Export a function to initialize the game when needed

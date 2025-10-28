@@ -2,14 +2,23 @@
   import { onMount } from 'svelte';
   import { inventory, selectedItem, combinationStore } from '../stores';
   import { CombinationService } from '../../game/services/CombinationService';
+  import { EventBus } from '../../game/EventBus';
   import type { Item } from '../stores';
 
   /**
    * Handle item click
+   * - If item is Owl's Note: show close-up
    * - If holding Shift: select for combination
    * - Otherwise: select for use in scene
    */
-  function handleItemClick(item: Item, event: MouseEvent) {
+  async function handleItemClick(item: Item, event: MouseEvent) {
+    // Special handling for Owl's Note - show close-up instead of selecting
+    if (item.id === 'owls_note') {
+      console.log('[Inventory] Opening Owl\'s Note close-up');
+      EventBus.emit('show-note-closeup', { addToInventory: false });
+      return;
+    }
+
     if (event.shiftKey) {
       // Shift-click: combination mode
       const firstItem = $combinationStore;
@@ -19,12 +28,12 @@
         combinationStore.set(item);
       } else {
         // This is the second item, attempt combination
-        const result = CombinationService.combine(firstItem, item);
+        const result = await CombinationService.combine(firstItem, item);
 
         if (result) {
           console.log(`Combined ${firstItem.name} + ${item.name} = ${result.name}`);
         } else {
-          console.log(`Cannot combine ${firstItem.name} + ${item.name}`);
+          console.log(`Combined ${firstItem.name} + ${item.name} (no result item)`);
         }
 
         // Clear combination store

@@ -1,0 +1,54 @@
+{
+  "living_room_intro": {
+    "id": "living_room_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A sala... está uma bagunça. Não consigo nem passar direito." }
+    ]
+  },
+  "room_tidy_up": {
+    "id": "room_tidy_up",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Ugh, que bagunça! Preciso arrumar isso antes de fazer qualquer coisa." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jéssica gasta 5 minutos arrumando a sala." }
+    ]
+  },
+  "sombra_sleeping": {
+    "id": "sombra_sleeping",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A Sombra! Dormindo no aparador. Que folgada!" }
+    ]
+  },
+  "sombra_choices": {
+    "id": "sombra_choices",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Como vou tirar ela daqui?" }
+    ]
+  },
+  "sombra_yell": {
+    "id": "sombra_yell",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "SAI DAÍ, SOMBRA!" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A Sombra apenas vira a cabeça e te ignora." }
+    ]
+  },
+  "sombra_pspsps": {
+    "id": "sombra_pspsps",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Pspspspsps..." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A Sombra abre um olho, te olha com desdém e volta a dormir." }
+    ]
+  },
+  "sombra_clap": {
+    "id": "sombra_clap",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "(Bate palmas bem alto)" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A Sombra pula assustada e corre para se esconder!" }
+    ]
+  },
+  "found_cellphone": {
+    "id": "found_cellphone",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Meu celular! Finalmente!" }
+    ]
+  }
+}

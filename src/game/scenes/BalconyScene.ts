@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
-import { createClickableRect, DEBUG_COLORS } from '../utils/DebugHelpers';
+import { createClickableRect, DEBUG_COLORS, enableDebugToggle, clearDebugElements } from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
 /**
@@ -50,6 +50,9 @@ export class BalconyScene extends Phaser.Scene {
 
   create(): void {
     console.log('BalconyScene.create() called');
+
+    // Show inventory (it's hidden during intro)
+    EventBus.emit('show-inventory');
 
     // Load saved state from sessionStorage
     const savedState = sessionStorage.getItem('balconySceneState');
@@ -103,6 +106,9 @@ export class BalconyScene extends Phaser.Scene {
 
     // Enable rectangle draw tool (dev mode only)
     enableRectangleDrawTool(this);
+
+    // Enable debug visibility toggle (dev mode only)
+    enableDebugToggle(this);
 
     // Fade in from black
     this.cameras.main.fadeIn(500, 0, 0, 0);
@@ -500,5 +506,6 @@ export class BalconyScene extends Phaser.Scene {
    */
   shutdown(): void {
     this.cleanupEventListeners();
+    clearDebugElements();
   }
 }

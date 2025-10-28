@@ -2,13 +2,15 @@
   "hallway_intro": {
     "id": "hallway_intro",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Este corredor... dá arrepios. Tantas portas..." }
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Este corredor... eu conheço esse lugar. Mas está tudo diferente..." },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "As paredes estão mais escuras, há tantas portas que não me lembro... e esse bilhete pregado ali na parede? Isso não estava aqui antes!" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Preciso descobrir o que está acontecendo. Melhor investigar." }
     ]
   },
   "note_pickup": {
     "id": "note_pickup",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "O que é isso na parede? Um bilhete?" }
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Esse bilhete na parede... parece importante. Vou pegar para ler." }
     ]
   },
   "note_reading": {
@@ -22,6 +24,29 @@
     "id": "found_broom",
     "lines": [
       { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Uma vassoura. Pode ser útil para alcançar lugares altos." }
+    ]
+  },
+  "livingroom_door_locked": {
+    "id": "livingroom_door_locked",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A porta da sala de estar... está trancada." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Parece que o único caminho disponível por aqui é o quintal. Vou ter que explorar lá." }
+    ]
+  },
+  "courtyard_door": {
+    "id": "courtyard_door",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "A porta do quintal... parece ser a única saída disponível." },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Mas está tão escuro lá fora... não consigo ver nada além da porta." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Não tenho escolha. Preciso seguir em frente." }
+    ]
+  },
+  "courtyard_transition": {
+    "id": "courtyard_transition",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "À medida que Jessica se aproxima da porta, a escuridão do quintal parece engolir a luz ao redor." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "O ar fica mais frio, mais denso. Algo sobre aquele lugar não está certo..." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Mas não há volta. Apenas a escuridão à frente." }
     ]
   }
 }

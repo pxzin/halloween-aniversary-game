@@ -39,8 +39,12 @@ export const INITIAL_TIME: GameTime = {
 
 /**
  * Inventory store - holds array of collected items
+ * Jessica always starts with a lighter and a special cigarette
  */
-export const inventory = writable<Item[]>([]);
+export const inventory = writable<Item[]>([
+  { id: 'lighter', name: 'Isqueiro', icon: '🔥' },
+  { id: 'weed_joint', name: 'Ponta de Erva Boa', icon: '🌿' }
+]);
 
 /**
  * Game time store - current in-game time
@@ -66,3 +70,9 @@ export const combinationStore = writable<Item | null>(null);
  * Game over store - tracks if game is over
  */
 export const isGameOver = writable<boolean>(false);
+
+/**
+ * Inventory visibility store - controls whether inventory panel is visible
+ * Hidden during INTRO scene to prevent premature item usage
+ */
+export const inventoryVisible = writable<boolean>(true);

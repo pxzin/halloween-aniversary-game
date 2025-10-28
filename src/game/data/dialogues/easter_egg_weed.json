@@ -1,0 +1,103 @@
+{
+  "smoking_sequence": {
+    "id": "smoking_sequence",
+    "lines": [
+      {
+        "speaker": { "character": "jessica", "emotion": "thinking" },
+        "text": "Hmm... talvez seja a hora de acender essa pontinha que guardei."
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "neutral" },
+        "text": "*acende o baseado e dá uma tragada longa*"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "happy" },
+        "text": "Ahh... isso sim. Exatamente o que eu precisava."
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "neutral" },
+        "text": "*outra tragada*"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "happy" },
+        "text": "Sabe de uma coisa? Essa casa amaldiçoada até que não é tão assustadora assim..."
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "thinking" },
+        "text": "*mais uma tragada*"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "happy" },
+        "text": "As paredes estão meio dançantes... mas tipo, de um jeito legal, sabe?"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "neutral" },
+        "text": "*última tragada*"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "happy" },
+        "text": "Pronto! Agora sim, estou relaxada e pronta pra... espera, o que eu estava fazendo mesmo?"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "thinking" },
+        "text": "Ah sim, fugir de uma maldição. Beleza, beleza... vou fazer isso daqui a pouco."
+      },
+      {
+        "speaker": { "character": "owl", "emotion": "furious" },
+        "text": "VOCÊ ESTÁ BRINCANDO COMIGO?!"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "scared" },
+        "text": "AAAAH! De onde você saiu?!"
+      },
+      {
+        "speaker": { "character": "owl", "emotion": "furious" },
+        "text": "Eu estava aqui o tempo todo! Observando você DESPERDIÇAR essa oportunidade!"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "thinking" },
+        "text": "Que oportunidade? Tô meio... confusa aqui."
+      },
+      {
+        "speaker": { "character": "owl", "emotion": "furious" },
+        "text": "Essa 'pontinha' que você fumou sozinha... ela tem propriedades MÁGICAS!"
+      },
+      {
+        "speaker": { "character": "owl", "emotion": "neutral" },
+        "text": "Se você tivesse DIVIDIDO comigo, eu teria ficado tão de boa que até desfazia a maldição!"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "scared" },
+        "text": "Sério?! Mas... você não falou nada!"
+      },
+      {
+        "speaker": { "character": "owl", "emotion": "furious" },
+        "text": "Claro que não! Onde está a graça se eu falar?!"
+      },
+      {
+        "speaker": { "character": "owl", "emotion": "furious" },
+        "text": "Mas já que você fumou TUDO sozinha... CONTINUARÁ AMALDIÇOADA!"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "thinking" },
+        "text": "Ah não... acabei de estragar minha chance de sair fácil daqui."
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "neutral" },
+        "text": "Mas tipo... ainda valeu a pena. Tava uma erva boa mesmo. Valeu FANTASMA!! 👻"
+      },
+      {
+        "speaker": { "character": "owl", "emotion": "furious" },
+        "text": "VOCÊ NÃO ESTÁ LEVANDO ISSO A SÉRIO!"
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "happy" },
+        "text": "Ah, relaxa aí, corujão. É Halloween!! Vamos curtir a vibe."
+      },
+      {
+        "speaker": { "character": "jessica", "emotion": "thinking" },
+        "text": "Só preciso lembrar onde eu tava indo... hmm..."
+      }
+    ]
+  }
+}

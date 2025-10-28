@@ -3,7 +3,7 @@ import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
 import { inventory } from '../../ui/stores';
 import type { Item } from '../../ui/stores';
-import { createClickableRect, DEBUG_COLORS } from '../utils/DebugHelpers';
+import { createClickableRect, DEBUG_COLORS, enableDebugToggle, clearDebugElements } from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
 /**
@@ -39,6 +39,9 @@ export class StairsScene extends Phaser.Scene {
   create(): void {
     console.log('StairsScene.create() called');
 
+    // Show inventory (it's hidden during intro)
+    EventBus.emit('show-inventory');
+
     // Load saved state from sessionStorage
     const savedState = sessionStorage.getItem('stairsSceneState');
     if (savedState) {
@@ -69,8 +72,9 @@ export class StairsScene extends Phaser.Scene {
 
     const { width, height } = this.cameras.main;
 
-    // Display stairs background - centered and scaled to fit
-    this.currentBackground = this.add.image(width / 2, height / 2, 'stairs_closed');
+    // Display stairs background - use correct texture based on doorIsOpen state
+    const backgroundTexture = this.doorIsOpen ? 'stairs_open' : 'stairs_closed';
+    this.currentBackground = this.add.image(width / 2, height / 2, backgroundTexture);
 
     // Scale to fit the game view while maintaining aspect ratio
     const scaleX = width / this.currentBackground.width;
@@ -78,11 +82,16 @@ export class StairsScene extends Phaser.Scene {
     const scale = Math.max(scaleX, scaleY);
     this.currentBackground.setScale(scale);
 
+    console.log(`StairsScene background set to: ${backgroundTexture} (doorIsOpen: ${this.doorIsOpen})`);
+
     // Create interactive zones (will be enabled after intro dialogue)
     this.createInteractiveZones();
 
     // Enable rectangle draw tool (dev mode only)
     enableRectangleDrawTool(this);
+
+    // Enable debug visibility toggle (dev mode only)
+    enableDebugToggle(this);
 
     // Fade in from black
     this.cameras.main.fadeIn(1000, 0, 0, 0);
@@ -244,10 +253,17 @@ export class StairsScene extends Phaser.Scene {
 
   /**
    * Handle hallway door click
-   * Check if player has Hallway Key
+   * Check if door is already open, otherwise check for key
    */
   private async onHallwayDoorClicked(): Promise<void> {
-    console.log('Hallway door clicked');
+    console.log('Hallway door clicked, doorIsOpen:', this.doorIsOpen);
+
+    // If door is already open, go straight to HallwayScene
+    if (this.doorIsOpen) {
+      console.log('Door is already open, transitioning to HallwayScene');
+      this.goToHallway();
+      return;
+    }
 
     // Check if player has the Hallway Key
     let hasKey = false;
@@ -283,11 +299,24 @@ export class StairsScene extends Phaser.Scene {
     this.doorIsOpen = true;
     this.saveState();
 
-    // TODO: Transition to HallwayScene (to be implemented in future task)
-    console.log('TODO: Transition to HallwayScene (not yet implemented)');
+    // Transition to HallwayScene
+    this.goToHallway();
+  }
 
-    // For now, just log
-    // In future: this.scene.start('HallwayScene');
+  /**
+   * Transition to HallwayScene
+   */
+  private goToHallway(): void {
+    console.log('Transitioning to HallwayScene');
+
+    // Fade out
+    this.cameras.main.fadeOut(500, 0, 0, 0);
+
+    // Transition to HallwayScene when fade completes
+    this.cameras.main.once('camerafadeoutcomplete', () => {
+      this.cleanupEventListeners();
+      this.scene.start('HallwayScene');
+    });
   }
 
   /**
@@ -305,5 +334,6 @@ export class StairsScene extends Phaser.Scene {
    */
   shutdown(): void {
     this.cleanupEventListeners();
+    clearDebugElements();
   }
 }

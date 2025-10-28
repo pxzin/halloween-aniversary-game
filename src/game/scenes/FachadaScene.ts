@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
-import { createClickableRect, DEBUG_COLORS } from '../utils/DebugHelpers';
+import { createClickableRect, DEBUG_COLORS, enableDebugToggle, clearDebugElements } from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
 /**
@@ -30,6 +30,9 @@ export class FachadaScene extends Phaser.Scene {
 
   create(): void {
     console.log('FachadaScene.create() called');
+
+    // Show inventory (it's hidden during intro)
+    EventBus.emit('show-inventory');
 
     // IMPORTANT: Reset state when scene is created (Phaser reuses scene instances)
     this.hasShownIntroDialogue = false;
@@ -78,6 +81,9 @@ export class FachadaScene extends Phaser.Scene {
 
     // Enable rectangle draw tool (dev mode only)
     enableRectangleDrawTool(this);
+
+    // Enable debug visibility toggle (dev mode only)
+    enableDebugToggle(this);
 
     // Start intro dialogue
     this.startIntroDialogue();
@@ -289,5 +295,6 @@ export class FachadaScene extends Phaser.Scene {
    */
   shutdown(): void {
     this.cleanupEventListeners();
+    clearDebugElements();
   }
 }

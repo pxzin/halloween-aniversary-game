@@ -26,6 +26,9 @@ export class IntroScene extends Phaser.Scene {
   create(): void {
     console.log('IntroScene.create() called');
 
+    // Hide inventory during intro to prevent premature item usage
+    EventBus.emit('hide-inventory');
+
     // IMPORTANT: Reset state when scene is created (Phaser reuses scene instances)
     this.currentPhase = 'opening';
     console.log('IntroScene: Reset currentPhase to opening');

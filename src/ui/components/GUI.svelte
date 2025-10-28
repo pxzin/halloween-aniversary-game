@@ -4,6 +4,9 @@
   import DialogueBox from './DialogueBox.svelte';
   import ChoiceBox from './ChoiceBox.svelte';
   import ItemAcquisition from './ItemAcquisition.svelte';
+  import Objectives from './Objectives.svelte';
+  import NoteCloseup from './NoteCloseup.svelte';
+  import { inventoryVisible } from '../stores';
 </script>
 
 <!-- Background com abóboras flutuantes -->
@@ -33,13 +36,18 @@
     <Clock />
   </div>
 
+  <!-- Objectives panel (left side, revealed after reading note) -->
+  <Objectives />
+
   <!-- Inventário lateral direito -->
-  <div class="inventory-panel">
-    <Inventory />
-  </div>
+  {#if $inventoryVisible}
+    <div class="inventory-panel">
+      <Inventory />
+    </div>
+  {/if}
 
   <!-- Área do jogo (Phaser canvas) -->
-  <div class="game-view">
+  <div class="game-view" class:full-width={!$inventoryVisible}>
     <div id="game-container"></div>
   </div>
 
@@ -54,6 +62,9 @@
 
 <!-- Item Acquisition Animation (overlay) -->
 <ItemAcquisition />
+
+<!-- Note Close-up (overlay) -->
+<NoteCloseup />
 
 <style>
   /* Fundo animado */
@@ -216,6 +227,11 @@
     box-shadow: inset 0 0 50px rgba(138, 43, 226, 0.2);
     overflow: hidden;
     z-index: 20;
+    transition: right 0.3s ease;
+  }
+
+  .game-view.full-width {
+    right: 0;
   }
 
   .game-view :global(#game-container) {

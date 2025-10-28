@@ -1,9 +1,18 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { push } from 'svelte-spa-router';
   import { DEV_MODE } from '../config/devMode';
 
   // Check if in development mode (controlled by VITE_DEV_MODE in .env)
   const isDev = DEV_MODE;
+
+  /**
+   * Clear session storage on mount (reset game state when returning to home)
+   */
+  onMount(() => {
+    sessionStorage.clear();
+    console.log('[Home] Session storage cleared - Game state reset');
+  });
 
   /**
    * Start the game by navigating to /game route
@@ -65,6 +74,12 @@
           </button>
           <button class="skip-button" onclick={() => skipToScene('BalconyScene')}>
             Sacada
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('HallwayScene')}>
+            Corredor
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('BackyardScene')}>
+            Quintal
           </button>
           <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
             World

@@ -1,0 +1,45 @@
+{
+  "backyard_intro": {
+    "id": "backyard_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "O quintal... está ainda mais assustador à noite." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Preciso de luz para ver alguma coisa aqui." }
+    ]
+  },
+  "found_sanitizer": {
+    "id": "found_sanitizer",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Álcool em gel. Perfeito para acender uma fogueira... ou uma churrasqueira." }
+    ]
+  },
+  "grill_lit": {
+    "id": "grill_lit",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A churrasqueira acende, iluminando o quintal." }
+    ]
+  },
+  "cat_house_high": {
+    "id": "cat_house_high",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Uma casinha de gato lá no alto... parece ter algo dentro, mas está fora de alcance." }
+    ]
+  },
+  "found_cat_food": {
+    "id": "found_cat_food",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Ração de gato. Isso deve atrair o bichano." }
+    ]
+  },
+  "cat_lured": {
+    "id": "cat_lured",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "O gato desce da prateleira, atraído pela ração." }
+    ]
+  },
+  "found_living_room_key": {
+    "id": "found_living_room_key",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "A chave da sala! Finalmente!" }
+    ]
+  }
+}

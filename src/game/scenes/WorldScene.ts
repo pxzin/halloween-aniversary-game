@@ -27,9 +27,9 @@ export class WorldScene extends Phaser.Scene {
       color: '#ff6b35'
     }).setOrigin(0.5);
 
-    // Add test items to inventory
-    inventory.set([
-      { id: 'lighter', name: 'Isqueiro', icon: '🔥' },
+    // Add test items to inventory (lighter is already in initial state)
+    inventory.update(items => [
+      ...items, // Keep existing items (including lighter)
       { id: 'cat_food_can', name: 'Lata de Ração', icon: '🥫' },
       { id: 'miniature_rake', name: 'Mini-Rastelo de Jardim', icon: '/assets/images/ui/miniature_rake.png' }
     ]);
