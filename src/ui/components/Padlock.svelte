@@ -13,9 +13,14 @@
 
   // Listen for show padlock event
   EventBus.on('show-padlock', () => {
+    console.log('');
+    console.log('🔒 [Padlock] Received show-padlock event');
+    console.log('Setting isVisible = true');
     isVisible = true;
     // Reset code when opening
     code = [0, 0, 0, 0];
+    console.log('Code reset to:', code.join(''));
+    console.log('');
   });
 
   /**
@@ -23,6 +28,9 @@
    */
   function incrementDigit(index: number) {
     code[index] = (code[index] + 1) % 10;
+    console.log(`[Padlock] Digit ${index} incremented to ${code[index]}, current code: ${code.join('')}`);
+    // Auto-check code when digit changes
+    checkCode();
   }
 
   /**
@@ -30,6 +38,9 @@
    */
   function decrementDigit(index: number) {
     code[index] = (code[index] - 1 + 10) % 10;
+    console.log(`[Padlock] Digit ${index} decremented to ${code[index]}, current code: ${code.join('')}`);
+    // Auto-check code when digit changes
+    checkCode();
   }
 
   /**
@@ -37,30 +48,37 @@
    */
   function checkCode() {
     const enteredCode = code.join('');
+    console.log('');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('🔐 PADLOCK CODE CHECK');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log(`Entered code: "${enteredCode}"`);
+    console.log(`Valid codes:`, validCodes);
+    console.log(`Is valid? ${validCodes.includes(enteredCode)}`);
 
     if (validCodes.includes(enteredCode)) {
       // Success!
+      console.log('✅ CODE CORRECT! Unlocking gate...');
+      console.log('Setting isVisible = false');
       isVisible = false;
+      console.log('Emitting gate-unlocked event');
       EventBus.emit('gate-unlocked');
+      console.log('Event emitted successfully');
     } else {
       // Incorrect - shake animation or sound effect could go here
-      console.log('Incorrect code');
+      console.log('❌ CODE INCORRECT!');
     }
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('');
   }
 
-  /**
-   * Close the padlock UI without unlocking
-   */
-  function close() {
-    isVisible = false;
-  }
 </script>
 
 {#if isVisible}
   <!-- Modal overlay -->
-  <div class="padlock-overlay" onclick={close}>
-    <!-- Padlock container - prevent click propagation -->
-    <div class="padlock-container" onclick={(e) => e.stopPropagation()}>
+  <div class="padlock-overlay">
+    <!-- Padlock container -->
+    <div class="padlock-container">
       <!-- Padlock image -->
       <div class="padlock-image">
         <img
@@ -84,11 +102,6 @@
         {/each}
       </div>
 
-      <!-- Action buttons -->
-      <div class="action-buttons">
-        <button class="unlock-button" onclick={checkCode}>Desbloquear</button>
-        <button class="close-button" onclick={close}>Fechar</button>
-      </div>
     </div>
   </div>
 {/if}
@@ -111,12 +124,12 @@
   .padlock-container {
     position: relative;
     max-width: 600px;
-    max-height: 80vh;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-    padding: 40px;
+    gap: 20px;
+    padding: 30px 40px 40px 40px;
     background: linear-gradient(135deg, #1a0f2e 0%, #0a0515 100%);
     border: 3px solid #ff5e00;
     border-radius: 10px;
@@ -127,7 +140,7 @@
 
   .padlock-image {
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
   }
 
   .padlock-image img {
@@ -200,7 +213,7 @@
   .action-buttons {
     display: flex;
     gap: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   .unlock-button,

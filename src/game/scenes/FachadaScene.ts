@@ -12,6 +12,9 @@ export class FachadaScene extends Phaser.Scene {
   private hasShownIntroDialogue: boolean = false;
   private waitingForPadlockDialogue: boolean = false;
 
+  // Store gate zone reference to enable/disable it
+  private gateZone: Phaser.GameObjects.Rectangle | null = null;
+
   // Store bound function references for proper cleanup
   private boundOnGateUnlocked!: () => void;
   private boundOnDialogueEnded!: () => void;
@@ -31,6 +34,7 @@ export class FachadaScene extends Phaser.Scene {
     // IMPORTANT: Reset state when scene is created (Phaser reuses scene instances)
     this.hasShownIntroDialogue = false;
     this.waitingForPadlockDialogue = false;
+    this.gateZone = null;
 
     // Store bound functions for proper cleanup (do this BEFORE registering listeners)
     this.boundOnGateUnlocked = this.onGateUnlocked.bind(this);
@@ -101,7 +105,12 @@ export class FachadaScene extends Phaser.Scene {
       EventBus.emit('show-padlock');
     } else {
       // Regular dialogue ended, player can now interact with the scene
-      console.log('Facade intro dialogue ended, player can interact');
+      console.log('Facade intro dialogue ended, enabling gate interaction');
+
+      // Enable gate zone interaction
+      if (this.gateZone) {
+        this.gateZone.setInteractive({ useHandCursor: true });
+      }
     }
   }
 
@@ -200,7 +209,7 @@ export class FachadaScene extends Phaser.Scene {
     const height = 270.63;
 
     // Create clickable gate zone with debug visualization (auto-enabled in dev mode)
-    const gateZone = createClickableRect(
+    this.gateZone = createClickableRect(
       this,
       centerX,
       centerY,
@@ -211,8 +220,11 @@ export class FachadaScene extends Phaser.Scene {
       'Gate Zone'
     );
 
+    // Disable interaction until intro dialogue ends
+    this.gateZone.disableInteractive();
+
     // When clicked, show padlock focus dialogue then open padlock
-    gateZone.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+    this.gateZone.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
       console.log(`[FachadaScene] Gate zone clicked at: x=${pointer.x}, y=${pointer.y}`);
       this.onGateClicked();
     });
@@ -236,17 +248,26 @@ export class FachadaScene extends Phaser.Scene {
    * Handle gate unlock event - transition to next scene
    */
   private onGateUnlocked(): void {
-    console.log('Gate unlocked, transitioning to StairsScene');
+    console.log('');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('🚪 [FachadaScene] GATE UNLOCKED EVENT RECEIVED');
+    console.log('═══════════════════════════════════════════════════════');
+    console.log('Starting transition to StairsScene...');
 
     // Fade out
+    console.log('Fading out camera...');
     this.cameras.main.fadeOut(1000, 0, 0, 0);
 
     // Transition to StairsScene when fade completes
     this.cameras.main.once('camerafadeoutcomplete', () => {
-      console.log('Fade complete, cleaning up and starting StairsScene');
+      console.log('Camera fade complete');
+      console.log('Cleaning up event listeners...');
       // Manually clean up event listeners before transitioning
       this.cleanupEventListeners();
+      console.log('Starting StairsScene...');
       this.scene.start('StairsScene');
+      console.log('═══════════════════════════════════════════════════════');
+      console.log('');
     });
   }
 
