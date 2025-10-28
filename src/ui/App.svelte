@@ -21,6 +21,10 @@
     background: linear-gradient(135deg, #1a0a2e 0%, #0f051d 100%);
     overflow: hidden;
     font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
 
   /* Halloween background decorations */

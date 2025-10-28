@@ -12,6 +12,12 @@
 </div>
 
 <div class="game-container">
+  <!-- Teias de aranha nos cantos -->
+  <div class="spider-web top-left">🕸️</div>
+  <div class="spider-web top-right">🕸️</div>
+  <div class="spider-web bottom-left">🕸️</div>
+  <div class="spider-web bottom-right">🕸️</div>
+
   <!-- Morcegos voadores -->
   <div class="bat" style="animation-delay: 0s;">🦇</div>
   <div class="bat" style="animation-delay: 4s; animation-duration: 10s;">🦇</div>
@@ -88,7 +94,7 @@
     position: absolute;
     font-size: 25px;
     animation: flyBat 8s infinite linear;
-    z-index: 5;
+    z-index: 2;
     opacity: 0.7;
   }
 
@@ -114,7 +120,36 @@
     font-size: 30px;
     animation: floatGhost 10s infinite ease-in-out;
     opacity: 0.6;
-    z-index: 5;
+    z-index: 2;
+  }
+
+  /* Teias de aranha */
+  .spider-web {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0.4;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .spider-web.top-left {
+    top: 10px;
+    left: 10px;
+  }
+
+  .spider-web.top-right {
+    top: 10px;
+    right: 10px;
+  }
+
+  .spider-web.bottom-left {
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .spider-web.bottom-right {
+    bottom: 10px;
+    right: 10px;
   }
 
   @keyframes floatGhost {
@@ -172,6 +207,7 @@
     justify-content: center;
     box-shadow: inset 0 0 50px rgba(138, 43, 226, 0.2);
     overflow: hidden;
+    z-index: 20;
   }
 
   .game-view :global(#game-container) {
@@ -184,6 +220,7 @@
     width: 100% !important;
     height: 100% !important;
     object-fit: contain;
+    aspect-ratio: 16 / 9;
   }
 
   /* Container de diálogo */
