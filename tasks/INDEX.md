@@ -13,7 +13,7 @@
 - [x] Task 011: Implement Façade Scene and Padlock Puzzle
 - [x] Task 012: Implement Stairs and Balcony Scenes
 - [x] Task 013: Implement Hallway Scene and Objective Reveal
-- [ ] Task 014: Implement Backyard Scene and Cat's Treasure Puzzle
+- [x] Task 014: Implement Backyard Scene and Cat's Treasure Puzzle
 - [ ] Task 015: Implement Living Room Scene and Scaredy Cat Puzzle
 - [ ] Task 016: Implement Frozen Treasure Puzzle (Chocolates)
 - [ ] Task 017: Implement Ric's Cheese Safe Puzzle

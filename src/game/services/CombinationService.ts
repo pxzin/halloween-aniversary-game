@@ -75,9 +75,14 @@ class CombinationServiceClass {
       await recipe.onCombine();
     }
 
-    // Add the resulting item to inventory (if there is one)
+    // Trigger item acquisition animation for the resulting item (if there is one)
+    // The animation component will add the item to inventory after the animation completes
     if (recipe.result) {
-      inventory.update(items => [...items, recipe.result!]);
+      EventBus.emit('item-acquired', {
+        id: recipe.result.id,
+        name: recipe.result.name,
+        icon: recipe.result.icon
+      });
     }
 
     // Reset selection stores to clear cursor and combination state
