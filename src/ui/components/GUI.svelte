@@ -31,13 +31,14 @@
   <div class="ghost" style="left: 15%; top: 15%;">👻</div>
   <div class="ghost" style="left: 75%; top: 25%; animation-delay: 3s;">👻</div>
 
-  <!-- Timer no topo -->
+  <!-- Timer bar with offerings and clock -->
   <div class="timer-bar">
+    <!-- Objectives panel (inline, left side) -->
+    <Objectives />
+
+    <!-- Clock (right side) -->
     <Clock />
   </div>
-
-  <!-- Objectives panel (left side, revealed after reading note) -->
-  <Objectives />
 
   <!-- Inventário lateral direito -->
   {#if $inventoryVisible}
@@ -182,7 +183,7 @@
     }
   }
 
-  /* Timer no topo */
+  /* Timer bar at the top */
   .timer-bar {
     position: absolute;
     top: 0;
@@ -192,10 +193,11 @@
     background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(26, 15, 46, 0.8) 100%);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     border-bottom: 3px solid #ff5e00;
     z-index: 100;
     box-shadow: 0 4px 20px rgba(255, 94, 0, 0.4);
+    padding: 0 20px;
   }
 
   /* Inventário */

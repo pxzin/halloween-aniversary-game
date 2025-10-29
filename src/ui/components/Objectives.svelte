@@ -44,10 +44,10 @@
 </script>
 
 {#if isVisible}
-  <div class="objectives-panel">
+  <div class="objectives-inline">
     <h2 class="objectives-title">Oferendas</h2>
 
-    <div class="gifts-grid">
+    <div class="gifts-row">
       {#each gifts as gift (gift.id)}
         <div class="gift-slot" class:collected={gift.collected}>
           <div class="gift-icon">
@@ -61,88 +61,60 @@
         </div>
       {/each}
     </div>
-
-    <div class="objectives-footer">
-      <p class="warning-text">Encontre antes da meia-noite!</p>
-    </div>
   </div>
 {/if}
 
 <style>
-  .objectives-panel {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 220px;
-    height: calc(100% - 240px);
-    background: linear-gradient(135deg, rgba(10, 5, 20, 0.95) 0%, rgba(26, 10, 35, 0.95) 100%);
-    border-right: 3px solid #ff5e00;
-    padding: 20px;
-    z-index: 50;
-    box-shadow: inset 0 0 30px rgba(138, 43, 226, 0.2);
-    animation: slideInLeft 0.5s ease-out;
+  .objectives-inline {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 0.5s ease-out;
   }
 
-  @keyframes slideInLeft {
+  @keyframes fadeIn {
     from {
-      transform: translateX(-100%);
       opacity: 0;
+      transform: translateY(-10px);
     }
     to {
-      transform: translateX(0);
       opacity: 1;
+      transform: translateY(0);
     }
   }
 
   .objectives-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 900;
     font-family: 'Arial Black', 'Arial Bold', 'Gadget', sans-serif;
     color: #ff5e00;
-    margin-bottom: 20px;
-    text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-shadow:
-      0 0 15px rgba(255, 94, 0, 0.8),
-      0 0 30px rgba(255, 94, 0, 0.5),
-      0 0 45px rgba(138, 43, 226, 0.3);
+      0 0 10px rgba(255, 94, 0, 0.8),
+      0 0 20px rgba(255, 94, 0, 0.5);
+    white-space: nowrap;
+    margin: 0;
   }
 
-  .gifts-grid {
+  .gifts-row {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-    overflow-y: auto;
-  }
-
-  .gifts-grid::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .gifts-grid::-webkit-scrollbar-track {
-    background: rgba(10, 0, 21, 0.5);
-    border-radius: 3px;
-  }
-
-  .gifts-grid::-webkit-scrollbar-thumb {
-    background: #ff5e00;
-    border-radius: 3px;
+    gap: 8px;
+    align-items: center;
   }
 
   .gift-slot {
     background: linear-gradient(135deg, rgba(26, 10, 35, 0.9) 0%, rgba(10, 5, 20, 0.9) 100%);
     border: 2px solid #8a2be2;
     border-radius: 8px;
-    padding: 12px;
+    padding: 6px;
     transition: all 0.3s ease;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 4px;
     box-shadow: 0 2px 8px rgba(138, 43, 226, 0.2);
+    min-width: 60px;
   }
 
   .gift-slot:hover {
@@ -150,6 +122,7 @@
     box-shadow:
       0 4px 12px rgba(255, 94, 0, 0.4),
       0 0 20px rgba(138, 43, 226, 0.3);
+    transform: translateY(-2px);
   }
 
   .gift-slot.collected {
@@ -161,15 +134,15 @@
   }
 
   .gift-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, rgba(138, 43, 226, 0.3) 0%, rgba(255, 94, 0, 0.3) 100%);
     border: 2px solid #8a2be2;
     border-radius: 50%;
-    font-size: 24px;
+    font-size: 18px;
     color: #ffffff;
     flex-shrink: 0;
     transition: all 0.3s ease;
@@ -178,15 +151,16 @@
   .gift-slot.collected .gift-icon {
     background: linear-gradient(135deg, rgba(88, 204, 2, 0.5) 0%, rgba(88, 204, 2, 0.3) 100%);
     border-color: #58cc02;
-    font-size: 28px;
+    font-size: 20px;
   }
 
   .gift-name {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 600;
     color: #ffffff;
-    flex: 1;
-    text-shadow: 0 0 10px rgba(255, 94, 0, 0.3);
+    text-shadow: 0 0 8px rgba(255, 94, 0, 0.3);
+    white-space: nowrap;
+    text-align: center;
   }
 
   .gift-slot.collected .gift-name {
@@ -194,89 +168,63 @@
     text-shadow: 0 0 10px rgba(88, 204, 2, 0.5);
   }
 
-  .objectives-footer {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 2px solid rgba(138, 43, 226, 0.3);
-  }
-
-  .warning-text {
-    color: #ff5e00;
-    font-size: 11px;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
-    opacity: 0.9;
-    text-shadow: 0 0 10px rgba(255, 94, 0, 0.6);
-    animation: pulse 2s infinite ease-in-out;
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.7;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
-
-  /* Responsive - hide on small screens or adjust layout */
+  /* Responsive adjustments */
   @media (max-width: 1200px) {
-    .objectives-panel {
-      width: 180px;
-      padding: 15px;
+    .objectives-title {
+      font-size: 16px;
     }
 
-    .objectives-title {
-      font-size: 18px;
-      margin-bottom: 16px;
+    .gift-slot {
+      min-width: 55px;
+      padding: 5px;
     }
 
     .gift-icon {
-      width: 36px;
-      height: 36px;
-      font-size: 20px;
+      width: 28px;
+      height: 28px;
+      font-size: 16px;
     }
 
     .gift-slot.collected .gift-icon {
-      font-size: 24px;
+      font-size: 18px;
     }
 
     .gift-name {
-      font-size: 12px;
+      font-size: 9px;
     }
   }
 
   @media (max-width: 900px) {
-    .objectives-panel {
-      top: auto;
-      bottom: 340px;
-      left: 0;
-      right: 0;
-      width: 100%;
-      height: auto;
-      border-right: none;
-      border-top: 3px solid #ff5e00;
-      padding: 15px;
+    .objectives-inline {
+      gap: 12px;
     }
 
-    .gifts-grid {
-      flex-direction: row;
-      gap: 8px;
-      overflow-x: auto;
-      overflow-y: visible;
+    .objectives-title {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .gifts-row {
+      gap: 6px;
     }
 
     .gift-slot {
-      flex-direction: column;
-      min-width: 80px;
-      text-align: center;
+      min-width: 50px;
+      padding: 4px;
+    }
+
+    .gift-icon {
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+    }
+
+    .gift-slot.collected .gift-icon {
+      font-size: 16px;
     }
 
     .gift-name {
-      font-size: 10px;
+      font-size: 8px;
     }
   }
 </style>
