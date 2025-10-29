@@ -1,0 +1,14 @@
+{
+  "kitchen_intro": {
+    "id": "kitchen_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A cozinha... parece que tudo está no lugar, mas... diferente." }
+    ]
+  },
+  "found_chocolates": {
+    "id": "found_chocolates",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Chocolates! Estavam escondidos no fundo do congelador o tempo todo!" }
+    ]
+  }
+}

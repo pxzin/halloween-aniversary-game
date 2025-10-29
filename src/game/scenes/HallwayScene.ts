@@ -14,6 +14,7 @@ export class HallwayScene extends Phaser.Scene {
   private noteHasBeenRead: boolean = false;
   private broomCollected: boolean = false;
   private objectivesRevealed: boolean = false;
+  private backyardVisited: boolean = false; // Track if player has visited backyard before
 
   // Store zone references
   private returnZone: Phaser.GameObjects.Rectangle | null = null;
@@ -63,6 +64,7 @@ export class HallwayScene extends Phaser.Scene {
       this.noteHasBeenRead = state.noteHasBeenRead || false;
       this.broomCollected = state.broomCollected || false;
       this.objectivesRevealed = state.objectivesRevealed || false;
+      this.backyardVisited = state.backyardVisited || false;
       console.log('Loaded HallwayScene state:', state);
     } else {
       // First time in scene - initialize state
@@ -71,6 +73,7 @@ export class HallwayScene extends Phaser.Scene {
       this.noteHasBeenRead = false;
       this.broomCollected = false;
       this.objectivesRevealed = false;
+      this.backyardVisited = false;
     }
 
     // Reset zone references
@@ -151,6 +154,7 @@ export class HallwayScene extends Phaser.Scene {
       noteHasBeenRead: this.noteHasBeenRead,
       broomCollected: this.broomCollected,
       objectivesRevealed: this.objectivesRevealed,
+      backyardVisited: this.backyardVisited,
     };
     sessionStorage.setItem('hallwaySceneState', JSON.stringify(state));
     console.log('Saved HallwayScene state:', state);
@@ -473,7 +477,14 @@ export class HallwayScene extends Phaser.Scene {
       this.courtyardDoorZone.disableInteractive();
     }
 
-    // Show reluctance dialogue
+    // If already visited backyard, skip dialogues and go directly
+    if (this.backyardVisited) {
+      console.log('Backyard already visited, skipping dialogues');
+      this.startBackyardTransition();
+      return;
+    }
+
+    // First visit - show reluctance dialogue
     await DialogueManager.loadScript('hallway', 'courtyard_door');
     DialogueManager.startDialogue();
 
@@ -484,6 +495,9 @@ export class HallwayScene extends Phaser.Scene {
 
       // After narrator dialogue ends, start the animated transition
       EventBus.once('dialogue-ended', () => {
+        // Mark backyard as visited
+        this.backyardVisited = true;
+        this.saveState();
         this.startBackyardTransition();
       });
     });

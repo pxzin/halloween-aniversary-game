@@ -19,10 +19,10 @@ interface Recipe {
  */
 class CombinationServiceClass {
   private recipes: Recipe[] = [
-    // Example recipes - will be expanded in future tasks
+    // Cat's Treasure Puzzle - Open cat food can
     {
-      ingredients: ['cat_food_can', 'mini_rake'],
-      result: { id: 'open_cat_food_can', name: 'Lata de Ração Aberta', icon: '🥫' }
+      ingredients: ['cat_food_can', 'miniature_rake'],
+      result: { id: 'open_cat_food_can', name: 'Lata de Ração Aberta', icon: '/assets/images/ui/cat_food_can_open.png' }
     },
     // Easter Egg: Lighter + Weed Joint
     {

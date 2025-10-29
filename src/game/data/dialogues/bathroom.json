@@ -1,0 +1,20 @@
+{
+  "bathroom_intro": {
+    "id": "bathroom_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Este banheiro... tem um cheiro estranho. E não é só da caixa de areia." }
+    ]
+  },
+  "found_safe": {
+    "id": "found_safe",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Um cofre? Aqui no banheiro? E esse cheiro... é queijo?" }
+    ]
+  },
+  "found_cheese": {
+    "id": "found_cheese",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Queijo! Eca, mas... é um dos presentes!" }
+    ]
+  }
+}

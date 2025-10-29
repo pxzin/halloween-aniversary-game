@@ -30,7 +30,7 @@ export class WorldScene extends Phaser.Scene {
     // Add test items to inventory (lighter is already in initial state)
     inventory.update(items => [
       ...items, // Keep existing items (including lighter)
-      { id: 'cat_food_can', name: 'Lata de Ração', icon: '🥫' },
+      { id: 'cat_food_can', name: 'Lata de Ração', icon: '/assets/images/ui/cat_food_can_closed.png' },
       { id: 'miniature_rake', name: 'Mini-Rastelo de Jardim', icon: '/assets/images/ui/miniature_rake.png' }
     ]);
 

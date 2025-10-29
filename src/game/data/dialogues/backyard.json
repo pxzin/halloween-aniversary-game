@@ -39,7 +39,47 @@
   "found_living_room_key": {
     "id": "found_living_room_key",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "A chave da sala! Finalmente!" }
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Vou usar a vassoura para derrubar a chave..." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "*A chave cai no chão*" },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Eca! O chão está cheio de aranhas!" },
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "*pega a chave rapidamente do chão*" },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Breca! Tinha uma aranha na chave!" },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Mas consegui! A chave da sala!" }
+    ]
+  },
+  "found_rics_diary": {
+    "id": "found_rics_diary",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "O diário do Ric! O que será que ele está fazendo aqui?" }
+    ]
+  },
+  "cat_on_table_1": {
+    "id": "cat_on_table_1",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Oi, Patroa! Gostou da comidinha?" },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A gata preta me olha com seus olhos amarelos brilhantes... meio assustador, mas meio fofo." }
+    ]
+  },
+  "cat_on_table_2": {
+    "id": "cat_on_table_2",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Escuridão... que nome dramático para uma gata." },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Mas combina perfeitamente com você, Patroa!" }
+    ]
+  },
+  "cat_on_table_3": {
+    "id": "cat_on_table_3",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "*acaricia a gata*" },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Você é a única coisa nessa casa que não está tentando me assustar." }
+    ]
+  },
+  "cat_on_table_4": {
+    "id": "cat_on_table_4",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Patroa, você viu onde está a chave daquela casinha lá em cima?" },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A gata continua comendo, ignorando completamente minha pergunta." },
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Tá bom então..." }
     ]
   }
 }

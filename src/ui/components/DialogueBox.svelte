@@ -14,6 +14,7 @@
   let currentCharIndex = $state(0);
   let portraitError = $state(false);
   let missingEmotion = $state('');
+  let isInlineDialogue = $state(false); // Track if dialogue is from show-dialogue event (not DialogueManager)
 
   /**
    * Parse speaker data - supports both legacy string format and new object format
@@ -89,8 +90,13 @@
       // Skip typewriter effect
       skipTypewriter();
     } else {
-      // Advance to next line
-      DialogueManager.advanceDialogue();
+      // If inline dialogue, close it. Otherwise advance to next line
+      if (isInlineDialogue) {
+        dialogue.set(null);
+        isInlineDialogue = false;
+      } else {
+        DialogueManager.advanceDialogue();
+      }
     }
   }
 
@@ -106,9 +112,10 @@
   }
 
   /**
-   * Handle show-dialogue event from EventBus (legacy support)
+   * Handle show-dialogue event from EventBus (inline dialogue support)
    */
   function handleShowDialogue(data: any) {
+    isInlineDialogue = true; // Mark as inline dialogue (can be dismissed with click)
     dialogue.set(data);
     if (data && data.text) {
       startTypewriter(data.text);
@@ -119,6 +126,7 @@
    * Handle dialogue-line-start event from DialogueManager
    */
   function handleDialogueLineStart(line: any) {
+    isInlineDialogue = false; // DialogueManager dialogues are not inline
     if (line && line.text) {
       startTypewriter(line.text);
     }
