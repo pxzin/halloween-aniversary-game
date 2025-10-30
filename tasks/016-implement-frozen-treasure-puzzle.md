@@ -9,7 +9,7 @@ To implement the `Frozen Treasure` puzzle (`Puzzle 09`) in the `KitchenScene`, a
 ### 1. Update `KitchenScene.ts`
 
 -   **Freezer Interaction:**
-    *   In the freezer compartment (View 1), create multiple interactive zones for the `ice keys`.
+    *   In the freezer compartment, create multiple interactive zones for the `ice keys`.
     *   Each time the player clicks an `ice key`, it should be removed from the scene.
     *   Once all `ice keys` are removed, the `Chocolates` item should become visible and clickable.
 -   **Chocolates Item:**

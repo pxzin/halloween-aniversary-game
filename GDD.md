@@ -96,7 +96,6 @@ This section details the specific scenes and the navigation paths between them.
     *   **Leads to:** `Cenário 9 (Banheiro)`
     *   **Interaction 4:** Click on the bedroom door.
     *   **Leads to:** `Cenário 10 (Quarto)`
-    *   **Sub-view:** A separate view for the stove/sink area.
 *   **Cenário 9: Banheiro (Bathroom)**
     *   **Interaction:** Click to return.
     *   **Leads to:** `Cenário 8 (Cozinha)`
@@ -174,18 +173,17 @@ This section details the specific scenes and the navigation paths between them.
 
 ### Puzzle 06: The Frozen Key
 
-*   **Location:** `Cenário 8: Cozinha` (with two separate views).
+*   **Location:** `Cenário 8: Cozinha`.
 *   **Objective:** Retrieve the second gift: the **Wine**.
 *   **Riddle:** The clue for this puzzle comes from the cell phone: "...o caminho está fechado para quem não aguenta o calor."
 *   **Sequence:**
-    1.  The player enters the kitchen, arriving in **View 1 (Entrance View)**. From here, they can interact with the main refrigerator.
-    2.  Inside the refrigerator's freezer compartment, the player finds a **"key of ice"**.
-    3.  The player navigates to **View 2 (Island View)**. Here they can see the induction stove and a modern wine cooler.
-    4.  The wine cooler is sealed with a visible **"icy lock"**. Trying the `key of ice` on the lock fails, with a message: "The key is the right shape, but it's too big and doesn't fit."
-    5.  The solution is to use the induction stove. The player must turn it on to the **lowest possible heat setting**.
-    6.  The player then uses the `key of ice` on the gently heated stove, which transforms it into a **"slightly melted ice key"**.
-    7.  This `slightly melted ice key` now fits the `icy lock` on the wine cooler, opening it.
-    8.  **Reward:** The player can now collect the **Wine**.
+    1.  In the kitchen, Jéssica can see a refrigerator, an induction stove, and a modern wine cooler with an `icy lock`.
+    2.  Inside the refrigerator's freezer compartment, she finds a **"key of ice"**.
+    3.  Trying the `key of ice` on the `icy lock` fails, with a message: "The key is the right shape, but it's too big and doesn't fit."
+    4.  The solution is to use the induction stove. The player must turn it on to the **lowest possible heat setting**.
+    5.  The player then uses the `key of ice` on the gently heated stove, which transforms it into a **"slightly melted ice key"**.
+    6.  This `slightly melted ice key` now fits the `icy lock` on the wine cooler, opening it.
+    7.  **Reward:** The player can now collect the **Wine**.
 
 ### Puzzle 07: The Stinky Key
 
