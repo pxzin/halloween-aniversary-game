@@ -6,6 +6,7 @@
   import ItemAcquisition from './ItemAcquisition.svelte';
   import Objectives from './Objectives.svelte';
   import NoteCloseup from './NoteCloseup.svelte';
+  import PuzzleCloseup from './PuzzleCloseup.svelte';
   import { inventoryVisible } from '../stores';
 </script>
 
@@ -66,6 +67,9 @@
 
 <!-- Note Close-up (overlay) -->
 <NoteCloseup />
+
+<!-- Puzzle Close-up (overlay) -->
+<PuzzleCloseup />
 
 <style>
   /* Fundo animado */

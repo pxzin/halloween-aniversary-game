@@ -104,6 +104,12 @@ export class FachadaScene extends Phaser.Scene {
   private onDialogueEnded(): void {
     console.log('FachadaScene.onDialogueEnded - waitingForPadlockDialogue:', this.waitingForPadlockDialogue);
 
+    // Only proceed if this scene is active
+    if (!this.scene.isActive('FachadaScene')) {
+      console.log('FachadaScene not active, ignoring dialogue-ended event');
+      return;
+    }
+
     // If we just showed the padlock focus dialogue, now show the padlock
     if (this.waitingForPadlockDialogue) {
       this.waitingForPadlockDialogue = false;

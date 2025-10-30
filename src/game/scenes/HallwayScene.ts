@@ -3,6 +3,8 @@ import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
 import { createClickableRect, DEBUG_COLORS, enableDebugToggle, clearDebugElements } from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
+import { inventory } from '../../ui/stores';
+import { get } from 'svelte/store';
 
 /**
  * Hallway Scene - Central hub with objective reveal and item collection
@@ -165,6 +167,12 @@ export class HallwayScene extends Phaser.Scene {
    */
   private onDialogueEnded(): void {
     console.log('HallwayScene.onDialogueEnded');
+
+    // Only proceed if this scene is active
+    if (!this.scene.isActive('HallwayScene')) {
+      console.log('HallwayScene not active, ignoring dialogue-ended event');
+      return;
+    }
 
     // Enable interaction zones after intro dialogue
     if (this.hasShownIntroDialogue) {
@@ -456,14 +464,31 @@ export class HallwayScene extends Phaser.Scene {
   }
 
   /**
-   * Handle living room door click - show locked door dialogue
+   * Handle living room door click - check for key or show locked dialogue
    */
   private async onLivingRoomDoorClicked(): Promise<void> {
     console.log('Living room door clicked');
 
-    // Show locked door dialogue
-    await DialogueManager.loadScript('hallway', 'livingroom_door_locked');
-    DialogueManager.startDialogue();
+    // Check if player has the living room key
+    const hasKey = this.checkInventoryForItem('living_room_key');
+
+    if (hasKey) {
+      // Player has the key - allow entry
+      console.log('Player has living room key, transitioning to LivingRoomScene');
+      this.scene.start('LivingRoomScene');
+    } else {
+      // Show locked door dialogue
+      await DialogueManager.loadScript('hallway', 'livingroom_door_locked');
+      DialogueManager.startDialogue();
+    }
+  }
+
+  /**
+   * Check if an item exists in the player's inventory
+   */
+  private checkInventoryForItem(itemId: string): boolean {
+    const items = get(inventory);
+    return items.some(item => item.id === itemId);
   }
 
   /**

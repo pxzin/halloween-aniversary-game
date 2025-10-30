@@ -28,6 +28,25 @@
     // Set scene in sessionStorage before navigating
     sessionStorage.setItem('startScene', sceneName);
     console.log('Home - Setting startScene:', sceneName);
+
+    // Special setup for LivingRoomScene - add required key
+    if (sceneName === 'LivingRoomScene') {
+      import('../ui/stores').then(({ inventory }) => {
+        inventory.update(items => {
+          // Check if key already exists
+          if (!items.some(item => item.id === 'living_room_key')) {
+            console.log('[Home] Adding living room key for dev access');
+            return [...items, {
+              id: 'living_room_key',
+              name: 'Chave da Sala',
+              icon: '🔑'
+            }];
+          }
+          return items;
+        });
+      });
+    }
+
     push('/game');
   }
 
@@ -80,6 +99,9 @@
           </button>
           <button class="skip-button" onclick={() => skipToScene('BackyardScene')}>
             Quintal
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('LivingRoomScene')}>
+            Sala
           </button>
           <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
             World

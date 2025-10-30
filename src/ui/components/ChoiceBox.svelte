@@ -2,17 +2,23 @@
   import { onMount, onDestroy } from 'svelte';
   import { EventBus } from '../../game/EventBus';
 
+  // Choice data type
+  interface Choice {
+    id: string;
+    text: string;
+  }
+
   // Choice state
   let isActive = $state(false);
   let question = $state('');
-  let choices = $state<string[]>([]);
+  let choices = $state<Choice[]>([]);
   let hoveredIndex = $state<number | null>(null);
 
   /**
    * Show choice dialogue
    */
-  function showChoices(data: { question: string; choices: string[] }) {
-    question = data.question;
+  function showChoices(data: { question?: string; choices: Choice[] }) {
+    question = data.question || '';
     choices = data.choices;
     isActive = true;
     console.log('[ChoiceBox] Showing choices:', data);
@@ -22,10 +28,11 @@
    * Handle choice selection
    */
   function selectChoice(index: number) {
-    console.log('[ChoiceBox] Choice selected:', index);
+    const selectedChoice = choices[index];
+    console.log('[ChoiceBox] Choice selected:', selectedChoice.id);
 
-    // Emit event with selected choice
-    EventBus.emit('choice-made', { choiceIndex: index });
+    // Emit event with selected choice ID
+    EventBus.emit('choice-made', { choice: selectedChoice.id });
 
     // Hide choice box
     isActive = false;
@@ -63,7 +70,7 @@
             onclick={() => selectChoice(index)}
           >
             <span class="choice-number">{index + 1}</span>
-            <span class="choice-text">{choice}</span>
+            <span class="choice-text">{choice.text}</span>
           </button>
         {/each}
       </div>

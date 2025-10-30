@@ -162,6 +162,12 @@ export class StairsScene extends Phaser.Scene {
   private onDialogueEnded(): void {
     console.log('StairsScene.onDialogueEnded');
 
+    // Only proceed if this scene is active
+    if (!this.scene.isActive('StairsScene')) {
+      console.log('StairsScene not active, ignoring dialogue-ended event');
+      return;
+    }
+
     // Enable interaction zones after intro dialogue
     if (this.hasShownIntroDialogue && !this.hasShownLockedDoorDialogue) {
       // First time: enable zones but DON'T show balcony text yet

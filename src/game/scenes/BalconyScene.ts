@@ -153,6 +153,12 @@ export class BalconyScene extends Phaser.Scene {
   private onDialogueEnded(): void {
     console.log('BalconyScene.onDialogueEnded');
 
+    // Only proceed if this scene is active
+    if (!this.scene.isActive('BalconyScene')) {
+      console.log('BalconyScene not active, ignoring dialogue-ended event');
+      return;
+    }
+
     // Enable interaction zones after intro dialogue
     if (this.hasShownIntroDialogue) {
       this.enableAllZones();

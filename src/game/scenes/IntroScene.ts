@@ -150,6 +150,12 @@ export class IntroScene extends Phaser.Scene {
   private onDialogueEnded(): void {
     console.log('IntroScene.onDialogueEnded - currentPhase:', this.currentPhase);
 
+    // Only proceed if this scene is active
+    if (!this.scene.isActive('IntroScene')) {
+      console.log('IntroScene not active, ignoring dialogue-ended event');
+      return;
+    }
+
     switch (this.currentPhase) {
       case 'opening':
         // Opening narrative finished, show owl appears dialogue

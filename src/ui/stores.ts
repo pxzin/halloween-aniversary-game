@@ -76,3 +76,33 @@ export const isGameOver = writable<boolean>(false);
  * Hidden during INTRO scene to prevent premature item usage
  */
 export const inventoryVisible = writable<boolean>(true);
+
+/**
+ * Add minutes to the current game time
+ * Used for time penalties (e.g., tidying up the living room)
+ */
+export function addMinutesToGameTime(minutes: number): void {
+  gameTime.update(current => {
+    let newMinute = current.minute + minutes;
+    let newHour = current.hour;
+    let newSecond = current.second;
+
+    // Handle minute overflow (60+ minutes)
+    if (newMinute >= 60) {
+      const hoursToAdd = Math.floor(newMinute / 60);
+      newMinute = newMinute % 60;
+      newHour += hoursToAdd;
+    }
+
+    // Handle hour overflow (24+ hours) - wraps to next day
+    if (newHour >= 24) {
+      newHour = newHour % 24;
+    }
+
+    return {
+      hour: newHour,
+      minute: newMinute,
+      second: newSecond
+    };
+  });
+}

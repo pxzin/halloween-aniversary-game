@@ -2,7 +2,7 @@
   "living_room_intro": {
     "id": "living_room_intro",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A sala... está uma bagunça. Não consigo nem passar direito." }
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A sala está uma bagunça! Vou precisar arrumar isso antes de conseguir explorar o lugar direito." }
     ]
   },
   "room_tidy_up": {
@@ -48,7 +48,7 @@
   "found_cellphone": {
     "id": "found_cellphone",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Meu celular! Finalmente!" }
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Um celular! Deve ser uma das 5 oferendas que a coruja pediu." }
     ]
   }
 }

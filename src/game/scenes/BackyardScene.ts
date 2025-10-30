@@ -733,6 +733,12 @@ export class BackyardScene extends Phaser.Scene {
   private onDialogueEnded(): void {
     console.log('[BackyardScene] Dialogue ended');
 
+    // Only proceed if this scene is active
+    if (!this.scene.isActive('BackyardScene')) {
+      console.log('[BackyardScene] Scene not active, ignoring dialogue-ended event');
+      return;
+    }
+
     if (!this.hasShownIntroDialogue) {
       this.hasShownIntroDialogue = true;
       this.saveState();
