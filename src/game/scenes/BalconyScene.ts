@@ -410,9 +410,9 @@ export class BalconyScene extends Phaser.Scene {
     EventBus.emit('show-choices', {
       question: 'Como você quer fazer carinho no Val Kilmer?',
       choices: [
-        'Fazer carinho na cabeça',
-        'Fazer carinho na barriga',
-        'Fazer carinho na bunda',
+        { id: 'head', text: 'Fazer carinho na cabeça' },
+        { id: 'belly', text: 'Fazer carinho na barriga' },
+        { id: 'butt', text: 'Fazer carinho na bunda' },
       ],
     });
   }
@@ -420,13 +420,19 @@ export class BalconyScene extends Phaser.Scene {
   /**
    * Handle choice made event
    */
-  private async onChoiceMade(data: { choiceIndex: number }): Promise<void> {
-    console.log('Choice made:', data.choiceIndex);
+  private async onChoiceMade(data: { choice: string }): Promise<void> {
+    console.log('Choice made:', data.choice);
 
-    const { choiceIndex } = data;
+    // Only proceed if scene is active
+    if (!this.scene.isActive('BalconyScene')) {
+      console.log('BalconyScene not active, ignoring choice');
+      return;
+    }
 
-    // Option 2 (index 2) is the correct choice: "Fazer carinho na bunda"
-    if (choiceIndex === 2) {
+    const { choice } = data;
+
+    // "butt" is the correct choice: "Fazer carinho na bunda"
+    if (choice === 'butt') {
       // Success! Show success dialogue and give key
       await this.onCatPuzzleSuccess();
     } else {
