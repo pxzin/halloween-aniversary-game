@@ -65,6 +65,40 @@
       });
     }
 
+    // Special setup for OfficeScene - add all 5 offerings for testing
+    if (sceneName === 'OfficeScene') {
+      import('../ui/stores').then(({ inventory }) => {
+        console.log('[Home] Adding all 5 offerings for dev access to OfficeScene');
+        inventory.set([
+          {
+            id: 'cell_phone',
+            name: 'Celular',
+            icon: '📱'
+          },
+          {
+            id: 'wine',
+            name: 'Vinho',
+            icon: '🍷'
+          },
+          {
+            id: 'cheese',
+            name: 'Queijo',
+            icon: '/assets/images/ui/cheese.png'
+          },
+          {
+            id: 'chocolates',
+            name: 'Chocolates',
+            icon: '🍫'
+          },
+          {
+            id: 'clothes',
+            name: 'Roupas',
+            icon: '/assets/images/ui/clothes.png'
+          }
+        ]);
+      });
+    }
+
     push('/game');
   }
 
@@ -129,6 +163,9 @@
           </button>
           <button class="skip-button" onclick={() => skipToScene('BedroomScene')}>
             Quarto
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('OfficeScene')}>
+            Escritório
           </button>
           <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
             World

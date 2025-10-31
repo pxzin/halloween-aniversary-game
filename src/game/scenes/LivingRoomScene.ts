@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
+import { get } from 'svelte/store';
 import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
-import { addMinutesToGameTime } from '../../ui/stores';
+import { addMinutesToGameTime, inventory } from '../../ui/stores';
 import { createClickableRect, DEBUG_COLORS, enableDebugToggle, clearDebugElements } from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
@@ -16,6 +17,7 @@ export class LivingRoomScene extends Phaser.Scene {
   private cabinetOpened: boolean = false; // Cabinet accessed
   private sombraScared: boolean = false; // Cat scared away
   private cellPhoneCollected: boolean = false;
+  private officeUnlocked: boolean = false; // Office door unlocked after collecting all offerings
 
   // Interactive zones
   private chairsZone: Phaser.GameObjects.Rectangle | null = null;
@@ -37,6 +39,7 @@ export class LivingRoomScene extends Phaser.Scene {
   private boundOnDialogueEnded!: () => void;
   private boundOnChoiceMade!: (data: { choice: string }) => void;
   private boundOnCloseupClosed!: () => void;
+  private boundOnAllOfferingsCollected!: () => void;
   private boundUpdateAfterDialogue: (() => void) | null = null;
 
   constructor() {
@@ -66,16 +69,19 @@ export class LivingRoomScene extends Phaser.Scene {
     this.boundOnDialogueEnded = this.onDialogueEnded.bind(this);
     this.boundOnChoiceMade = this.onChoiceMade.bind(this);
     this.boundOnCloseupClosed = this.onCloseupClosed.bind(this);
+    this.boundOnAllOfferingsCollected = this.onAllOfferingsCollected.bind(this);
 
     // Remove any existing listeners to prevent duplicates
     EventBus.off('dialogue-ended', this.boundOnDialogueEnded);
     EventBus.off('choice-made', this.boundOnChoiceMade);
     EventBus.off('closeup-closed', this.boundOnCloseupClosed);
+    EventBus.off('all-offerings-collected', this.boundOnAllOfferingsCollected);
 
     // Listen for events
     EventBus.on('dialogue-ended', this.boundOnDialogueEnded);
     EventBus.on('choice-made', this.boundOnChoiceMade);
     EventBus.on('closeup-closed', this.boundOnCloseupClosed);
+    EventBus.on('all-offerings-collected', this.boundOnAllOfferingsCollected);
 
     const { width, height } = this.cameras.main;
     console.log(`[LivingRoomScene] Camera dimensions: ${width}x${height}`);
@@ -110,6 +116,7 @@ export class LivingRoomScene extends Phaser.Scene {
       this.cabinetOpened = state.cabinetOpened || false;
       this.sombraScared = state.sombraScared || false;
       this.cellPhoneCollected = state.cellPhoneCollected || false;
+      this.officeUnlocked = state.officeUnlocked || false;
       console.log('[LivingRoomScene] Loaded state:', state);
     } else {
       // First time in scene
@@ -118,6 +125,7 @@ export class LivingRoomScene extends Phaser.Scene {
       this.cabinetOpened = false;
       this.sombraScared = false;
       this.cellPhoneCollected = false;
+      this.officeUnlocked = false;
     }
   }
 
@@ -130,7 +138,8 @@ export class LivingRoomScene extends Phaser.Scene {
       roomTidy: this.roomTidy,
       cabinetOpened: this.cabinetOpened,
       sombraScared: this.sombraScared,
-      cellPhoneCollected: this.cellPhoneCollected
+      cellPhoneCollected: this.cellPhoneCollected,
+      officeUnlocked: this.officeUnlocked
     };
     sessionStorage.setItem('livingRoomSceneState', JSON.stringify(state));
     console.log('[LivingRoomScene] Saved state:', state);
@@ -733,9 +742,44 @@ export class LivingRoomScene extends Phaser.Scene {
    * Handle office navigation
    */
   private onOfficeClicked(): void {
+    console.log('[LivingRoomScene] Office door clicked');
+
+    // Check if office is unlocked
+    if (!this.officeUnlocked) {
+      console.log('[LivingRoomScene] Office door is still locked');
+
+      // Check how many offerings the player has
+      const currentInventory = get(inventory);
+      const offeringIds = ['cell_phone', 'wine', 'cheese', 'chocolates', 'clothes'];
+      const offeringsInInventory = currentInventory.filter(item => offeringIds.includes(item.id));
+
+      // Show appropriate dialogue
+      if (offeringsInInventory.length === 0) {
+        EventBus.emit('show-dialogue', {
+          character: 'jessica',
+          text: 'A porta do escritório está trancada. Parece que preciso encontrar algo para destrancá-la...'
+        });
+      } else {
+        EventBus.emit('show-dialogue', {
+          character: 'jessica',
+          text: `Tenho ${offeringsInInventory.length} de 5 oferendas. A porta ainda está trancada...`
+        });
+      }
+      return;
+    }
+
+    // Office is unlocked, navigate to it
     console.log('[LivingRoomScene] Navigating to Office');
-    // TODO: Implement OfficeScene in future task
-    console.log('[LivingRoomScene] OfficeScene not implemented yet');
+    this.scene.start('OfficeScene');
+  }
+
+  /**
+   * Handle all offerings collected event
+   */
+  private onAllOfferingsCollected(): void {
+    console.log('[LivingRoomScene] All offerings collected! Unlocking office door');
+    this.officeUnlocked = true;
+    this.saveState();
   }
 
   /**
@@ -765,6 +809,7 @@ export class LivingRoomScene extends Phaser.Scene {
     EventBus.off('dialogue-ended', this.boundOnDialogueEnded);
     EventBus.off('choice-made', this.boundOnChoiceMade);
     EventBus.off('closeup-closed', this.boundOnCloseupClosed);
+    EventBus.off('all-offerings-collected', this.boundOnAllOfferingsCollected);
 
     // Remove the update callback if it's still pending
     if (this.boundUpdateAfterDialogue) {

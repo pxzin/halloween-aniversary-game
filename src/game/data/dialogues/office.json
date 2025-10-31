@@ -36,5 +36,37 @@
       { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Eu consegui... mas como?" },
       { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Mas a história sobre a origem desse poder... fica para o ano que vem." }
     ]
+  },
+  "jiji_first_encounter": {
+    "id": "jiji_first_encounter",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "surprised" }, "text": "Jiji?! Minha gata também está aqui?" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Será que ela foi trazida junto comigo para este lugar estranho?" },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Vem cá, Jiji! Vem no colo da mamãe!" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jiji te olha por um segundo, vira a cabeça e sai andando majestosamente." }
+    ]
+  },
+  "jiji_second_attempt": {
+    "id": "jiji_second_attempt",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Jiji! Vem aqui agora!" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A gata te ignora completamente e continua lambendo a pata." }
+    ]
+  },
+  "jiji_third_attempt": {
+    "id": "jiji_third_attempt",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Pspspspsps... Jiji... gatinha linda..." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jiji se levanta, estica as costas e pula para outro canto da sala." },
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Aff..." }
+    ]
+  },
+  "jiji_give_up": {
+    "id": "jiji_give_up",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "tired" }, "text": "Tá bom, desisto. Gata arisca..." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Pelo menos ela parece bem. Quando eu sair daqui, vou levar ela junto." },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Jiji bufa e vira as costas para você." }
+    ]
   }
 }

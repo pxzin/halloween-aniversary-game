@@ -18,4 +18,4 @@
 - [x] Task 016: Implement Frozen Treasure Puzzle (Chocolates)
 - [x] Task 017: Implement Ric's Cheese Safe Puzzle
 - [ ] Task 018: Implement Final Puzzle in the Office
-- [ ] Task 019: Implement Bedroom Scene and Hand Gesture Puzzle
+- [x] Task 019: Implement Bedroom Scene and Hand Gesture Puzzle

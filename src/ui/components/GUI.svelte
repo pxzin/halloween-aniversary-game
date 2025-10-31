@@ -11,6 +11,8 @@
   import PuzzleCloseup from './PuzzleCloseup.svelte';
   import Safe from './Safe.svelte';
   import HandGesturePuzzle from './HandGesturePuzzle.svelte';
+  import RhymeBattle from './RhymeBattle.svelte';
+  import HappyBirthday from './HappyBirthday.svelte';
   import { inventoryVisible } from '../stores';
 </script>
 
@@ -86,6 +88,12 @@
 
 <!-- Hand Gesture Puzzle (overlay) -->
 <HandGesturePuzzle />
+
+<!-- Rhyme Battle (overlay) -->
+<RhymeBattle />
+
+<!-- Happy Birthday Screen (overlay) -->
+<HappyBirthday />
 
 <style>
   /* Fundo animado */
