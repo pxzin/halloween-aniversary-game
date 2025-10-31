@@ -19,3 +19,4 @@
 - [x] Task 017: Implement Ric's Cheese Safe Puzzle
 - [ ] Task 018: Implement Final Puzzle in the Office
 - [x] Task 019: Implement Bedroom Scene and Hand Gesture Puzzle
+- [ ] Task 020: Implement Basic Audio

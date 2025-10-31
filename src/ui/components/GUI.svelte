@@ -12,7 +12,9 @@
   import Safe from './Safe.svelte';
   import HandGesturePuzzle from './HandGesturePuzzle.svelte';
   import RhymeBattle from './RhymeBattle.svelte';
+  import EndingVideo from './EndingVideo.svelte';
   import HappyBirthday from './HappyBirthday.svelte';
+  import BackgroundMusic from './BackgroundMusic.svelte';
   import { inventoryVisible } from '../stores';
 </script>
 
@@ -92,8 +94,14 @@
 <!-- Rhyme Battle (overlay) -->
 <RhymeBattle />
 
+<!-- Ending Video (overlay) -->
+<EndingVideo />
+
 <!-- Happy Birthday Screen (overlay) -->
 <HappyBirthday />
+
+<!-- Background Music -->
+<BackgroundMusic />
 
 <style>
   /* Fundo animado */

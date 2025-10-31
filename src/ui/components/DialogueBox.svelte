@@ -15,6 +15,7 @@
   let portraitError = $state(false);
   let missingEmotion = $state('');
   let isInlineDialogue = $state(false); // Track if dialogue is from show-dialogue event (not DialogueManager)
+  let textBlipAudio: HTMLAudioElement | null = null;
 
   /**
    * Parse speaker data - supports both legacy string format and new object format
@@ -33,10 +34,18 @@
     }
   }
 
-  // Placeholder sound effect (will be replaced with actual audio)
+  /**
+   * Play a single blip sound (non-blocking)
+   */
   const playBlipSound = () => {
-    // TODO: Play actual sound effect
-    // For now, just a placeholder
+    if (textBlipAudio) {
+      // Clone the audio to allow overlapping sounds
+      const blip = textBlipAudio.cloneNode(true) as HTMLAudioElement;
+      blip.volume = 0.4; // 40% volume
+      blip.play().catch(err => {
+        // Ignore errors for blip sounds
+      });
+    }
   };
 
   /**
@@ -58,7 +67,12 @@
       if (currentCharIndex < fullText.length) {
         displayedText += fullText[currentCharIndex];
         currentCharIndex++;
-        playBlipSound();
+
+        // Play blip sound every 2 characters (not spaces)
+        const char = fullText[currentCharIndex - 1];
+        if (currentCharIndex % 2 === 0 && char !== ' ') {
+          playBlipSound();
+        }
       } else {
         // Finished typing
         isTyping = false;
@@ -236,6 +250,15 @@
     }
   });
 </script>
+
+<!-- Hidden audio element for text blip sound -->
+<audio
+  bind:this={textBlipAudio}
+  src="/assets/audio/sfx/text_blip.mp3"
+  preload="auto"
+>
+  <track kind="captions" />
+</audio>
 
 {#if $dialogue}
   <!-- Character portrait - positioned absolutely, overlaps dialogue box -->

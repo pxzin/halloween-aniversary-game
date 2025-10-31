@@ -463,9 +463,10 @@ export class OfficeScene extends Phaser.Scene {
           await DialogueManager.loadScript('office', 'curse_breaking');
           DialogueManager.startDialogue();
 
-          // After dialogue ends, show happy birthday screen
+          // After dialogue ends, show ending video
           EventBus.once('dialogue-ended', () => {
-            EventBus.emit('show-happy-birthday');
+            console.log('[OfficeScene] Dialogue ended, showing ending video');
+            EventBus.emit('show-ending-video');
           });
         } else {
           // Player failed the rhyme battle - allow retry
