@@ -6,6 +6,13 @@
       { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "Falando nisso... tem uma caixa de areia enorme lá no fundo. A Patroa não brinca em serviço!" }
     ]
   },
+  "bedroom_door_locked": {
+    "id": "bedroom_door_locked",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "A porta do quarto está trancada..." },
+      { "speaker": { "character": "jessica", "emotion": "determined" }, "text": "Preciso encontrar a chave." }
+    ]
+  },
   "found_safe": {
     "id": "found_safe",
     "lines": [
@@ -30,7 +37,7 @@
     "id": "found_dirty_key",
     "lines": [
       { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "Consegui! Mas... eca, que nojento!" },
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Espera... é uma chave! Perfeito!" }
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Espera... é uma chave! A chave do quarto!" }
     ]
   },
   "litter_box_empty": {

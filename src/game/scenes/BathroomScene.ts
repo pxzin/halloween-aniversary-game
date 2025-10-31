@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { get } from 'svelte/store';
 import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
-import { selectedItem } from '../../ui/stores';
+import { selectedItem, inventory } from '../../ui/stores';
 import {
   createClickableRect,
   DEBUG_COLORS,
@@ -440,9 +440,23 @@ export class BathroomScene extends Phaser.Scene {
    * Handle Bedroom navigation
    */
   private onBedroomClicked(): void {
+    console.log('[BathroomScene] Bedroom door clicked');
+
+    // Check if player has the bedroom key
+    const hasKey = get(inventory).some((item) => item.id === 'dirty_key');
+
+    if (!hasKey) {
+      // Door is locked - show locked dialogue
+      console.log('[BathroomScene] Bedroom door is locked');
+      DialogueManager.loadScript('bathroom', 'bedroom_door_locked').then(() => {
+        DialogueManager.startDialogue();
+      });
+      return;
+    }
+
+    // Has key - navigate to bedroom
     console.log('[BathroomScene] Navigating to Bedroom');
-    // TODO: Implement BedroomScene
-    console.warn('[BathroomScene] BedroomScene not yet implemented');
+    this.scene.start('BedroomScene');
   }
 
   /**
@@ -487,7 +501,7 @@ export class BathroomScene extends Phaser.Scene {
       EventBus.once('dialogue-ended', () => {
         EventBus.emit('item-acquired', {
           id: 'dirty_key',
-          name: 'Chave Suja',
+          name: 'Chave do Quarto',
           icon: '🔑',
         });
       });

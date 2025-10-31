@@ -15,7 +15,7 @@
 - [x] Task 013: Implement Hallway Scene and Objective Reveal
 - [x] Task 014: Implement Backyard Scene and Cat's Treasure Puzzle
 - [x] Task 015: Implement Living Room Scene and Scaredy Cat Puzzle
-- [ ] Task 016: Implement Frozen Treasure Puzzle (Chocolates)
-- [ ] Task 017: Implement Ric's Cheese Safe Puzzle
+- [x] Task 016: Implement Frozen Treasure Puzzle (Chocolates)
+- [x] Task 017: Implement Ric's Cheese Safe Puzzle
 - [ ] Task 018: Implement Final Puzzle in the Office
 - [ ] Task 019: Implement Bedroom Scene and Hand Gesture Puzzle

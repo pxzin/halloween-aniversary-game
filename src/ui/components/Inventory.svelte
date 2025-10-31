@@ -8,6 +8,8 @@
   /**
    * Handle item click
    * - If item is Owl's Note: show close-up
+   * - If item is Ric's Diary: show close-up
+   * - If item is Old Note: show close-up
    * - If holding Shift: select for combination
    * - Otherwise: select for use in scene
    */
@@ -16,6 +18,20 @@
     if (item.id === 'owls_note') {
       console.log('[Inventory] Opening Owl\'s Note close-up');
       EventBus.emit('show-note-closeup', { addToInventory: false });
+      return;
+    }
+
+    // Special handling for Ric's Diary - show close-up instead of selecting
+    if (item.id === 'rics_diary') {
+      console.log('[Inventory] Opening Ric\'s Diary close-up');
+      EventBus.emit('show-diary-closeup');
+      return;
+    }
+
+    // Special handling for Old Note - show close-up instead of selecting
+    if (item.id === 'old_note') {
+      console.log('[Inventory] Opening Old Note close-up');
+      EventBus.emit('show-old-note-closeup');
       return;
     }
 

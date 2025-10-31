@@ -3,7 +3,12 @@ import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
 import { inventory, selectedItem } from '../../ui/stores';
 import { get } from 'svelte/store';
-import { createClickableRect, DEBUG_COLORS, enableDebugToggle, clearDebugElements } from '../utils/DebugHelpers';
+import {
+  createClickableRect,
+  DEBUG_COLORS,
+  enableDebugToggle,
+  clearDebugElements,
+} from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
 /**
@@ -36,7 +41,7 @@ export class BackyardScene extends Phaser.Scene {
   private openCanSprite: Phaser.GameObjects.Sprite | null = null;
   private closedCanSprite: Phaser.GameObjects.Sprite | null = null;
   private sanitizerSprite: Phaser.GameObjects.Sprite | null = null;
-  private diaryIcon: Phaser.GameObjects.Text | null = null;
+  private diarySprite: Phaser.GameObjects.Sprite | null = null;
 
   // Store bound function references for proper cleanup
   private boundOnDialogueEnded!: () => void;
@@ -47,18 +52,30 @@ export class BackyardScene extends Phaser.Scene {
 
   preload(): void {
     // Load backyard backgrounds - dark (initial) and fire (when grill is lit)
-    this.load.image('backyard_dark', '/assets/images/backgrounds/backyard_dark.png');
-    this.load.image('backyard_fire', '/assets/images/backgrounds/backyard_fire.png');
+    this.load.image(
+      'backyard_dark',
+      '/assets/images/backgrounds/backyard_dark.png'
+    );
+    this.load.image(
+      'backyard_fire',
+      '/assets/images/backgrounds/backyard_fire.png'
+    );
 
     // Load black cat sprite for puzzle
     this.load.image('black_cat', '/assets/images/ui/black_cat_puzzle.png');
 
     // Load cat food can sprites
-    this.load.image('cat_food_closed', '/assets/images/ui/cat_food_can_closed.png');
+    this.load.image(
+      'cat_food_closed',
+      '/assets/images/ui/cat_food_can_closed.png'
+    );
     this.load.image('cat_food_open', '/assets/images/ui/cat_food_can_open.png');
 
     // Load sanitizer sprite
     this.load.image('sanitizer', '/assets/images/ui/sanitizer.png');
+
+    // Load Ric's diary sprite
+    this.load.image('rics_diary', '/assets/images/ui/rics_diary.png');
   }
 
   create(): void {
@@ -128,7 +145,9 @@ export class BackyardScene extends Phaser.Scene {
     const scale = Math.max(scaleX, scaleY);
     this.backgroundImage.setScale(scale);
 
-    console.log(`BackyardScene background loaded: ${backgroundKey} (scale: ${scale})`);
+    console.log(
+      `BackyardScene background loaded: ${backgroundKey} (scale: ${scale})`
+    );
 
     // Create all interactive zones
     this.createReturnZone();
@@ -171,11 +190,20 @@ export class BackyardScene extends Phaser.Scene {
   private createReturnZone(): void {
     // Bottom-left corner return zone (door/exit area)
     const centerX = 82.04;
-    const centerY = 634.80;
+    const centerY = 634.8;
     const width = 150.35;
     const height = 157.03;
 
-    this.returnZone = createClickableRect(this, centerX, centerY, width, height, undefined, DEBUG_COLORS.NAVIGATION, 'Return');
+    this.returnZone = createClickableRect(
+      this,
+      centerX,
+      centerY,
+      width,
+      height,
+      undefined,
+      DEBUG_COLORS.NAVIGATION,
+      'Return'
+    );
     this.returnZone.on('pointerdown', () => this.onReturnClicked());
 
     this.returnText = this.add.text(centerX, centerY, '← Voltar', {
@@ -193,7 +221,7 @@ export class BackyardScene extends Phaser.Scene {
     const centerX = 1162.88;
     const centerY = 358.33;
     const width = 83.53;
-    const height = 85.20;
+    const height = 85.2;
 
     // Create sanitizer sprite if not collected
     if (!this.sanitizerCollected) {
@@ -205,7 +233,16 @@ export class BackyardScene extends Phaser.Scene {
       this.sanitizerSprite.setAlpha(0.85); // Slightly transparent
     }
 
-    this.sanitizerZone = createClickableRect(this, centerX, centerY, width, height, undefined, DEBUG_COLORS.ITEM, 'Sanitizer');
+    this.sanitizerZone = createClickableRect(
+      this,
+      centerX,
+      centerY,
+      width,
+      height,
+      undefined,
+      DEBUG_COLORS.ITEM,
+      'Sanitizer'
+    );
     this.sanitizerZone.setDepth(10);
     this.sanitizerZone.on('pointerdown', () => this.onSanitizerClicked());
 
@@ -224,7 +261,16 @@ export class BackyardScene extends Phaser.Scene {
     const width = 133.64;
     const height = 145.34;
 
-    this.grillZone = createClickableRect(this, centerX, centerY, width, height, undefined, DEBUG_COLORS.CLICKABLE, 'Grill');
+    this.grillZone = createClickableRect(
+      this,
+      centerX,
+      centerY,
+      width,
+      height,
+      undefined,
+      DEBUG_COLORS.CLICKABLE,
+      'Grill'
+    );
     this.grillZone.setDepth(10);
     this.grillZone.on('pointerdown', () => this.onGrillClicked());
   }
@@ -252,13 +298,24 @@ export class BackyardScene extends Phaser.Scene {
       }
     } else if (this.catLured && !this.keyCollected) {
       // Show key icon in cat house after cat is lured
-      this.keyIcon = this.add.text(centerX, centerY, '🔑', {
-        fontSize: '32px'
-      }).setOrigin(0.5);
+      this.keyIcon = this.add
+        .text(centerX, centerY, '🔑', {
+          fontSize: '32px',
+        })
+        .setOrigin(0.5);
       this.keyIcon.setDepth(5);
     }
 
-    this.catHouseZone = createClickableRect(this, centerX, centerY, width, height, undefined, DEBUG_COLORS.HOTSPOT, 'Cat House');
+    this.catHouseZone = createClickableRect(
+      this,
+      centerX,
+      centerY,
+      width,
+      height,
+      undefined,
+      DEBUG_COLORS.HOTSPOT,
+      'Cat House'
+    );
     this.catHouseZone.setDepth(10);
     this.catHouseZone.on('pointerdown', () => this.onCatHouseClicked());
   }
@@ -271,11 +328,15 @@ export class BackyardScene extends Phaser.Scene {
     const centerX = 408.63;
     const centerY = 373.36;
     const width = 118.61;
-    const height = 101.90;
+    const height = 101.9;
 
     // Create closed cat food can sprite if not collected
     if (!this.catFoodCollected) {
-      this.closedCanSprite = this.add.sprite(centerX, centerY, 'cat_food_closed');
+      this.closedCanSprite = this.add.sprite(
+        centerX,
+        centerY,
+        'cat_food_closed'
+      );
       this.closedCanSprite.setScale(0.084); // 20% smaller (0.105 * 0.8)
       this.closedCanSprite.setDepth(5);
       // Apply much darker filter to blend with dark scene
@@ -283,7 +344,16 @@ export class BackyardScene extends Phaser.Scene {
       this.closedCanSprite.setAlpha(0.75); // More transparent
     }
 
-    this.catFoodZone = createClickableRect(this, centerX, centerY, width, height, undefined, DEBUG_COLORS.ITEM, 'Cat Food');
+    this.catFoodZone = createClickableRect(
+      this,
+      centerX,
+      centerY,
+      width,
+      height,
+      undefined,
+      DEBUG_COLORS.ITEM,
+      'Cat Food'
+    );
     this.catFoodZone.setDepth(10);
     this.catFoodZone.on('pointerdown', () => this.onCatFoodClicked());
 
@@ -302,7 +372,16 @@ export class BackyardScene extends Phaser.Scene {
     const width = 419.31;
     const height = 90.21;
 
-    this.tableZone = createClickableRect(this, centerX, centerY, width, height, undefined, DEBUG_COLORS.CLICKABLE, 'Table');
+    this.tableZone = createClickableRect(
+      this,
+      centerX,
+      centerY,
+      width,
+      height,
+      undefined,
+      DEBUG_COLORS.CLICKABLE,
+      'Table'
+    );
     this.tableZone.setDepth(10);
     this.tableZone.on('pointerdown', () => this.onTableClicked());
   }
@@ -315,19 +394,27 @@ export class BackyardScene extends Phaser.Scene {
     const centerX = 937.36;
     const centerY = 365.85;
     const width = 86.87;
-    const height = 73.50;
+    const height = 73.5;
 
-    // Create diary icon if not collected
+    // Create diary sprite if not collected
     if (!this.diaryCollected) {
-      this.diaryIcon = this.add.text(centerX, centerY, '📔', {
-        fontSize: '32px'
-      }).setOrigin(0.5);
-      this.diaryIcon.setDepth(5);
+      this.diarySprite = this.add.sprite(centerX, centerY, 'rics_diary');
+      this.diarySprite.setScale(0.07); // Adjust scale to fit nicely
+      this.diarySprite.setDepth(5);
       // Apply dark filter to blend with scene
-      this.diaryIcon.setAlpha(0.8);
+      this.diarySprite.setAlpha(0.8);
     }
 
-    this.diaryZone = createClickableRect(this, centerX, centerY, width, height, undefined, DEBUG_COLORS.ITEM, 'Diary');
+    this.diaryZone = createClickableRect(
+      this,
+      centerX,
+      centerY,
+      width,
+      height,
+      undefined,
+      DEBUG_COLORS.ITEM,
+      'Diary'
+    );
     this.diaryZone.setDepth(10);
     this.diaryZone.on('pointerdown', () => this.onDiaryClicked());
 
@@ -369,7 +456,7 @@ export class BackyardScene extends Phaser.Scene {
       EventBus.emit('item-acquired', {
         id: 'hand_sanitizer',
         name: 'Álcool em Gel',
-        icon: '🧴'
+        icon: '🧴',
       });
     });
   }
@@ -385,12 +472,12 @@ export class BackyardScene extends Phaser.Scene {
       if (!this.grillLit) {
         EventBus.emit('show-dialogue', {
           character: 'jessica',
-          text: 'Uma churrasqueira. Preciso de algo para acendê-la.'
+          text: 'Uma churrasqueira. Preciso de algo para acendê-la.',
         });
       } else {
         EventBus.emit('show-dialogue', {
           character: 'jessica',
-          text: 'A churrasqueira está acesa, iluminando o quintal.'
+          text: 'A churrasqueira está acesa, iluminando o quintal.',
         });
       }
       return;
@@ -400,14 +487,16 @@ export class BackyardScene extends Phaser.Scene {
     if (selected.id === 'hand_sanitizer') {
       console.log('Using hand sanitizer on grill');
       // Remove sanitizer from inventory
-      inventory.update(items => items.filter(i => i.id !== 'hand_sanitizer'));
+      inventory.update((items) =>
+        items.filter((i) => i.id !== 'hand_sanitizer')
+      );
       // Clear selection
       selectedItem.set(null);
 
       // Show inline dialogue (doesn't disable zones)
       EventBus.emit('show-dialogue', {
         character: 'jessica',
-        text: 'Despejei o álcool na churrasqueira. Agora preciso acendê-la com o isqueiro.'
+        text: 'Despejei o álcool na churrasqueira. Agora preciso acendê-la com o isqueiro.',
       });
       return;
     }
@@ -461,7 +550,7 @@ export class BackyardScene extends Phaser.Scene {
         // Cat has been lured away
         EventBus.emit('show-dialogue', {
           character: 'jessica',
-          text: 'A casinha está vazia agora. Mas ainda está muito alta...'
+          text: 'A casinha está vazia agora. Mas ainda está muito alta...',
         });
       }
       return;
@@ -482,16 +571,18 @@ export class BackyardScene extends Phaser.Scene {
 
       // Show dialogue with spider floor reaction
       this.disableAllZones();
-      DialogueManager.loadScript('backyard', 'found_living_room_key').then(() => {
-        DialogueManager.startDialogue();
-      });
+      DialogueManager.loadScript('backyard', 'found_living_room_key').then(
+        () => {
+          DialogueManager.startDialogue();
+        }
+      );
 
       // Trigger item acquisition animation after dialogue ends
       EventBus.once('dialogue-ended', () => {
         EventBus.emit('item-acquired', {
           id: 'living_room_key',
           name: 'Chave da Sala',
-          icon: '🔑'
+          icon: '🔑',
         });
       });
       return;
@@ -534,7 +625,7 @@ export class BackyardScene extends Phaser.Scene {
       EventBus.emit('item-acquired', {
         id: 'cat_food_can',
         name: 'Lata de Ração',
-        icon: '/assets/images/ui/cat_food_can_closed.png'
+        icon: '/assets/images/ui/cat_food_can_closed.png',
       });
     });
   }
@@ -547,13 +638,13 @@ export class BackyardScene extends Phaser.Scene {
       return;
     }
 
-    console.log('Ric\'s diary collected');
+    console.log("Ric's diary collected");
     this.diaryCollected = true;
     this.saveState();
 
-    // Hide icon
-    if (this.diaryIcon) {
-      this.diaryIcon.setVisible(false);
+    // Hide sprite
+    if (this.diarySprite) {
+      this.diarySprite.setVisible(false);
     }
 
     // Disable zone
@@ -572,7 +663,7 @@ export class BackyardScene extends Phaser.Scene {
       EventBus.emit('item-acquired', {
         id: 'rics_diary',
         name: 'Diário do Ric',
-        icon: '📔'
+        icon: '/assets/images/ui/rics_diary.png',
       });
     });
   }
@@ -591,9 +682,10 @@ export class BackyardScene extends Phaser.Scene {
           'cat_on_table_1',
           'cat_on_table_2',
           'cat_on_table_3',
-          'cat_on_table_4'
+          'cat_on_table_4',
         ];
-        const randomDialogue = catDialogues[Math.floor(Math.random() * catDialogues.length)];
+        const randomDialogue =
+          catDialogues[Math.floor(Math.random() * catDialogues.length)];
 
         this.disableAllZones();
         DialogueManager.loadScript('backyard', randomDialogue).then(() => {
@@ -603,7 +695,7 @@ export class BackyardScene extends Phaser.Scene {
         // Just a table - inline dialogue doesn't block interaction
         EventBus.emit('show-dialogue', {
           character: 'jessica',
-          text: 'Uma mesa no centro do quintal.'
+          text: 'Uma mesa no centro do quintal.',
         });
       }
       return;
@@ -616,7 +708,9 @@ export class BackyardScene extends Phaser.Scene {
       this.saveState();
 
       // Remove open can from inventory
-      inventory.update(items => items.filter(i => i.id !== 'open_cat_food_can'));
+      inventory.update((items) =>
+        items.filter((i) => i.id !== 'open_cat_food_can')
+      );
       // Clear selection
       selectedItem.set(null);
 
@@ -634,7 +728,7 @@ export class BackyardScene extends Phaser.Scene {
           ease: 'Power2',
           onComplete: () => {
             console.log('Cat moved to table');
-          }
+          },
         });
       }
 
@@ -643,7 +737,11 @@ export class BackyardScene extends Phaser.Scene {
         const tableCenterX = 609.09;
         const tableCenterY = 496.15 - 20; // On table, in front of cat
 
-        this.openCanSprite = this.add.sprite(tableCenterX, tableCenterY, 'cat_food_open');
+        this.openCanSprite = this.add.sprite(
+          tableCenterX,
+          tableCenterY,
+          'cat_food_open'
+        );
         this.openCanSprite.setScale(0.084); // 20% smaller (0.105 * 0.8)
         this.openCanSprite.setDepth(6); // Higher than cat (depth 5) to be in front
         this.openCanSprite.setAlpha(0);
@@ -655,7 +753,7 @@ export class BackyardScene extends Phaser.Scene {
           targets: this.openCanSprite,
           alpha: 1,
           duration: 500,
-          delay: 500
+          delay: 500,
         });
       }
 
@@ -663,9 +761,11 @@ export class BackyardScene extends Phaser.Scene {
       if (!this.keyIcon) {
         const catHouseX = 790.35;
         const catHouseY = 149.51;
-        this.keyIcon = this.add.text(catHouseX, catHouseY, '🔑', {
-          fontSize: '32px'
-        }).setOrigin(0.5);
+        this.keyIcon = this.add
+          .text(catHouseX, catHouseY, '🔑', {
+            fontSize: '32px',
+          })
+          .setOrigin(0.5);
         this.keyIcon.setDepth(5);
         this.keyIcon.setAlpha(0);
 
@@ -674,7 +774,7 @@ export class BackyardScene extends Phaser.Scene {
           targets: this.keyIcon,
           alpha: 1,
           duration: 500,
-          delay: 1500
+          delay: 1500,
         });
       }
 
@@ -697,7 +797,6 @@ export class BackyardScene extends Phaser.Scene {
     this.cleanupEventListeners();
     this.scene.start('HallwayScene');
   }
-
 
   /**
    * Recreate cat and can on table when returning to scene
@@ -735,7 +834,9 @@ export class BackyardScene extends Phaser.Scene {
 
     // Only proceed if this scene is active
     if (!this.scene.isActive('BackyardScene')) {
-      console.log('[BackyardScene] Scene not active, ignoring dialogue-ended event');
+      console.log(
+        '[BackyardScene] Scene not active, ignoring dialogue-ended event'
+      );
       return;
     }
 

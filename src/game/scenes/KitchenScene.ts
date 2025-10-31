@@ -701,9 +701,23 @@ export class KitchenScene extends Phaser.Scene {
    * Handle Bedroom navigation
    */
   private onBedroomClicked(): void {
+    console.log('[KitchenScene] Bedroom door clicked');
+
+    // Check if player has the bedroom key
+    const hasKey = get(inventory).some((item) => item.id === 'dirty_key');
+
+    if (!hasKey) {
+      // Door is locked - show locked dialogue
+      console.log('[KitchenScene] Bedroom door is locked');
+      DialogueManager.loadScript('kitchen', 'bedroom_door_locked').then(() => {
+        DialogueManager.startDialogue();
+      });
+      return;
+    }
+
+    // Has key - navigate to bedroom
     console.log('[KitchenScene] Navigating to Bedroom');
-    // TODO: Implement BedroomScene in future task
-    console.log('[KitchenScene] BedroomScene not implemented yet');
+    this.scene.start('BedroomScene');
   }
 
   /**

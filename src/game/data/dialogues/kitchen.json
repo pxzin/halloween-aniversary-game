@@ -5,6 +5,13 @@
       { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A cozinha... parece que tudo está no lugar, mas... diferente." }
     ]
   },
+  "bedroom_door_locked": {
+    "id": "bedroom_door_locked",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "A porta do quarto está trancada..." },
+      { "speaker": { "character": "jessica", "emotion": "determined" }, "text": "Deve ter uma chave por aqui em algum lugar." }
+    ]
+  },
   "freezer_first_open": {
     "id": "freezer_first_open",
     "lines": [

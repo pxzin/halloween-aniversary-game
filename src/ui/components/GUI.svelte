@@ -6,8 +6,11 @@
   import ItemAcquisition from './ItemAcquisition.svelte';
   import Objectives from './Objectives.svelte';
   import NoteCloseup from './NoteCloseup.svelte';
+  import DiaryCloseup from './DiaryCloseup.svelte';
+  import OldNoteCloseup from './OldNoteCloseup.svelte';
   import PuzzleCloseup from './PuzzleCloseup.svelte';
   import Safe from './Safe.svelte';
+  import HandGesturePuzzle from './HandGesturePuzzle.svelte';
   import { inventoryVisible } from '../stores';
 </script>
 
@@ -69,11 +72,20 @@
 <!-- Note Close-up (overlay) -->
 <NoteCloseup />
 
+<!-- Diary Close-up (overlay) -->
+<DiaryCloseup />
+
+<!-- Old Note Close-up (overlay) -->
+<OldNoteCloseup />
+
 <!-- Puzzle Close-up (overlay) -->
 <PuzzleCloseup />
 
 <!-- Safe Puzzle (overlay) -->
 <Safe />
+
+<!-- Hand Gesture Puzzle (overlay) -->
+<HandGesturePuzzle />
 
 <style>
   /* Fundo animado */

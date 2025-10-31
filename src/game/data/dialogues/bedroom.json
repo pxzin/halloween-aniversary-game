@@ -27,7 +27,8 @@
   "found_clothes": {
     "id": "found_clothes",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Roupas! E são lindas! Mais um presente encontrado!" }
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Roupas! E são lindas!" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "O Ric deve ter guardado isso aqui por algum motivo..." }
     ]
   }
 }

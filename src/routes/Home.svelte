@@ -127,6 +127,9 @@
           <button class="skip-button" onclick={() => skipToScene('BathroomScene')}>
             Banheiro
           </button>
+          <button class="skip-button" onclick={() => skipToScene('BedroomScene')}>
+            Quarto
+          </button>
           <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
             World
           </button>
