@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { EventBus } from '../../game/EventBus';
+  import { DEV_MODE } from '../../config/devMode';
 
   let isVisible = $state(false);
   let imageSrc = $state('');
@@ -88,11 +89,14 @@
         {#each zones as zone}
           <button
             class="clickable-zone"
+            class:dev-visible={DEV_MODE}
             style="left: {zone.x}px; top: {zone.y}px; width: {zone.width}px; height: {zone.height}px;"
             onclick={() => onZoneClicked(zone.id)}
             aria-label={zone.label}
           >
-            <span class="zone-label">{zone.label}</span>
+            {#if DEV_MODE}
+              <span class="zone-label">{zone.label}</span>
+            {/if}
           </button>
         {/each}
       </div>
@@ -182,8 +186,8 @@
 
   .clickable-zone {
     position: absolute;
-    background: rgba(255, 94, 0, 0.2);
-    border: 2px solid rgba(255, 94, 0, 0.6);
+    background: transparent;
+    border: none;
     cursor: pointer;
     transition: all 0.2s ease;
     padding: 0;
@@ -192,7 +196,13 @@
     justify-content: center;
   }
 
-  .clickable-zone:hover {
+  /* Only show visual indicators in dev mode */
+  .clickable-zone.dev-visible {
+    background: rgba(255, 94, 0, 0.2);
+    border: 2px solid rgba(255, 94, 0, 0.6);
+  }
+
+  .clickable-zone.dev-visible:hover {
     background: rgba(255, 94, 0, 0.4);
     border-color: #ff5e00;
     box-shadow: 0 0 20px rgba(255, 94, 0, 0.8);
