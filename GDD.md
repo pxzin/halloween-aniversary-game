@@ -275,14 +275,19 @@ This section details the specific scenes and the navigation paths between them.
     *   The dialogue is triggered via the `onCombine` callback using the `DialogueManager`.
     *   The inventory panel is intentionally **hidden during the Introduction scene** to prevent players from triggering this Easter Egg before the game properly begins.
 
-## 10. Final Puzzle: The Pentagram of the Curse
+## 10. Final Puzzle: The Rhyme Battle of Banishment
 
 *   **Location:** `Cenário 7: Escritório`.
-*   **Objective:** Break the Duolingo Owl's curse.
+*   **Objective:** Break the Duolingo Owl's curse by defeating him in a battle of rhymes.
 *   **Prerequisite:** All five gifts (Cell Phone, Wine, Clothes, Chocolates, Cheese) must be collected.
 *   **Sequence:**
     1.  Once all five gifts are in Jéssica's inventory, the door to the `Escritório` becomes accessible.
-    2.  Inside the `Escritório`, there is a large, central area (e.g., a rug or a marked spot on the floor) where a pentagram can be formed.
-    3.  The player must use each of the five collected gifts on a specific point of the pentagram.
-    4.  Upon placing all five gifts correctly, a magical ritual is performed.
-
+    2.  Inside the `Escritório`, Jéssica finds a large, central area with a pentagram.
+    3.  The player must place each of the five collected gifts on a specific point of the pentagram.
+    4.  Upon placing all five gifts, the pentagram glows, and the demonic **Duolingo Owl** is summoned for a final confrontation.
+    5.  **The Rhyme Battle:** The Owl challenges Jéssica to a battle of rhymes. After a series of successful rhymes, Jéssica delivers the final blow:
+        > "...com a minha magia, quebro sua corrente!"
+    6.  **The Revelation:** The Owl realizes Jéssica has latent magical powers (the blood of a witch), which causes him to panic.
+    7.  **The Banishment:** The Owl is dragged into a portal, screaming in terror, banished by Jéssica's own power.
+    8.  Jéssica is left confused but powerful, wondering about her newfound abilities.
+    9.  The curse is broken, triggering the game's conclusion.

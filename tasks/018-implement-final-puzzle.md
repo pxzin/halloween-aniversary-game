@@ -13,23 +13,24 @@ To implement the `OfficeScene` (`Cenário 7`) and the final puzzle, `The Pentagr
 -   **Scene Access:**
     *   The door to the `OfficeScene` (from the `LivingRoomScene`) should only become interactive and lead to this scene *after* the player has all five gifts in their inventory.
 
-### 2. Implement Pentagram Puzzle
+### 2. Implement Pentagram and Rhyme Battle Puzzle
 
 -   **Pentagram Interaction:**
     *   Create a large interactive zone over the pentagram area on the floor.
-    *   When the player first interacts with it, trigger the `pentagram_interaction` dialogue.
-    *   The pentagram should have five distinct interactive points (hotspots), one for each point of the star.
--   **Placing Gifts:**
-    *   The player must use each of the five gift items from their inventory on the correct hotspot of the pentagram.
-    *   When a gift is placed correctly, it should appear visually on the pentagram.
-    *   If a gift is placed incorrectly, a subtle "wrong" sound effect should play.
--   **Ritual Sequence:**
-    *   Once all five gifts are placed correctly, trigger the `curse_breaking` dialogue sequence.
-    *   During this sequence, add visual effects (e.g., the pentagram glowing, the owl appearing and disappearing) to enhance the cinematic feel.
+    *   The player must use each of the five gift items on a specific hotspot of the pentagram.
+-   **Ritual and Rhyme Battle:**
+    *   Once all five gifts are placed correctly, the pentagram should glow, and the `curse_breaking` dialogue sequence from `src/game/data/dialogues/office.json` should begin.
+    *   This sequence will involve a special UI for the 5-turn rhyme battle.
+    *   For each of Jéssica's five lines in the rhyme battle, the game should present the player with three choices, where only one is correct.
+    *   After the dialogue and visual effects conclude, the game should transition to the final "Happy Birthday" screen.
 
 ### 3. Game Conclusion
 
--   After the `curse_breaking` dialogue and visual effects conclude, the game should transition to a final "Happy Birthday" screen or a concluding cutscene, as defined in the GDD.
+-   After the final dialogue in the `OfficeScene` concludes, the screen should fade to black.
+-   A new, simple UI screen should fade in, displaying the following text:
+    *   **Title:** "Feliz Aniversário, meu amor!"
+    *   **Body:** "Para a Jéssica,\nCada momento com você é um presente. Esta é só uma pequena forma de celebrar o seu dia. Obrigado por tanto. Feliz aniversário, meu amor!!\nCom todo o meu carinho,\nRic"
+-   This screen marks the end of the game.
 
 ### 4. Dialogue Integration
 

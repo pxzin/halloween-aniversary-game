@@ -16,11 +16,25 @@
   "curse_breaking": {
     "id": "curse_breaking",
     "lines": [
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Assim que o último presente é colocado, o pentagrama brilha intensamente!" },
-      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "O que está acontecendo?!" },
-      { "speaker": { "character": "owl", "emotion": "furious" }, "text": "NÃÃÃÃOOO! MINHA MALDIÇÃO!" },
-      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A figura da Coruja aparece e se desfaz em uma nuvem de fumaça verde." },
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Acabou... finalmente acabou. Eu consegui!" }
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Assim que o último presente é colocado, o pentagrama brilha intensamente e a Coruja demoníaca aparece!" },
+      { "speaker": { "character": "owl", "emotion": "furious" }, "text": "Você achou que seria fácil assim? Para quebrar minha maldição, terá que me vencer em um duelo de rimas!" },
+      { "speaker": { "character": "jessica", "emotion": "determined" }, "text": "Pode vir, sua ave de mau agouro! Eu topo o desafio!" },
+      { "speaker": { "character": "owl", "emotion": "impatient" }, "text": "Eu sou a coruja, o terror da lição..." },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "...e eu vou te chutar pra outra dimensão!" },
+      { "speaker": { "character": "owl", "emotion": "agitated" }, "text": "Sua alma é minha, não tem pra onde correr..." },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "...mas com meus presentes, eu vou te vencer!" },
+      { "speaker": { "character": "owl", "emotion": "furious" }, "text": "Comida, bebida, e um novo celular..." },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "...são as oferendas que vão te derrotar!" },
+      { "speaker": { "character": "owl", "emotion": "agitated" }, "text": "Você é só uma, não pode me vencer..." },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "...mas com meu amor, eu tenho mais poder!" },
+      { "speaker": { "character": "owl", "emotion": "furious" }, "text": "Chega de rimas, sua garota insolente!" },
+      { "speaker": { "character": "jessica", "emotion": "determined" }, "text": "...com a minha magia, quebro sua corrente!" },
+      { "speaker": { "character": "owl", "emotion": "scared" }, "text": "Sua... sua magia? Esse poder... Não é possível! Você... você tem o sangue de uma bruxa!" },
+      { "speaker": { "character": "owl", "emotion": "furious" }, "text": "Eu não sabia! Se eu soubesse com quem estava lidando... NÃÃÃOOO!" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A Coruja é arrastada por um portal de sombras, gritando em pânico até desaparecer." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Bruxa? Eu? O que... o que foi isso?" },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Eu consegui... mas como?" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Mas a história sobre a origem desse poder... fica para o ano que vem." }
     ]
   }
 }
