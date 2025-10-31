@@ -694,8 +694,7 @@ export class KitchenScene extends Phaser.Scene {
    */
   private onBathroomClicked(): void {
     console.log('[KitchenScene] Navigating to Bathroom');
-    // TODO: Implement BathroomScene in Task 017
-    console.log('[KitchenScene] BathroomScene not implemented yet');
+    this.scene.start('BathroomScene');
   }
 
   /**

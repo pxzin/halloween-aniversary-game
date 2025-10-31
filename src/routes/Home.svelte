@@ -47,6 +47,24 @@
       });
     }
 
+    // Special setup for BathroomScene - add miniature rake for testing
+    if (sceneName === 'BathroomScene') {
+      import('../ui/stores').then(({ inventory }) => {
+        inventory.update(items => {
+          // Check if miniature_rake already exists
+          if (!items.some(item => item.id === 'miniature_rake')) {
+            console.log('[Home] Adding miniature_rake for dev access to BathroomScene');
+            return [...items, {
+              id: 'miniature_rake',
+              name: 'Mini-Rastelo de Jardim',
+              icon: '/assets/images/ui/miniature_rake.png'
+            }];
+          }
+          return items;
+        });
+      });
+    }
+
     push('/game');
   }
 
@@ -105,6 +123,9 @@
           </button>
           <button class="skip-button" onclick={() => skipToScene('KitchenScene')}>
             Cozinha
+          </button>
+          <button class="skip-button" onclick={() => skipToScene('BathroomScene')}>
+            Banheiro
           </button>
           <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
             World

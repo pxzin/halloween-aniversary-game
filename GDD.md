@@ -95,7 +95,6 @@ This section details the specific scenes and the navigation paths between them.
 *   **Cenário 9: Banheiro (Bathroom)**
     *   **Interaction:** Click to return.
     *   **Leads to:** `Cenário 8 (Cozinha)`
-    *   **Sub-view:** A separate view for the cabinet under the sink.
 *   **Cenário 10: Quarto (Bedroom)**
     *   **Interaction:** Click to return.
     *   **Leads to:** `Cenário 8 (Cozinha)`
@@ -183,16 +182,16 @@ This section details the specific scenes and the navigation paths between them.
 
 ### Puzzle 07: The Stinky Key
 
-*   **Location:** `Cenário 9: Banheiro` (with two separate views).
+*   **Location:** `Cenário 9: Banheiro`.
 *   **Objective:** Find and clean the key to the Bedroom (`Cenário 10: Quarto`).
 *   **Cross-location Item Required:**
     *   **Miniature Rake:** Must be acquired from the `Cenário 3.1: Sacada`.
 *   **Sequence:**
-    1.  The player enters the bathroom, arriving in **View 1 (Main View)**. They can see a dirty cat litter box in the shower stall.
+    1.  In the bathroom, Jéssica can see a dirty cat litter box in the shower stall and a cabinet under the sink.
     2.  Using the `miniature rake` on the `litter box` unearths a **"dirty key"**.
     3.  If the player tries to use the `dirty key` on the Bedroom door, they will refuse due to it being too gross.
     4.  If the player tries to use the sink to clean the key, they discover there is no running water.
-    5.  The player must navigate to **View 2 (Under the Sink)**. Among various old items, they find a pack of **"wet wipes"**.
+    5.  The player must interact with the cabinet under the sink to find a pack of **"wet wipes"**.
     6.  In the inventory, the player must **combine** the `dirty key` with the `wet wipes`.
     7.  This combination produces the clean **"Bedroom Key"**.
     8.  **Reward:** The player can now unlock the door to the Bedroom.
@@ -229,13 +228,13 @@ This section details the specific scenes and the navigation paths between them.
 
 ### Puzzle 10: Ric's Cheese Safe
 
-*   **Location:** `Cenário 9: Banheiro` (View 1).
+*   **Location:** `Cenário 9: Banheiro`.
 *   **Objective:** Retrieve the fifth gift: the **Cheese**.
 *   **Clue:** Ric's Diary, found in the `Cenário 5: Quintal`.
 *   **Sequence:**
-    1.  In the `Banheiro` (View 1), Jéssica finds a **small safe** with a geometric symbol input panel.
+    1.  In the `Banheiro`, Jéssica finds a **small safe** with a geometric symbol input panel.
     2.  Interacting with the safe, Jéssica notices a strong cheese smell and a dialogue indicates she's sure cheese is inside, but doesn't know the password. She also notes the bathroom has *multiple sources of bad smells*.
-    3.  In the `Quintal` (View 1, e.g., on a shelf or behind a pot), Jéssica finds **Ric's Diary**.
+    3.  In the `Quintal` (e.g., on a shelf or behind a pot), Jéssica finds **Ric's Diary**.
     4.  Reading Ric's Diary (close-up UI) reveals an entry:
         > "Querida Jéssica,
         > Tenho tido umas experiências muito estranhas ultimamente, como se estivesse viajando entre o nosso mundo e um mundo de Halloween. Agora, parece que fiquei preso aqui. Estou com tanta fome, e felizmente tenho meu queijo guardado no cofre. Mas, para minha infelicidade, esqueci a senha! Anotei-a na geladeira do nosso mundo real. Se ao menos eu pudesse encontrá-la...

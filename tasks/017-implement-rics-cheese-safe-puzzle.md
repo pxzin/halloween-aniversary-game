@@ -15,8 +15,8 @@ To implement the `Ric's Cheese Safe` puzzle (`Puzzle 10`), which spans the `Back
 ### 2. Update `BathroomScene.ts`
 
 -   **Small Safe:**
-    *   Create an interactive zone over the small safe in the bathroom (View 1).
-    *   Clicking it should trigger the `found_safe` dialogue and open the `Safe.svelte` UI pop-up.
+    *   The safe is already visible in the background image. Create an interactive zone over it.
+    *   Clicking this zone should trigger the `found_safe` dialogue and open the `Safe.svelte` UI pop-up.
 
 ### 3. Create `Safe.svelte` Component
 

@@ -131,3 +131,20 @@ export function addItemToInventory(item: Item, quantityToAdd: number = 1): void 
     }
   });
 }
+
+/**
+ * Check if inventory has a specific item
+ * Returns a promise that resolves with true/false
+ */
+export function hasItemInInventory(itemId: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    let unsubscribe: (() => void) | undefined;
+    unsubscribe = inventory.subscribe(items => {
+      const hasItem = items.some(item => item.id === itemId);
+      if (unsubscribe) {
+        unsubscribe();
+      }
+      resolve(hasItem);
+    });
+  });
+}

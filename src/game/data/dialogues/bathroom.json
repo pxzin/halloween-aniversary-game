@@ -2,7 +2,8 @@
   "bathroom_intro": {
     "id": "bathroom_intro",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Este banheiro... tem um cheiro estranho. E não é só da caixa de areia." }
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Este banheiro... tem um cheiro estranho. E não é só da caixa de areia." },
+      { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "Falando nisso... tem uma caixa de areia enorme lá no fundo. A Patroa não brinca em serviço!" }
     ]
   },
   "found_safe": {
@@ -15,6 +16,34 @@
     "id": "found_cheese",
     "lines": [
       { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Queijo! Eca, mas... é um dos presentes!" }
+    ]
+  },
+  "litter_box_no_rake": {
+    "id": "litter_box_no_rake",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "Eca! Não vou mexer nisso com as mãos!" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Se eu tivesse alguma ferramenta... tipo um mini-rastelo de jardim ou algo assim..." }
+    ]
+  },
+  "found_dirty_key": {
+    "id": "found_dirty_key",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "Consegui! Mas... eca, que nojento!" },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Espera... é uma chave! Perfeito!" }
+    ]
+  },
+  "litter_box_empty": {
+    "id": "litter_box_empty",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Já vasculhei isso. Não tem mais nada aí... graças a Deus." }
+    ]
+  },
+  "toilet_interaction": {
+    "id": "toilet_interaction",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Sério? Você quer que eu olhe dentro da privada?" },
+      { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "O Ric pode ser maluco, mas até ele não esconderia nada AÍ!" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "...pelo menos eu espero que não." }
     ]
   }
 }
