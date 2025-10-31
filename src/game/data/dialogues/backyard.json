@@ -21,7 +21,7 @@
   "cat_house_high": {
     "id": "cat_house_high",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Uma casinha de gato lá no alto... parece ter algo dentro, mas está fora de alcance." }
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "A gata está na prateleira lá no alto... e parece ter uma chave lá, mas está fora de alcance." }
     ]
   },
   "found_cat_food": {
@@ -77,7 +77,7 @@
   "cat_on_table_4": {
     "id": "cat_on_table_4",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Patroa, você viu onde está a chave daquela casinha lá em cima?" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Patroa, você viu onde está aquela chave lá em cima na prateleira?" },
       { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A gata continua comendo, ignorando completamente minha pergunta." },
       { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Tá bom então..." }
     ]
