@@ -21,14 +21,14 @@ To implement the `BackyardScene` (`Cenário 5`), including its background, inter
     *   **Barbecue Grill:** Create an interactive zone over the grill.
         *   Using `hand_sanitizer` on the grill changes its state (e.g., `grill_with_sanitizer`).
         *   Using `lighter` on `grill_with_sanitizer` triggers `grill_lit` dialogue and changes the scene's lighting/visuals to reflect it being lit.
-    *   **Cat House:** Create an interactive zone over the cat house on the high shelf.
-        *   If the grill is not lit, clicking it triggers `cat_house_high` dialogue.
-        *   If the grill is lit, it reveals the cat (or a placeholder for it) and indicates something is inside but out of reach.
+    *   **Cat on Shelf:** Create an interactive zone over the cat on the high shelf.
+        *   If the grill is not lit, clicking it triggers `cat_on_shelf` dialogue.
+        *   If the grill is lit, it reveals the cat is guarding something.
     *   **Cat Food Can:** Create an interactive zone over the cat food can in the cabinets. Clicking it adds `cat_food_can` to inventory and makes it disappear.
     *   **Table:** Create an interactive zone over the central table.
-        *   Using `open_cat_food_can` on the table triggers `cat_lured` dialogue and makes the cat (if present) move away from the cat house.
-    *   **Living Room Key:** Once the cat is lured away, the `Living Room Key` should be accessible in the cat house.
-        *   Using `broom` on the cat house (after cat is lured) makes the key fall.
+        *   Using `open_cat_food_can` on the table triggers `cat_lured` dialogue and makes the cat move away from the shelf.
+    *   **Living Room Key:** Once the cat is lured away, the `Living Room Key` should be accessible on the shelf.
+        *   Using `broom` on the shelf (after cat is lured) makes the key fall.
         *   Clicking the fallen key adds `living_room_key` to inventory and makes it disappear.
 
 ### 3. Dialogue Integration

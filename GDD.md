@@ -72,8 +72,6 @@ This section details the specific scenes and the navigation paths between them.
     *   **Leads to:** `Cenário 5 (Quintal)`
     *   **Interaction 2:** Click on the living room door.
     *   **Leads to:** `Cenário 6 (Sala)`
-    *   **Interaction 3:** Click on the kitchen door.
-    *   **Leads to:** `Cenário 8 (Cozinha)`
 *   **Cenário 5: Quintal (Backyard)**
     *   **Interaction:** Click to return.
     *   **Leads to:** `Cenário 4 (Corredor)`
@@ -88,13 +86,11 @@ This section details the specific scenes and the navigation paths between them.
     *   **Interaction:** Click to return.
     *   **Leads to:** `Cenário 6 (Sala)`
 *   **Cenário 8: Cozinha (Kitchen)**
-    *   **Interaction 1:** Click to return to the hallway.
-    *   **Leads to:** `Cenário 4 (Corredor)`
-    *   **Interaction 2:** Click to return to the living room.
+    *   **Interaction 1:** Click to return to the living room.
     *   **Leads to:** `Cenário 6 (Sala)`
-    *   **Interaction 3:** Click on the bathroom door.
+    *   **Interaction 2:** Click on the bathroom door.
     *   **Leads to:** `Cenário 9 (Banheiro)`
-    *   **Interaction 4:** Click on the bedroom door.
+    *   **Interaction 3:** Click on the bedroom door.
     *   **Leads to:** `Cenário 10 (Quarto)`
 *   **Cenário 9: Banheiro (Bathroom)**
     *   **Interaction:** Click to return.
