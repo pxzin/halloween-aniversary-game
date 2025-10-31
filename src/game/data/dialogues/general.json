@@ -1,0 +1,10 @@
+{
+  "all_offerings_collected": {
+    "id": "all_offerings_collected",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "*Um som ecoa pela casa inteira, como o ranger de uma porta antiga se abrindo.*" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "O que foi isso? Veio de cima... do segundo andar." },
+      { "speaker": { "character": "jessica", "emotion": "determined" }, "text": "A porta do escritório! Ela deve ter se destrancado agora que consegui todas as oferendas!" }
+    ]
+  }
+}

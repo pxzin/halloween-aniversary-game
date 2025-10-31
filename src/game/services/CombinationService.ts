@@ -22,7 +22,8 @@ class CombinationServiceClass {
     // Cat's Treasure Puzzle - Open cat food can
     {
       ingredients: ['cat_food_can', 'miniature_rake'],
-      result: { id: 'open_cat_food_can', name: 'Lata de Ração Aberta', icon: '/assets/images/ui/cat_food_can_open.png' }
+      result: { id: 'open_cat_food_can', name: 'Lata de Ração Aberta', icon: '/assets/images/ui/cat_food_can_open.png' },
+      keepItems: ['miniature_rake'] // Keep the rake to use in the bathroom litter box
     },
     // Easter Egg: Lighter + Weed Joint
     {

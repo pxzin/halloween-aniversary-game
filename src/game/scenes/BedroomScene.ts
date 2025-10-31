@@ -451,8 +451,8 @@ export class BedroomScene extends Phaser.Scene {
         icon: '/assets/images/ui/clothes.png',
       });
 
-      // Mark as gift
-      EventBus.emit('gift-collected', 'gift2');
+      // Mark as gift (Clothes is the 5th gift)
+      EventBus.emit('gift-collected', { giftId: 'gift5' });
     });
   }
 

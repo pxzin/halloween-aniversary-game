@@ -1,8 +1,10 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { EventBus } from '../../game/EventBus';
+  import { DialogueManager } from '../../game/services/DialogueManager';
 
   let isVisible = $state(false);
+  let allCollected = $state(false);
 
   // 5 gifts to collect
   const gifts = $state([
@@ -26,9 +28,34 @@
    */
   function collectGift(data: { giftId: string }) {
     const gift = gifts.find(g => g.id === data.giftId);
-    if (gift) {
+    if (gift && !gift.collected) {
       gift.collected = true;
       console.log(`Gift ${data.giftId} collected`);
+
+      // Check if all gifts are collected
+      checkAllCollected();
+    }
+  }
+
+  /**
+   * Check if all gifts have been collected
+   */
+  function checkAllCollected() {
+    const allGiftsCollected = gifts.every(g => g.collected);
+
+    if (allGiftsCollected && !allCollected) {
+      allCollected = true;
+      console.log('[Objectives] All offerings collected! Office unlocked!');
+
+      // Emit event to unlock office door
+      EventBus.emit('all-offerings-collected');
+
+      // Show dialogue about office door unlocking
+      setTimeout(() => {
+        DialogueManager.loadScript('general', 'all_offerings_collected').then(() => {
+          DialogueManager.startDialogue();
+        });
+      }, 500); // Small delay for better UX
     }
   }
 

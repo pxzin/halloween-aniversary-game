@@ -424,7 +424,7 @@ export class BathroomScene extends Phaser.Scene {
       });
 
       // Mark as gift
-      EventBus.emit('gift-collected', 'gift3');
+      EventBus.emit('gift-collected', { giftId: 'gift3' });
     });
   }
 
