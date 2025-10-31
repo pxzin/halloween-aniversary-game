@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
+  import { push } from 'svelte-spa-router';
   import { EventBus } from '../../game/EventBus';
 
   let isVisible = $state(false);
@@ -15,9 +16,12 @@
   }
 
   function close() {
-    console.log('[HappyBirthday] Closing happy birthday screen');
+    console.log('[HappyBirthday] Closing happy birthday screen and returning to home');
     isVisible = false;
     showConfetti = false;
+
+    // Navigate back to home
+    push('/');
   }
 
   onMount(() => {
@@ -35,7 +39,7 @@
       <!-- Confetti animation -->
       {#if showConfetti}
         <div class="confetti-container">
-          {#each Array(50) as _, i}
+          {#each Array(50) as _}
             <div
               class="confetti"
               style="left: {Math.random() * 100}%; animation-delay: {Math.random() * 3}s; animation-duration: {3 + Math.random() * 2}s;"

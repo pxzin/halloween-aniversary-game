@@ -20,6 +20,7 @@ export class OfficeScene extends Phaser.Scene {
   private hasShownIntroDialogue: boolean = false;
   private offeringsPlaced: Set<string> = new Set();
   private jijiInteractionCount: number = 0; // Track interactions with Jiji
+  private rhymeBattleFailed: boolean = false; // Track if rhyme battle was failed
 
   // Interactive zones
   private pentagramZone: Phaser.GameObjects.Rectangle | null = null;
@@ -29,7 +30,7 @@ export class OfficeScene extends Phaser.Scene {
   // Visual elements
   private currentBackground: Phaser.GameObjects.Image | null = null;
   private returnText: Phaser.GameObjects.Text | null = null;
-  private placedOfferingsVisuals: Map<string, Phaser.GameObjects.Image> = new Map();
+  private placedOfferingsVisuals: Map<string, Phaser.GameObjects.Image | Phaser.GameObjects.Text> = new Map();
 
   // Bound function references for cleanup
   private boundOnDialogueEnded!: () => void;
@@ -246,13 +247,13 @@ export class OfficeScene extends Phaser.Scene {
     const centerY = 604.73;
     const radius = 80; // Distance from center for each offering
 
-    // Define positions for the 5 offerings (pentagram points)
+    // Define positions for the 5 offerings (pentagram points) with their emoji/icon
     const positions = [
-      { angle: -90, id: 'cell_phone' },   // Top
-      { angle: -18, id: 'wine' },          // Top-right
-      { angle: 54, id: 'cheese' },         // Bottom-right
-      { angle: 126, id: 'chocolates' },    // Bottom-left
-      { angle: 198, id: 'clothes' }        // Top-left
+      { angle: -90, id: 'cell_phone', emoji: '📱' },   // Top
+      { angle: -18, id: 'wine', emoji: '🍷' },          // Top-right
+      { angle: 54, id: 'cheese', icon: 'cheese_icon' }, // Bottom-right
+      { angle: 126, id: 'chocolates', emoji: '🍫' },    // Bottom-left
+      { angle: 198, id: 'clothes', icon: 'clothes_icon' } // Top-left
     ];
 
     // Create visual for each placed offering
@@ -262,14 +263,30 @@ export class OfficeScene extends Phaser.Scene {
         const x = centerX + Math.cos(pos.angle * Math.PI / 180) * radius;
         const y = centerY + Math.sin(pos.angle * Math.PI / 180) * radius;
 
-        // Create the visual (using the preloaded icon)
-        const visual = this.add.image(x, y, `${pos.id}_icon`);
-        visual.setScale(0.15);
-        visual.setDepth(100);
-        visual.setAlpha(0.9);
+        let visual: Phaser.GameObjects.Image | Phaser.GameObjects.Text;
 
-        // Add a glow effect
-        visual.setTint(0xffff00);
+        // Use emoji text for items with emoji, image for others
+        if (pos.emoji) {
+          // Create text object for emoji
+          visual = this.add.text(x, y, pos.emoji, {
+            fontSize: '48px'
+          });
+          visual.setOrigin(0.5);
+          visual.setDepth(100);
+          visual.setAlpha(0.9);
+
+          // Add glow effect via shadow
+          visual.setShadow(0, 0, '#ffff00', 15, true, true);
+        } else {
+          // Create image for PNG icons
+          visual = this.add.image(x, y, pos.icon!);
+          visual.setScale(0.15);
+          visual.setDepth(100);
+          visual.setAlpha(0.9);
+
+          // Add a glow effect
+          visual.setTint(0xffff00);
+        }
 
         this.placedOfferingsVisuals.set(pos.id, visual);
       }
@@ -295,8 +312,22 @@ export class OfficeScene extends Phaser.Scene {
 
     const selected = get(selectedItem);
 
-    // If no item selected, show description
+    // If no item selected, show description or allow retry
     if (!selected) {
+      // If rhyme battle was failed, allow retry
+      if (this.rhymeBattleFailed && this.offeringsPlaced.size === 5) {
+        EventBus.emit('show-dialogue', {
+          character: 'jessica',
+          text: 'Vou tentar de novo! Dessa vez vai dar certo!',
+        });
+
+        // Wait a moment, then restart the battle
+        setTimeout(() => {
+          this.startFinalSequence();
+        }, 1500);
+        return;
+      }
+
       if (this.offeringsPlaced.size === 0) {
         // First time examining pentagram
         await DialogueManager.loadScript('office', 'pentagram_interaction');
@@ -425,6 +456,9 @@ export class OfficeScene extends Phaser.Scene {
       // Listen for rhyme battle completion
       EventBus.once('rhyme-battle-completed', async (success: boolean) => {
         if (success) {
+          // Reset failure flag
+          this.rhymeBattleFailed = false;
+
           // Show curse breaking dialogue
           await DialogueManager.loadScript('office', 'curse_breaking');
           DialogueManager.startDialogue();
@@ -434,9 +468,19 @@ export class OfficeScene extends Phaser.Scene {
             EventBus.emit('show-happy-birthday');
           });
         } else {
-          // Player failed the rhyme battle - reset?
-          // TODO: Decide what happens on failure
-          console.log('[OfficeScene] Rhyme battle failed');
+          // Player failed the rhyme battle - allow retry
+          console.log('[OfficeScene] Rhyme battle failed - player can retry by clicking pentagram');
+          this.rhymeBattleFailed = true;
+
+          // Re-enable zones
+          this.pentagramZone?.setInteractive();
+          this.returnZone?.setInteractive();
+
+          // Show failure message
+          EventBus.emit('show-dialogue', {
+            character: 'jessica',
+            text: 'Ah não... Errei nas rimas! Preciso tentar de novo!',
+          });
         }
       });
     }, 2500);
