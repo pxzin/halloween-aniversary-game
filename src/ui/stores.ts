@@ -7,6 +7,7 @@ export interface Item {
   id: string;
   name: string;
   icon: string; // Emoji or image path for the item
+  quantity?: number; // Optional quantity for stackable items (e.g., ice keys)
 }
 
 /**
@@ -104,5 +105,29 @@ export function addMinutesToGameTime(minutes: number): void {
       minute: newMinute,
       second: newSecond
     };
+  });
+}
+
+/**
+ * Add item to inventory with quantity support
+ * If item already exists, increments quantity. Otherwise, adds new item.
+ */
+export function addItemToInventory(item: Item, quantityToAdd: number = 1): void {
+  inventory.update(items => {
+    const existingItemIndex = items.findIndex(i => i.id === item.id);
+
+    if (existingItemIndex !== -1) {
+      // Item exists, update quantity
+      const updatedItems = [...items];
+      const currentQuantity = updatedItems[existingItemIndex].quantity || 1;
+      updatedItems[existingItemIndex] = {
+        ...updatedItems[existingItemIndex],
+        quantity: currentQuantity + quantityToAdd
+      };
+      return updatedItems;
+    } else {
+      // New item, add to inventory
+      return [...items, { ...item, quantity: quantityToAdd }];
+    }
   });
 }

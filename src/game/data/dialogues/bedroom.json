@@ -1,0 +1,33 @@
+{
+  "bedroom_intro": {
+    "id": "bedroom_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "O quarto... parece tão frio e vazio." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Aquele guarda-roupa... parece importante." }
+    ]
+  },
+  "wardrobe_locked": {
+    "id": "wardrobe_locked",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Está trancado. E tem um painel estranho na porta..." }
+    ]
+  },
+  "found_old_note": {
+    "id": "found_old_note",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Um bilhete antigo... com uns desenhos estranhos. O que será que significam?" }
+    ]
+  },
+  "wardrobe_unlocked": {
+    "id": "wardrobe_unlocked",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "*Um clique alto ecoa pelo quarto e a porta do guarda-roupa se abre lentamente.*" }
+    ]
+  },
+  "found_clothes": {
+    "id": "found_clothes",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Roupas! E são lindas! Mais um presente encontrado!" }
+    ]
+  }
+}

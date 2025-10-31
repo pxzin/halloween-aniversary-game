@@ -726,8 +726,7 @@ export class LivingRoomScene extends Phaser.Scene {
    */
   private onKitchenClicked(): void {
     console.log('[LivingRoomScene] Navigating to Kitchen');
-    // TODO: Implement KitchenScene in future task
-    console.log('[LivingRoomScene] KitchenScene not implemented yet');
+    this.scene.start('KitchenScene');
   }
 
   /**

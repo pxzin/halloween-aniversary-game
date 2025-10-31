@@ -1,0 +1,26 @@
+{
+  "office_intro": {
+    "id": "office_intro",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "A porta do escritório... abriu. É aqui. O fim de tudo." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Sinto uma energia estranha vindo daqui de dentro." }
+    ]
+  },
+  "pentagram_interaction": {
+    "id": "pentagram_interaction",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Um pentagrama no chão... e cinco lugares vazios. As cinco oferendas!" },
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Preciso colocar cada presente no lugar certo." }
+    ]
+  },
+  "curse_breaking": {
+    "id": "curse_breaking",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Assim que o último presente é colocado, o pentagrama brilha intensamente!" },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "O que está acontecendo?!" },
+      { "speaker": { "character": "owl", "emotion": "furious" }, "text": "NÃÃÃÃOOO! MINHA MALDIÇÃO!" },
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "A figura da Coruja aparece e se desfaz em uma nuvem de fumaça verde." },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Acabou... finalmente acabou. Eu consegui!" }
+    ]
+  }
+}

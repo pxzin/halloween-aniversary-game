@@ -5,10 +5,101 @@
       { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "A cozinha... parece que tudo está no lugar, mas... diferente." }
     ]
   },
+  "freezer_first_open": {
+    "id": "freezer_first_open",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "AAHHH! Que NOJO!" },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "O que é isso tudo aqui dentro?! Comida velha, gelo sujo..." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "E essas... chaves de gelo? Espera, tem algo embaixo delas..." },
+      { "speaker": { "character": "jessica", "emotion": "determined" }, "text": "Tá bom... vou ter que tirar essas chaves. Uma por uma. Que azar o meu." }
+    ]
+  },
+  "disgust_1": {
+    "id": "disgust_1",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Eca! Essa tava grudada num negócio estranho..." }
+    ]
+  },
+  "disgust_2": {
+    "id": "disgust_2",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Que nojo! Isso aqui era uma comida???" }
+    ]
+  },
+  "disgust_3": {
+    "id": "disgust_3",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Urgh... minha mão tá congelando!" }
+    ]
+  },
+  "disgust_4": {
+    "id": "disgust_4",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Quantas dessas malditas chaves tem aqui dentro?!" }
+    ]
+  },
+  "disgust_5": {
+    "id": "disgust_5",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Isso aqui tá com um cheiro HORRÍVEL!" }
+    ]
+  },
+  "disgust_6": {
+    "id": "disgust_6",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "tired" }, "text": "Já cansei... mas preciso continuar..." }
+    ]
+  },
+  "thousand_years_later": {
+    "id": "thousand_years_later",
+    "lines": [
+      { "speaker": { "character": "narrator", "emotion": "neutral" }, "text": "Mil anos depois..." }
+    ]
+  },
   "found_chocolates": {
     "id": "found_chocolates",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Chocolates! Estavam escondidos no fundo do congelador o tempo todo!" }
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "FINALMENTE! Os chocolates!" },
+      { "speaker": { "character": "jessica", "emotion": "tired" }, "text": "Minha mão tá doendo, tô com frio, mas CONSEGUI!" },
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Ric... a gente precisa conversar SERIAMENTE sobre suas 'ideias criativas' de esconder coisas." }
+    ]
+  },
+  "wine_cooler_locked": {
+    "id": "wine_cooler_locked",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Uma adega? Deixa eu ver..." },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Tem uma garrafa de vinho aí dentro! Mas tá trancada..." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Parece que preciso de alguma chave para abrir isso." }
+    ]
+  },
+  "wine_cooler_no_key": {
+    "id": "wine_cooler_no_key",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Ainda trancada. Preciso achar uma chave..." }
+    ]
+  },
+  "wine_cooler_opened": {
+    "id": "wine_cooler_opened",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "*usa uma chave de gelo*" },
+      { "speaker": { "character": "jessica", "emotion": "scared" }, "text": "Opa! Funcionou! A fechadura deve estar congelada também..." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Espera... se eu usei UMA chave, e tinha mais de 900..." },
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Ahh, o Ric DEFINITIVAMENTE exagerou na quantidade de chaves! Mas pelo menos agora tenho um bom estoque de gelo!" }
+    ]
+  },
+  "found_wine": {
+    "id": "found_wine",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Vinho! E parece ser uma garrafa boa!" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Ric sabe que eu adoro um bom vinho... Vou pegar isso!" }
+    ]
+  },
+  "note_on_fridge": {
+    "id": "note_on_fridge",
+    "lines": [
+      { "speaker": { "character": "jessica", "emotion": "neutral" }, "text": "Um bilhete..." },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "\"Deixei 'algumas' forminhas de gelo em formato de chave no congelador. Pra que? Pq achei legal!\"" },
+      { "speaker": { "character": "jessica", "emotion": "annoyed" }, "text": "Ric... por que você é assim?" }
     ]
   }
 }

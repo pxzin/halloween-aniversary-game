@@ -121,6 +121,9 @@
             {:else}
               {item.icon}
             {/if}
+            {#if item.quantity && item.quantity > 1}
+              <span class="item-quantity">{item.quantity}</span>
+            {/if}
           </div>
           <div class="item-name">{item.name}</div>
         </button>
@@ -259,6 +262,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+  }
+
+  .item-quantity {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    background: #ff5e00;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 2px solid #1a0a23;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    min-width: 18px;
+    text-align: center;
   }
 
   .item-icon-image {

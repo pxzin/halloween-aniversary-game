@@ -103,6 +103,9 @@
           <button class="skip-button" onclick={() => skipToScene('LivingRoomScene')}>
             Sala
           </button>
+          <button class="skip-button" onclick={() => skipToScene('KitchenScene')}>
+            Cozinha
+          </button>
           <button class="skip-button" onclick={() => skipToScene('WorldScene')}>
             World
           </button>
