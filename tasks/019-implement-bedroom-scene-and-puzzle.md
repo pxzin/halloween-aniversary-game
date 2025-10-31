@@ -9,9 +9,7 @@ To implement the `BedroomScene` (`Cenário 10`) and the `Hand Gesture Enigma` pu
 ### 1. Create `BedroomScene.ts`
 
 -   Create a new Phaser scene file at `src/game/scenes/BedroomScene.ts`.
--   **Backgrounds:**
-    *   Load and display `public/assets/images/backgrounds/bedroom_view1.png` as the initial background.
-    *   Implement a mechanism to switch to a close-up view of the closets (`bedroom_view2.png`) when the player interacts with the closet area.
+-   **Background:** Load and display `public/assets/images/backgrounds/bedroom.png`.
 -   **Navigation:**
     *   The scene should be accessible from the `KitchenScene`.
     *   Create an interactive zone to return to the `KitchenScene`.
@@ -19,17 +17,15 @@ To implement the `BedroomScene` (`Cenário 10`) and the `Hand Gesture Enigma` pu
 ### 2. Implement Hand Gesture Enigma (`Puzzle 08`)
 
 -   **Old Note:**
-    *   In the main view (`bedroom_view1.png`), create an interactive zone over the `old note`.
+    *   In the scene, create an interactive zone over the `old note`.
     *   Clicking it should add `old_note` to the player's inventory and trigger the `found_old_note` dialogue.
 -   **Wardrobe:**
     *   Create an interactive zone over the large wardrobe.
-    *   If the wardrobe is locked, clicking it should trigger the `wardrobe_locked` dialogue.
--   **Closet View (Puzzle UI):**
-    *   In the closet view (`bedroom_view2.png`), create three interactive hotspots corresponding to the hand gestures (🤌, 🫰, 😘).
-    *   The player must click these hotspots in the correct sequence.
+    *   If the wardrobe is locked, clicking it should trigger the `wardrobe_locked` dialogue and open a UI pop-up with the three hand gesture inputs (🤌, 🫰, 😘).
+    *   The player must click these inputs in the correct sequence.
     *   **On Success:**
         *   Trigger the `wardrobe_unlocked` dialogue.
-        *   Make the wardrobe in the main view appear open.
+        *   Make the wardrobe appear open.
         *   Reveal the `Clothes` gift inside the wardrobe.
     *   **On Failure:**
         *   If the sequence is incorrect, a subtle "wrong" sound effect should play, and the sequence resets.

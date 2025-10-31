@@ -15,7 +15,8 @@
   "found_cheese": {
     "id": "found_cheese",
     "lines": [
-      { "speaker": { "character": "jessica", "emotion": "happy" }, "text": "Queijo! Eca, mas... é um dos presentes!" }
+      { "speaker": { "character": "jessica", "emotion": "disgusted" }, "text": "Queijo? No cofre do banheiro?!" },
+      { "speaker": { "character": "jessica", "emotion": "thinking" }, "text": "Bom... o Ric sempre teve gostos estranhos. Vou levar mesmo assim." }
     ]
   },
   "litter_box_no_rake": {

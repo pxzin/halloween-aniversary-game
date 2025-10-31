@@ -98,7 +98,6 @@ This section details the specific scenes and the navigation paths between them.
 *   **Cenário 10: Quarto (Bedroom)**
     *   **Interaction:** Click to return.
     *   **Leads to:** `Cenário 8 (Cozinha)`
-    *   **Sub-view:** A separate view for the clothes closets.
 
 ## 8. Puzzle Design
 
@@ -198,22 +197,16 @@ This section details the specific scenes and the navigation paths between them.
 
 ### Puzzle 08: The Hand Gesture Enigma
 
-*   **Location:** `Cenário 10: Quarto` (with two separate views).
+*   **Location:** `Cenário 10: Quarto`.
 *   **Objective:** Retrieve the third gift: the **Clothes**.
 *   **Sequence:**
-    1.  Jéssica enters the Bedroom (`Cenário 10: Quarto`, View 1).
-    2.  She finds a large, old, locked wardrobe. There's an interactive panel on its door.
-    3.  In View 1 of the Bedroom (e.g., on a dresser or under a rug), she finds an **"old note"**.
-    4.  This `old note` contains three distinct drawings:
-        *   A **coxinha** (Brazilian snack).
-        *   A **mini heart**.
-        *   A **sketch of the user's photo**.
-    5.  The player must interpret these visual clues as the corresponding emojis: **🤌 (coxinha), 🫰 (mini heart), 😘 (kissing face - representing the user's photo)**.
-    6.  Jéssica navigates to **View 2 (Closets View)**.
-    7.  In View 2, there are three interactive points (e.g., stylized hand gestures or emoji representations) corresponding to the three emojis.
-    8.  The player must interact with these points in the correct sequence: **🤌, 🫰, 😘**.
-    9.  Upon successful input, the wardrobe in View 1 opens.
-    10. **Reward:** Jéssica finds the **Clothes** gift inside the wardrobe.
+    1.  Jéssica enters the Bedroom (`Cenário 10: Quarto`).
+    2.  She finds a large, old, locked wardrobe. There's an interactive panel on its door with three stylized hand gestures (🤌, 🫰, 😘).
+    3.  In the Bedroom (e.g., on a dresser or under a rug), she finds an **"old note"**.
+    4.  This `old note` contains three distinct drawings: a **coxinha**, a **mini heart**, and a **sketch of the user's photo**.
+    5.  The player must interpret these visual clues as the corresponding emojis and interact with the hand gestures on the wardrobe panel in the correct sequence: **🤌, 🫰, 😘**.
+    6.  Upon successful input, the wardrobe opens.
+    7.  **Reward:** Jéssica finds the **Clothes** gift inside the wardrobe.
 
 ### Puzzle 09: The Frozen Treasure (Chocolates)
 

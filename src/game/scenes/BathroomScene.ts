@@ -3,7 +3,12 @@ import { get } from 'svelte/store';
 import { EventBus } from '../EventBus';
 import { DialogueManager } from '../services/DialogueManager';
 import { selectedItem } from '../../ui/stores';
-import { createClickableRect, DEBUG_COLORS, enableDebugToggle, clearDebugElements } from '../utils/DebugHelpers';
+import {
+  createClickableRect,
+  DEBUG_COLORS,
+  enableDebugToggle,
+  clearDebugElements,
+} from '../utils/DebugHelpers';
 import { enableRectangleDrawTool } from '../utils/RectangleDrawTool';
 
 /**
@@ -29,7 +34,7 @@ export class BathroomScene extends Phaser.Scene {
   private currentBackground: Phaser.GameObjects.Image | null = null;
   private kitchenText: Phaser.GameObjects.Text | null = null;
   private bedroomText: Phaser.GameObjects.Text | null = null;
-  private cheeseIcon: Phaser.GameObjects.Text | null = null;
+  private cheeseIcon: Phaser.GameObjects.Image | null = null;
 
   // Bound function references for cleanup
   private boundOnDialogueEnded!: () => void;
@@ -42,6 +47,9 @@ export class BathroomScene extends Phaser.Scene {
   preload(): void {
     // Load bathroom background
     this.load.image('bathroom', '/assets/images/backgrounds/bathroom.png');
+
+    // Load cheese sprite
+    this.load.image('cheese', '/assets/images/ui/cheese.png');
   }
 
   create(): void {
@@ -117,7 +125,7 @@ export class BathroomScene extends Phaser.Scene {
       hasShownIntroDialogue: this.hasShownIntroDialogue,
       safeOpened: this.safeOpened,
       cheeseCollected: this.cheeseCollected,
-      dirtyKeyFound: this.dirtyKeyFound
+      dirtyKeyFound: this.dirtyKeyFound,
     };
     sessionStorage.setItem('bathroomSceneState', JSON.stringify(state));
     console.log('[BathroomScene] Saved state:', state);
@@ -188,8 +196,8 @@ export class BathroomScene extends Phaser.Scene {
         offsetY: 2,
         color: '#000000',
         blur: 4,
-        fill: true
-      }
+        fill: true,
+      },
     });
     this.kitchenText.setOrigin(0.5);
     this.kitchenText.setDepth(1000);
@@ -228,8 +236,8 @@ export class BathroomScene extends Phaser.Scene {
         offsetY: 2,
         color: '#000000',
         blur: 4,
-        fill: true
-      }
+        fill: true,
+      },
     });
     this.bedroomText.setOrigin(0.5);
     this.bedroomText.setDepth(1000);
@@ -240,10 +248,10 @@ export class BathroomScene extends Phaser.Scene {
    */
   private createSafeZone(): void {
     // Safe coordinates from RectangleDrawTool
-    const centerX = 523.90;
+    const centerX = 523.9;
     const centerY = 484.45;
     const width = 128.63;
-    const height = 130.30;
+    const height = 130.3;
 
     this.safeZone = createClickableRect(
       this,
@@ -287,7 +295,7 @@ export class BathroomScene extends Phaser.Scene {
   private createToiletZone(): void {
     // Toilet coordinates from RectangleDrawTool
     const centerX = 809.56;
-    const centerY = 502.00;
+    const centerY = 502.0;
     const width = 232.21;
     const height = 172.06;
 
@@ -309,17 +317,16 @@ export class BathroomScene extends Phaser.Scene {
    */
   private createCheeseZone(): void {
     // Cheese appears inside the opened safe (same position as safe)
-    const centerX = 523.90;
+    const centerX = 523.9;
     const centerY = 484.45;
     const width = 80;
     const height = 80;
 
-    // Show cheese icon
-    this.cheeseIcon = this.add.text(centerX, centerY, '🧀', {
-      fontSize: '48px'
-    });
+    // Show cheese sprite
+    this.cheeseIcon = this.add.image(centerX, centerY, 'cheese');
     this.cheeseIcon.setOrigin(0.5);
     this.cheeseIcon.setDepth(100);
+    this.cheeseIcon.setScale(0.1); // Adjust scale to fit nicely in the safe
 
     this.cheeseZone = createClickableRect(
       this,
@@ -413,7 +420,7 @@ export class BathroomScene extends Phaser.Scene {
       EventBus.emit('item-acquired', {
         id: 'cheese',
         name: 'Queijo',
-        icon: '🧀'
+        icon: '/assets/images/ui/cheese.png',
       });
 
       // Mark as gift
@@ -442,7 +449,10 @@ export class BathroomScene extends Phaser.Scene {
    * Handle litter box clicked - requires miniature_rake to find dirty key
    */
   private async onLitterBoxClicked(): Promise<void> {
-    console.log('[BathroomScene] Litter box clicked, dirtyKeyFound:', this.dirtyKeyFound);
+    console.log(
+      '[BathroomScene] Litter box clicked, dirtyKeyFound:',
+      this.dirtyKeyFound
+    );
 
     const selected = get(selectedItem);
 
@@ -478,17 +488,20 @@ export class BathroomScene extends Phaser.Scene {
         EventBus.emit('item-acquired', {
           id: 'dirty_key',
           name: 'Chave Suja',
-          icon: '🔑'
+          icon: '🔑',
         });
       });
     } else {
       // Wrong item selected
-      console.log('[BathroomScene] Wrong item used on litter box:', selected.id);
+      console.log(
+        '[BathroomScene] Wrong item used on litter box:',
+        selected.id
+      );
 
       // Show inline feedback
       EventBus.emit('show-dialogue', {
         character: 'jessica',
-        text: `Não acho que ${selected.name} vai ajudar aqui...`
+        text: `Não acho que ${selected.name} vai ajudar aqui...`,
       });
 
       // Clear selection
@@ -526,6 +539,6 @@ export class BathroomScene extends Phaser.Scene {
     EventBus.off('safe-unlocked', this.boundOnSafeUnlocked);
 
     // Clear debug elements
-    clearDebugElements(this);
+    clearDebugElements();
   }
 }
