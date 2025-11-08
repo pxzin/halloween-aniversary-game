@@ -673,7 +673,7 @@ export class LivingRoomScene extends Phaser.Scene {
 
     // Show item acquisition animation with phone emoji
     EventBus.emit('item-acquired', {
-      id: 'cellphone_offering',
+      id: 'cell_phone',
       name: 'Celular',
       icon: '📱'
     });
